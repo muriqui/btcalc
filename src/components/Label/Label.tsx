@@ -1,6 +1,6 @@
 import React from "react";
 
-interface Props extends React.ComponentPropsWithoutRef<"label"> {
+export interface LabelProps extends React.ComponentPropsWithoutRef<"label"> {
   /** Whether the component is against a dark background. */
   darkBackground?: boolean;
 }
@@ -8,7 +8,7 @@ interface Props extends React.ComponentPropsWithoutRef<"label"> {
 /**
  * A form label.
  */
-function Label({ children, darkBackground, ...props }: Props) {
+function Label({ children, darkBackground, ...props }: LabelProps) {
   return (
     <label
       className={`${

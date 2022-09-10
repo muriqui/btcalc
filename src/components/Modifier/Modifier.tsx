@@ -1,7 +1,7 @@
 import React from "react";
 import { formatModifier } from "utils/modifiers";
 
-interface Props extends React.ComponentPropsWithoutRef<"span"> {
+export interface ModifierProps extends React.ComponentPropsWithoutRef<"span"> {
   /** The modifier value. */
   value: number;
   /** Whether the component is visually hidden. */
@@ -13,7 +13,7 @@ interface Props extends React.ComponentPropsWithoutRef<"span"> {
 /**
  * Displays a modifier value.
  */
-function Modifier({ value, hidden, darkBackground, ...props }: Props) {
+function Modifier({ value, hidden, darkBackground, ...props }: ModifierProps) {
   return (
     <span
       className={`${hidden || value === 0 ? "invisible" : ""} ${

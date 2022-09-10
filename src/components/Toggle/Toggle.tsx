@@ -1,7 +1,7 @@
 import React, { useId } from "react";
 import Label from "components/Label/Label";
 
-interface Props
+export interface ToggleProps
   extends Omit<React.ComponentPropsWithoutRef<"div">, "onChange"> {
   /** The toggle switch label. */
   label: string;
@@ -25,7 +25,7 @@ function Toggle({
   onChange = () => {},
   children,
   ...props
-}: Props) {
+}: ToggleProps) {
   const id = useId();
   const handleChange = () => onChange(!checked);
 

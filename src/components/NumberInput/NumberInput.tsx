@@ -1,7 +1,7 @@
 import React, { useId } from "react";
 import Label from "components/Label/Label";
 
-interface Props
+export interface NumberInputProps
   extends Omit<React.ComponentPropsWithoutRef<"div">, "onChange"> {
   /** The input label. */
   label: string;
@@ -24,7 +24,7 @@ function NumberInput({
   max,
   onChange = () => {},
   ...props
-}: Props) {
+}: NumberInputProps) {
   const id = useId();
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     onChange(parseInt(event.target.value, 10));
