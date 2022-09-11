@@ -50,3 +50,9 @@ function ModifierSelector({
 }
 
 export default ModifierSelector;
+
+/**
+ * Props for components that extend ModifierSelector.
+ */
+export interface ModifierSelectorExtensionProps
+  extends Omit<ModifierSelectorProps, "label" | "options"> {}

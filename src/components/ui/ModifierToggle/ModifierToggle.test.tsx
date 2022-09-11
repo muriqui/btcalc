@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { ModifierToggleExtensionProps, formatModifier } from "utils/modifiers";
-import ModifierToggle from "./ModifierToggle";
+import { formatModifier } from "utils/modifiers";
+import ModifierToggle, { ModifierToggleExtensionProps } from "./ModifierToggle";
 
 /**
  * Reusable test suite for components derived from ModifierToggle.

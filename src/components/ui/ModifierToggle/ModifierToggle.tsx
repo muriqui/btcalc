@@ -49,3 +49,9 @@ function ModifierToggle({
 }
 
 export default ModifierToggle;
+
+/**
+ * Props for components that extend ModifierToggle.
+ */
+export interface ModifierToggleExtensionProps
+  extends Omit<ModifierToggleProps, "label" | "description" | "value"> {}

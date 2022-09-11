@@ -1,6 +1,7 @@
 import React from "react";
-import { ModifierToggleExtensionProps } from "utils/modifiers";
-import ModifierToggle from "components/ui/ModifierToggle/ModifierToggle";
+import ModifierToggle, {
+  ModifierToggleExtensionProps,
+} from "components/ui/ModifierToggle/ModifierToggle";
 
 export const modifier = { label: "Prone in an adjacent hex", value: -2 };
 

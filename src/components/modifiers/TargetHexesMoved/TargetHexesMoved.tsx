@@ -1,6 +1,7 @@
 import React from "react";
-import { ModifierSelectorExtensionProps } from "utils/modifiers";
-import ModifierSelector from "components/ui/ModifierSelector/ModifierSelector";
+import ModifierSelector, {
+  ModifierSelectorExtensionProps,
+} from "components/ui/ModifierSelector/ModifierSelector";
 
 export const options = [
   {
