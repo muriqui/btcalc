@@ -1,6 +1,6 @@
 import React from "react";
-import Modifier from "components/Modifier/Modifier";
-import Toggle, { ToggleProps } from "components/Toggle/Toggle";
+import Modifier from "components/ui/Modifier/Modifier";
+import Toggle, { ToggleProps } from "components/ui/Toggle/Toggle";
 
 export interface ModifierToggleProps extends Omit<ToggleProps, "children"> {
   /** The modifier value. */

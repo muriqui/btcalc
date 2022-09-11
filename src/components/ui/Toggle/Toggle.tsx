@@ -1,5 +1,5 @@
 import React, { useId } from "react";
-import Label from "components/Label/Label";
+import Label from "components/ui/Label/Label";
 
 export interface ToggleProps
   extends Omit<React.ComponentPropsWithoutRef<"div">, "onChange"> {

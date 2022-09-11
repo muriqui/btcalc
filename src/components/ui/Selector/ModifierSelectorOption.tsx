@@ -1,8 +1,8 @@
 import React from "react";
-import Modifier from "components/Modifier/Modifier";
+import Modifier from "components/ui/Modifier/Modifier";
 import SelectorOption, {
   SelectorOptionProps,
-} from "components/Selector/SelectorOption";
+} from "components/ui/Selector/SelectorOption";
 
 export interface ModifierSelectorOptionProps
   extends Omit<SelectorOptionProps, "children" | "onChange"> {
