@@ -1,17 +1,8 @@
 import React from "react";
-import Selector, { SelectorProps } from "components/ui/Selector/Selector";
-import ModifierSelectorOption from "components/ui/Selector/ModifierSelectorOption";
+import { ModifierSelectorExtensionProps } from "utils/modifiers";
+import ModifierSelector from "components/ui/ModifierSelector/ModifierSelector";
 
-export interface TargetHexesMovedProps
-  extends Omit<SelectorProps, "children" | "onChange" | "label"> {
-  /** The label of the currently selected option. */
-  selected?: string;
-  /** Whether the selector options should be disabled. */
-  disabled?: boolean;
-  onChange?: (label: string, value: number) => void;
-}
-
-const options = [
+export const options = [
   {
     label: "Moved 0–2 hexes",
     value: 0,
@@ -45,25 +36,8 @@ const options = [
 /**
  * The number of hexes that the target moved.
  */
-function TargetHexesMoved({
-  selected = options[0].label,
-  disabled,
-  onChange = () => {},
-  ...props
-}: TargetHexesMovedProps) {
-  return (
-    <Selector label="Hexes moved" {...props}>
-      {options.map((option) => (
-        <ModifierSelectorOption
-          key={option.label}
-          checked={option.label === selected}
-          disabled={disabled}
-          onChange={onChange}
-          {...option}
-        />
-      ))}
-    </Selector>
-  );
+function TargetHexesMoved(props: ModifierSelectorExtensionProps) {
+  return <ModifierSelector label="Hexes moved" options={options} {...props} />;
 }
 
 export default TargetHexesMoved;

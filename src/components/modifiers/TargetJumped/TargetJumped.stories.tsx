@@ -1,24 +1,18 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import TargetJumped from "./TargetJumped";
+import TargetJumpedComponent from "./TargetJumped";
 
 export default {
   title: "Modifiers/Target Jumped",
-  component: TargetJumped,
-} as ComponentMeta<typeof TargetJumped>;
+  component: TargetJumpedComponent,
+} as ComponentMeta<typeof TargetJumpedComponent>;
 
-const Template: ComponentStory<typeof TargetJumped> = (args) => (
-  <TargetJumped {...args} />
+const Template: ComponentStory<typeof TargetJumpedComponent> = (args) => (
+  <TargetJumpedComponent {...args} />
 );
 
-export const Default = Template.bind({});
-Default.args = {
-  checked: false,
+export const TargetJumped = Template.bind({});
+TargetJumped.args = {
+  checked: true,
   disabled: false,
-};
-
-export const Disabled = Template.bind({});
-Disabled.args = {
-  ...Default.args,
-  disabled: true,
 };

@@ -1,24 +1,18 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import TargetImmobile from "./TargetImmobile";
+import TargetImmobileComponent from "./TargetImmobile";
 
 export default {
   title: "Modifiers/Target Immobile",
-  component: TargetImmobile,
-} as ComponentMeta<typeof TargetImmobile>;
+  component: TargetImmobileComponent,
+} as ComponentMeta<typeof TargetImmobileComponent>;
 
-const Template: ComponentStory<typeof TargetImmobile> = (args) => (
-  <TargetImmobile {...args} />
+const Template: ComponentStory<typeof TargetImmobileComponent> = (args) => (
+  <TargetImmobileComponent {...args} />
 );
 
-export const Default = Template.bind({});
-Default.args = {
-  checked: false,
+export const TargetImmobile = Template.bind({});
+TargetImmobile.args = {
+  checked: true,
   disabled: false,
-};
-
-export const Disabled = Template.bind({});
-Disabled.args = {
-  ...Default.args,
-  disabled: true,
 };

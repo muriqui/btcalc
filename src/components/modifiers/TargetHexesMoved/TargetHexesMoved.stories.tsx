@@ -1,24 +1,18 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import TargetHexesMoved from "./TargetHexesMoved";
+import TargetHexesMovedComponent from "./TargetHexesMoved";
 
 export default {
   title: "Modifiers/Target Hexes Moved",
-  component: TargetHexesMoved,
-} as ComponentMeta<typeof TargetHexesMoved>;
+  component: TargetHexesMovedComponent,
+} as ComponentMeta<typeof TargetHexesMovedComponent>;
 
-const Template: ComponentStory<typeof TargetHexesMoved> = (args) => (
-  <TargetHexesMoved {...args} />
+const Template: ComponentStory<typeof TargetHexesMovedComponent> = (args) => (
+  <TargetHexesMovedComponent {...args} />
 );
 
-export const Default = Template.bind({});
-Default.args = {
+export const TargetHexesMoved = Template.bind({});
+TargetHexesMoved.args = {
   selected: "Moved 3–4 hexes",
   disabled: false,
-};
-
-export const Disabled = Template.bind({});
-Disabled.args = {
-  ...Default.args,
-  disabled: true,
 };

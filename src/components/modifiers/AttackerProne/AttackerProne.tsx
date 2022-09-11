@@ -1,38 +1,14 @@
 import React from "react";
-import ModifierToggle, {
-  ModifierToggleProps,
-} from "components/ui/ModifierToggle/ModifierToggle";
+import { ModifierToggleExtensionProps } from "utils/modifiers";
+import ModifierToggle from "components/ui/ModifierToggle/ModifierToggle";
 
-export interface AttackerProneProps
-  extends Omit<
-    ModifierToggleProps,
-    "label" | "description" | "value" | "onChange"
-  > {
-  onChange?: (label: string, value?: number) => void;
-}
+export const modifier = { label: "Prone", value: 2 };
 
-const modifier = { label: "Prone", value: 2 };
-
-function AttackerProne({
-  checked,
-  disabled,
-  onChange = () => {},
-  ...props
-}: AttackerProneProps) {
-  const handleChange = (checked: boolean) =>
-    checked
-      ? onChange(modifier.label, modifier.value)
-      : onChange(modifier.label);
-
-  return (
-    <ModifierToggle
-      checked={checked}
-      disabled={disabled}
-      onChange={handleChange}
-      {...props}
-      {...modifier}
-    />
-  );
+/**
+ * Is the attacker prone?
+ */
+function AttackerProne(props: ModifierToggleExtensionProps) {
+  return <ModifierToggle {...props} {...modifier} />;
 }
 
 export default AttackerProne;

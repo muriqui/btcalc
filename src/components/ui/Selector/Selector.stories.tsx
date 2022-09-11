@@ -13,9 +13,8 @@ const options = [
     label: "Option one",
     description: "An optional description",
     checked: true,
-    value: 1,
   },
-  { label: "Option two", checked: false, value: 2 },
+  { label: "Option two", checked: false },
 ];
 
 const Template: ComponentStory<typeof Selector> = (args) => (

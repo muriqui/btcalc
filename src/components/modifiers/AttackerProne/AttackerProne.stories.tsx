@@ -1,24 +1,18 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import AttackerProne from "./AttackerProne";
+import AttackerProneComponent from "./AttackerProne";
 
 export default {
   title: "Modifiers/Attacker Prone",
-  component: AttackerProne,
-} as ComponentMeta<typeof AttackerProne>;
+  component: AttackerProneComponent,
+} as ComponentMeta<typeof AttackerProneComponent>;
 
-const Template: ComponentStory<typeof AttackerProne> = (args) => (
-  <AttackerProne {...args} />
+const Template: ComponentStory<typeof AttackerProneComponent> = (args) => (
+  <AttackerProneComponent {...args} />
 );
 
-export const Default = Template.bind({});
-Default.args = {
-  checked: false,
+export const AttackerProne = Template.bind({});
+AttackerProne.args = {
+  checked: true,
   disabled: false,
-};
-
-export const Disabled = Template.bind({});
-Disabled.args = {
-  ...Default.args,
-  disabled: true,
 };

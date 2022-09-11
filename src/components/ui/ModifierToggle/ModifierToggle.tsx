@@ -2,9 +2,11 @@ import React from "react";
 import Modifier from "components/ui/Modifier/Modifier";
 import Toggle, { ToggleProps } from "components/ui/Toggle/Toggle";
 
-export interface ModifierToggleProps extends Omit<ToggleProps, "children"> {
+export interface ModifierToggleProps
+  extends Omit<ToggleProps, "children" | "onChange"> {
   /** The modifier value. */
   value: number;
+  onChange?: (label: string, value?: number) => void;
 }
 
 /**
@@ -19,13 +21,16 @@ function ModifierToggle({
   onChange = () => {},
   ...props
 }: ModifierToggleProps) {
+  const handleChange = (checked: boolean) =>
+    checked ? onChange(label, value) : onChange(label);
+
   return (
     <Toggle
       label={label}
       description={description}
       checked={checked}
       disabled={disabled}
-      onChange={onChange}
+      onChange={handleChange}
       {...props}
     >
       <div
@@ -36,7 +41,7 @@ function ModifierToggle({
         <Modifier
           value={value}
           hidden={disabled || !checked}
-          onClick={() => onChange(!checked)}
+          onClick={() => handleChange(!checked)}
         />
       </div>
     </Toggle>

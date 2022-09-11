@@ -1,24 +1,18 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import AttackerMovement from "./AttackerMovement";
+import AttackerMovementComponent from "./AttackerMovement";
 
 export default {
-  title: "Modifiers/Attacker Movemement",
-  component: AttackerMovement,
-} as ComponentMeta<typeof AttackerMovement>;
+  title: "Modifiers/Attacker Movement",
+  component: AttackerMovementComponent,
+} as ComponentMeta<typeof AttackerMovementComponent>;
 
-const Template: ComponentStory<typeof AttackerMovement> = (args) => (
-  <AttackerMovement {...args} />
+const Template: ComponentStory<typeof AttackerMovementComponent> = (args) => (
+  <AttackerMovementComponent {...args} />
 );
 
-export const Default = Template.bind({});
-Default.args = {
+export const AttackerMovement = Template.bind({});
+AttackerMovement.args = {
   selected: "Walked",
   disabled: false,
-};
-
-export const Disabled = Template.bind({});
-Disabled.args = {
-  ...Default.args,
-  disabled: true,
 };
