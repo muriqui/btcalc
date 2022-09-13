@@ -8,6 +8,8 @@ export interface GunnerySkillProps
   onChange?: (label: string, value: number) => void;
 }
 
+export const label = "Gunnery skill";
+
 /**
  * The pilot's gunnery skill.
  */
@@ -16,10 +18,10 @@ function GunnerySkill({
   onChange = () => {},
   ...props
 }: GunnerySkillProps) {
-  const handleChange = (value: number) => onChange("Gunnery skill", value);
+  const handleChange = (value: number) => onChange(label, value);
   return (
     <NumberInput
-      label="Gunnery skill"
+      label={label}
       value={value}
       min={0}
       max={6}

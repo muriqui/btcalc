@@ -3,7 +3,8 @@ import ModifierToggle, {
   ModifierToggleExtensionProps,
 } from "components/ui/ModifierToggle/ModifierToggle";
 
-export const modifier = { label: "Prone in an adjacent hex", value: -2 };
+export const label = "Prone in an adjacent hex";
+export const modifier = { label, value: -2 };
 
 /**
  * Is the target prone in an adjacent hex?

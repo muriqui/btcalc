@@ -3,7 +3,8 @@ import ModifierToggle, {
   ModifierToggleExtensionProps,
 } from "components/ui/ModifierToggle/ModifierToggle";
 
-export const modifier = { label: "Prone", value: 1 };
+export const label = "Prone";
+export const modifier = { label, value: 1 };
 
 /**
  * Is the target prone?

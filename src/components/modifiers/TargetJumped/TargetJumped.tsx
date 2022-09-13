@@ -3,7 +3,8 @@ import ModifierToggle, {
   ModifierToggleExtensionProps,
 } from "components/ui/ModifierToggle/ModifierToggle";
 
-export const modifier = { label: "Jumped", value: 1 };
+export const label = "Jumped";
+export const modifier = { label, value: 1 };
 
 /**
  * Did the target jump?

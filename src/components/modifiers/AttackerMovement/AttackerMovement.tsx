@@ -3,6 +3,7 @@ import ModifierSelector, {
   ModifierSelectorExtensionProps,
 } from "components/ui/ModifierSelector/ModifierSelector";
 
+export const label = "Movement";
 export const options = [
   {
     label: "Stationary",
@@ -26,7 +27,7 @@ export const options = [
  * The attacker's movement.
  */
 function AttackerMovement(props: ModifierSelectorExtensionProps) {
-  return <ModifierSelector label="Movement" options={options} {...props} />;
+  return <ModifierSelector label={label} options={options} {...props} />;
 }
 
 export default AttackerMovement;

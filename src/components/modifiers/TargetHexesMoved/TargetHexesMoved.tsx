@@ -3,6 +3,7 @@ import ModifierSelector, {
   ModifierSelectorExtensionProps,
 } from "components/ui/ModifierSelector/ModifierSelector";
 
+export const label = "Hexes moved";
 export const options = [
   {
     label: "Moved 0–2 hexes",
@@ -38,7 +39,7 @@ export const options = [
  * The number of hexes that the target moved.
  */
 function TargetHexesMoved(props: ModifierSelectorExtensionProps) {
-  return <ModifierSelector label="Hexes moved" options={options} {...props} />;
+  return <ModifierSelector label={label} options={options} {...props} />;
 }
 
 export default TargetHexesMoved;

@@ -20,6 +20,8 @@ export interface MinimumRangeProps
   onChange?: (label: string, value: number, state: MinimumRangeState) => void;
 }
 
+export const label = "Minimum range";
+
 /**
  * Calculates the minimum range modifier.
  */
@@ -54,7 +56,7 @@ function MinimumRange({
     }
 
     onChange(
-      "Minimum range",
+      label,
       checked && sanitizedMinimumRange && sanitizedTargetRange
         ? sanitizedMinimumRange - sanitizedTargetRange + 1
         : 0,

@@ -3,7 +3,8 @@ import ModifierToggle, {
   ModifierToggleExtensionProps,
 } from "components/ui/ModifierToggle/ModifierToggle";
 
-export const modifier = { label: "Immobile", value: -4 };
+export const label = "Immobile";
+export const modifier = { label, value: -4 };
 
 /**
  * Is the target immobile?
