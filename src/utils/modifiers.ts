@@ -2,6 +2,12 @@
  * Utilities for working with modifier values.
  */
 
+export interface modifierInterface {
+  label: string;
+  value?: number;
+  state?: any;
+}
+
 /**
  * Formats a modifier value.
  */
@@ -12,20 +18,28 @@ export function formatModifier(value: number): string {
 /**
  * Calculates the total of a list of modifiers.
  */
-export function totalModifiers(modifiers: Map<string, number>): number {
+export function totalModifiers(
+  modifiers: Map<string, modifierInterface>
+): number {
   let total = 0;
-  modifiers.forEach((value) => (total += value));
+  modifiers.forEach((modifier) => {
+    if (modifier.value) {
+      total += modifier.value;
+    }
+  });
   return total;
 }
 
 /**
  * Summarizes a list of modifiers.
  */
-export function summarizeModifiers(modifiers: Map<string, number>): string {
+export function summarizeModifiers(
+  modifiers: Map<string, modifierInterface>
+): string {
   const summary: string[] = [];
-  modifiers.forEach((value, label) => {
-    if (value !== 0) {
-      summary.push(`${label} ${formatModifier(value)}`);
+  modifiers.forEach((modifier) => {
+    if (modifier.value) {
+      summary.push(`${modifier.label} ${formatModifier(modifier.value)}`);
     }
   });
   return summary.join(", ");

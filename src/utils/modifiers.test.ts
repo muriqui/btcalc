@@ -1,4 +1,5 @@
 import {
+  modifierInterface,
   formatModifier,
   totalModifiers,
   summarizeModifiers,
@@ -10,9 +11,9 @@ it("formats modifiers", () => {
   expect(formatModifier(-2)).toEqual("-2");
 });
 
-const modifiers = new Map<string, number>([
-  ["Walked", 1],
-  ["Ran", 2],
+const modifiers = new Map<string, modifierInterface>([
+  ["Movement", { label: "Walked", value: 1 }],
+  ["Prone", { label: "Prone", value: 2 }],
 ]);
 
 it("totals modifiers", () => {
@@ -20,5 +21,5 @@ it("totals modifiers", () => {
 });
 
 it("summarizes modifiers", () => {
-  expect(summarizeModifiers(modifiers)).toEqual("Walked +1, Ran +2");
+  expect(summarizeModifiers(modifiers)).toEqual("Walked +1, Prone +2");
 });
