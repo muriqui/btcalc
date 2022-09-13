@@ -21,8 +21,8 @@ export const options = [
 /**
  * The target's range.
  */
-function TargetRange(props: ModifierSelectorExtensionProps) {
+function Range(props: ModifierSelectorExtensionProps) {
   return <ModifierSelector label="Range" options={options} {...props} />;
 }
 
-export default TargetRange;
+export default Range;
