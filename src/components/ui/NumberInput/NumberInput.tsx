@@ -11,6 +11,8 @@ export interface NumberInputProps
   min?: number;
   /** The maximum value. */
   max?: number;
+  /** Whether the input is disabled (unable to accept input). */
+  disabled?: boolean;
   onChange?: (value: number) => void;
 }
 
@@ -22,6 +24,7 @@ function NumberInput({
   value = 0,
   min,
   max,
+  disabled,
   onChange = () => {},
   ...props
 }: NumberInputProps) {
@@ -38,8 +41,11 @@ function NumberInput({
         value={value}
         min={min}
         max={max}
+        disabled={disabled}
         onChange={handleChange}
-        className="w-full rounded border border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-gray-900 focus-within:outline-none focus-within:ring-2 focus-within:ring-white focus-within:ring-opacity-60 focus-within:ring-offset-2 focus-within:ring-offset-sky-300"
+        className={`${
+          disabled ? "cursor-not-allowed opacity-60" : ""
+        } w-full rounded border border-gray-300 bg-white bg-clip-padding px-3 py-1.5 text-gray-900 focus-within:outline-none focus-within:ring-2 focus-within:ring-white focus-within:ring-opacity-60 focus-within:ring-offset-2 focus-within:ring-offset-sky-300`}
       />
     </div>
   );
