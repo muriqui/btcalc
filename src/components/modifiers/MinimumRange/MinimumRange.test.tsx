@@ -17,6 +17,19 @@ test("renders MinimumRange", async () => {
   });
 });
 
+test("toggles MinimumRange", async () => {
+  render(<MinimumRange checked={true} onChange={handleChange} />);
+  const toggleElement = screen.getByLabelText(
+    "Target is within the weapon's minimum range"
+  );
+  await userEvent.click(toggleElement);
+  expect(handleChange).toBeCalledWith("Minimum range", undefined, {
+    checked: false,
+    minimumRange: undefined,
+    targetRange: undefined,
+  });
+});
+
 test("calculates MinimumRange", async () => {
   render(
     <MinimumRange

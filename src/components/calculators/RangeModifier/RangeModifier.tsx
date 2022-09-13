@@ -21,7 +21,7 @@ function RangeModifier({
 }: RangeModifierProps) {
   const handleChange = (label: string, modifier: modifierInterface) => {
     const newSelected = new Map(selected);
-    if (modifier.value) {
+    if (modifier.value || (label === minimumLabel && modifier.value === 0)) {
       newSelected.set(label, modifier);
 
       // Minimum range and medium/long range are mutually exclusive.
@@ -36,6 +36,12 @@ function RangeModifier({
     onChange(newSelected);
   };
 
+  const minimumRangeState = selected.get(minimumLabel)?.state ?? {
+    checked: false,
+    minimumRange: undefined,
+    targetRange: undefined,
+  };
+
   return (
     <div {...props}>
       <Range
@@ -45,7 +51,7 @@ function RangeModifier({
         onChange={(label, value) => handleChange(rangeLabel, { label, value })}
       />
       <MinimumRange
-        checked={selected.has(minimumLabel)}
+        {...minimumRangeState}
         onChange={(label, value, state) =>
           handleChange(minimumLabel, { label, value, state })
         }

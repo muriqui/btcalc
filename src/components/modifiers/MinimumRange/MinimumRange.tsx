@@ -17,10 +17,32 @@ export interface MinimumRangeProps
   minimumRange?: number;
   /** The range to the target. */
   targetRange?: number;
-  onChange?: (label: string, value: number, state: MinimumRangeState) => void;
+  onChange?: (label: string, value?: number, state?: MinimumRangeState) => void;
 }
 
 export const label = "Minimum range";
+
+/**
+ * Computes the current modifier value.
+ *
+ * @param checked
+ * @param minimumRange
+ * @param targetRange
+ * @returns number | undefined
+ *   Returns the modifier value. If checked is false, returns undefined.
+ *   If either the minimum range or target range are falsy, returns 0.
+ */
+function computeValue(
+  checked: boolean,
+  minimumRange?: number,
+  targetRange?: number
+): number | undefined {
+  return !checked
+    ? undefined
+    : minimumRange && targetRange
+    ? minimumRange - targetRange + 1
+    : 0;
+}
 
 /**
  * Calculates the minimum range modifier.
@@ -34,10 +56,11 @@ function MinimumRange({
 }: MinimumRangeProps) {
   const sanitizedMinimumRange = minimumRange || undefined;
   const sanitizedTargetRange = targetRange || undefined;
-  const value =
-    checked && sanitizedMinimumRange && sanitizedTargetRange
-      ? sanitizedMinimumRange - sanitizedTargetRange + 1
-      : 0;
+  const value = computeValue(
+    checked,
+    sanitizedMinimumRange,
+    sanitizedTargetRange
+  );
 
   const handleChange = ({
     checked,
@@ -57,9 +80,7 @@ function MinimumRange({
 
     onChange(
       label,
-      checked && sanitizedMinimumRange && sanitizedTargetRange
-        ? sanitizedMinimumRange - sanitizedTargetRange + 1
-        : 0,
+      computeValue(checked, sanitizedMinimumRange, sanitizedTargetRange),
       {
         checked,
         minimumRange: sanitizedMinimumRange,
@@ -83,7 +104,7 @@ function MinimumRange({
       >
         <div className={!checked ? "pointer-events-none" : "cursor-pointer"}>
           <Modifier
-            value={value}
+            value={value ?? 0}
             hidden={!checked}
             onClick={() =>
               handleChange({
