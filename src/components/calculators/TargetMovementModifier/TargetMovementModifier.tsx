@@ -45,6 +45,8 @@ function TargetMovementModifier({
       else if (label === immobileLabel) {
         newSelected.delete(hexesLabel);
         newSelected.delete(jumpedLabel);
+      } else if (label === hexesLabel || label === jumpedLabel) {
+        newSelected.delete(immobileLabel);
       }
     } else {
       newSelected.delete(label);
