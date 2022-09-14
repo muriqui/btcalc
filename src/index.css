@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+summary {
+  list-style-image: none;
+}
+summary::-webkit-details-marker {
+  display: none;
+  background: none;
+  color: transparent;
+}
+details summary svg {
+  transform: rotate(90deg);
+}
+details[open] summary svg {
+  transform: rotate(-90deg);
+}
