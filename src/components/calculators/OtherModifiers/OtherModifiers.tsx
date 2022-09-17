@@ -1,6 +1,12 @@
 import React from "react";
 import { modifierInterface } from "utils/modifiers";
 import Heat, { label as heatLabel } from "components/modifiers/Heat/Heat";
+import SecondaryTargetForward, {
+  label as secondaryForwardLabel,
+} from "components/modifiers/SecondaryTargetForward/SecondaryTargetForward";
+import SecondaryTargetSideRear, {
+  label as secondarySideRearLabel,
+} from "components/modifiers/SecondaryTargetSideRear/SecondaryTargetSideRear";
 
 interface OtherModifiersProps
   extends Omit<React.ComponentPropsWithoutRef<"div">, "onChange"> {
@@ -20,6 +26,13 @@ function OtherModifiers({
     const newSelected = new Map(selected);
     if (modifier.value) {
       newSelected.set(label, modifier);
+
+      // The two secondary target options are mutually exclusive.
+      if (label === secondaryForwardLabel) {
+        newSelected.delete(secondarySideRearLabel);
+      } else if (label === secondarySideRearLabel) {
+        newSelected.delete(secondaryForwardLabel);
+      }
     } else {
       newSelected.delete(label);
     }
@@ -35,7 +48,18 @@ function OtherModifiers({
         }
         onChange={(label, value) => handleChange(heatLabel, { label, value })}
       />
-      <div>@todo Multiple targets</div>
+      <SecondaryTargetForward
+        checked={selected.has(secondaryForwardLabel)}
+        onChange={(label, value) =>
+          handleChange(secondaryForwardLabel, { label, value })
+        }
+      />
+      <SecondaryTargetSideRear
+        checked={selected.has(secondarySideRearLabel)}
+        onChange={(label, value) =>
+          handleChange(secondarySideRearLabel, { label, value })
+        }
+      />
       <div>@todo Specialized attacks</div>
       <div>@todo Terrain modifiers</div>
     </div>
