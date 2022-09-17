@@ -3,6 +3,7 @@ import { totalModifiers, summarizeModifiers } from "utils/modifiers";
 import GunnerySkill from "components/modifiers/GunnerySkill/GunnerySkill";
 import AttackerMovementModifier from "components/calculators/AttackerMovementModifier/AttackerMovementModifier";
 import TargetMovementModifier from "components/calculators/TargetMovementModifier/TargetMovementModifier";
+import OtherModifiers from "components/calculators/OtherModifiers/OtherModifiers";
 import RangeModifier from "components/calculators/RangeModifier/RangeModifier";
 import Disclosure from "components/ui/Disclosure/Disclosure";
 
@@ -13,12 +14,14 @@ function Gator({ ...props }: React.ComponentPropsWithoutRef<"div">) {
   const [gunnery, setGunnery] = useState(4);
   const [attacker, setAttacker] = useState(new Map());
   const [target, setTarget] = useState(new Map());
+  const [other, setOther] = useState(new Map());
   const [range, setRange] = useState(new Map());
 
   const total =
     gunnery +
     totalModifiers(attacker) +
     totalModifiers(target) +
+    totalModifiers(other) +
     totalModifiers(range);
 
   return (
@@ -49,8 +52,14 @@ function Gator({ ...props }: React.ComponentPropsWithoutRef<"div">) {
           onChange={(selected) => setTarget(selected)}
         />
       </Disclosure>
-      <Disclosure summary="Other modifiers" description="None">
-        <div>@todo "Other" coming soon because it's complicated.</div>
+      <Disclosure
+        summary="Other modifiers"
+        description={summarizeModifiers(other) || "None"}
+      >
+        <OtherModifiers
+          selected={other}
+          onChange={(selected) => setOther(selected)}
+        />
       </Disclosure>
       <Disclosure
         summary="Range modifier"
