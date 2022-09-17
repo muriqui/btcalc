@@ -7,6 +7,15 @@ import SecondaryTargetForward, {
 import SecondaryTargetSideRear, {
   label as secondarySideRearLabel,
 } from "components/modifiers/SecondaryTargetSideRear/SecondaryTargetSideRear";
+import IndirectFire, {
+  label as indirectLabel,
+} from "components/modifiers/IndirectFire/IndirectFire";
+import IndirectFireSpotterAttacked, {
+  label as indirectSpotterAttackedLabel,
+} from "components/modifiers/IndirectFireSpotterAttacked/IndirectFireSpotterAttacked";
+import Spotter, {
+  label as spotterLabel,
+} from "components/modifiers/Spotter/Spotter";
 
 interface OtherModifiersProps
   extends Omit<React.ComponentPropsWithoutRef<"div">, "onChange"> {
@@ -32,6 +41,17 @@ function OtherModifiers({
         newSelected.delete(secondarySideRearLabel);
       } else if (label === secondarySideRearLabel) {
         newSelected.delete(secondaryForwardLabel);
+      }
+      // The three indirect fire options are mutually exclusive.
+      else if (label === indirectLabel) {
+        newSelected.delete(indirectSpotterAttackedLabel);
+        newSelected.delete(spotterLabel);
+      } else if (label === indirectSpotterAttackedLabel) {
+        newSelected.delete(indirectLabel);
+        newSelected.delete(spotterLabel);
+      } else if (label === spotterLabel) {
+        newSelected.delete(indirectLabel);
+        newSelected.delete(indirectSpotterAttackedLabel);
       }
     } else {
       newSelected.delete(label);
@@ -60,7 +80,24 @@ function OtherModifiers({
           handleChange(secondarySideRearLabel, { label, value })
         }
       />
-      <div>@todo Specialized attacks</div>
+      <IndirectFire
+        checked={selected.has(indirectLabel)}
+        onChange={(label, value) =>
+          handleChange(indirectLabel, { label, value })
+        }
+      />
+      <IndirectFireSpotterAttacked
+        checked={selected.has(indirectSpotterAttackedLabel)}
+        onChange={(label, value) =>
+          handleChange(indirectSpotterAttackedLabel, { label, value })
+        }
+      />
+      <Spotter
+        checked={selected.has(spotterLabel)}
+        onChange={(label, value) =>
+          handleChange(spotterLabel, { label, value })
+        }
+      />
       <div>@todo Terrain modifiers</div>
     </div>
   );
