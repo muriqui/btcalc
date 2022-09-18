@@ -31,6 +31,12 @@ import IndirectFireSpotterAttacked, {
 import Spotter, {
   label as spotterLabel,
 } from "components/modifiers/Spotter/Spotter";
+import WoodsTargetHex, {
+  label as woodsTargetLabel,
+} from "components/modifiers/WoodsTargetHex/WoodsTargetHex";
+import WoodsInterveningHex, {
+  label as woodsInterveningLabel,
+} from "components/modifiers/WoodsIntervening/WoodsIntervening";
 
 interface OtherModifiersProps
   extends Omit<React.ComponentPropsWithoutRef<"div">, "onChange"> {
@@ -77,6 +83,11 @@ function OtherModifiers({
       newSelected.delete(label);
     }
     onChange(newSelected);
+  };
+
+  const woodsInterveningState = selected.get(woodsInterveningLabel)?.state ?? {
+    lightWoods: 0,
+    heavyWoods: 0,
   };
 
   return (
@@ -148,7 +159,24 @@ function OtherModifiers({
           handleChange(spotterLabel, { label, value })
         }
       />
-      <div>@todo Terrain modifiers</div>
+      <WoodsTargetHex
+        selected={
+          selected.has(woodsTargetLabel)
+            ? selected.get(woodsTargetLabel)!.label
+            : undefined
+        }
+        onChange={(label, value) =>
+          handleChange(woodsTargetLabel, { label, value })
+        }
+      />
+      <WoodsInterveningHex
+        {...woodsInterveningState}
+        onChange={(label, value, state) =>
+          handleChange(woodsInterveningLabel, { label, value, state })
+        }
+      />
+      <div>@todo Water</div>
+      <div>@todo Partial cover</div>
     </div>
   );
 }
