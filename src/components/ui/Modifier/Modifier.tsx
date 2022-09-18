@@ -18,7 +18,7 @@ function Modifier({ value, hidden, darkBackground, ...props }: ModifierProps) {
     <span
       className={`${hidden || value === 0 ? "invisible" : ""} ${
         darkBackground ? "bg-white text-white" : "bg-black text-gray-900"
-      } mx-2 inline-flex h-6 w-8 items-center justify-center rounded-full bg-opacity-20 text-xs font-bold`}
+      } mx-2 inline-flex h-6 min-w-[2.5rem] items-center justify-center rounded-full bg-opacity-20 px-2 text-xs font-bold`}
       {...props}
     >
       {formatModifier(value)}

@@ -1,5 +1,20 @@
 import React from "react";
 import { modifierInterface } from "utils/modifiers";
+import SensorHit, {
+  label as sensorLabel,
+} from "components/modifiers/SensorHit/SensorHit";
+import SensorHitSecond, {
+  label as sensorSecondLabel,
+} from "components/modifiers/SensorHitSecond/SensorHitSecond";
+import ShoulderHit, {
+  label as shoulderLabel,
+} from "components/modifiers/ShoulderHit/ShoulderHit";
+import UpperArmHit, {
+  label as upperArmLabel,
+} from "components/modifiers/UpperArmHit/UpperArmHit";
+import LowerArmHit, {
+  label as lowerArmLabel,
+} from "components/modifiers/LowerArmHit/LowerArmHit";
 import Heat, { label as heatLabel } from "components/modifiers/Heat/Heat";
 import SecondaryTargetForward, {
   label as secondaryForwardLabel,
@@ -36,8 +51,13 @@ function OtherModifiers({
     if (modifier.value) {
       newSelected.set(label, modifier);
 
+      // A shoulder hit means other arm hits are disregarded.
+      if (label === shoulderLabel) {
+        newSelected.delete(upperArmLabel);
+        newSelected.delete(lowerArmLabel);
+      }
       // The two secondary target options are mutually exclusive.
-      if (label === secondaryForwardLabel) {
+      else if (label === secondaryForwardLabel) {
         newSelected.delete(secondarySideRearLabel);
       } else if (label === secondarySideRearLabel) {
         newSelected.delete(secondaryForwardLabel);
@@ -61,7 +81,37 @@ function OtherModifiers({
 
   return (
     <div {...props}>
-      <div>@todo Mech damage</div>
+      <SensorHit
+        checked={selected.has(sensorLabel)}
+        onChange={(label, value) => handleChange(sensorLabel, { label, value })}
+      />
+      <SensorHitSecond
+        checked={selected.has(sensorSecondLabel)}
+        onChange={(label, value) =>
+          handleChange(sensorSecondLabel, { label, value })
+        }
+        disabled={!selected.has(sensorLabel)}
+      />
+      <ShoulderHit
+        checked={selected.has(shoulderLabel)}
+        onChange={(label, value) =>
+          handleChange(shoulderLabel, { label, value })
+        }
+      />
+      <UpperArmHit
+        checked={selected.has(upperArmLabel)}
+        onChange={(label, value) =>
+          handleChange(upperArmLabel, { label, value })
+        }
+        disabled={selected.has(shoulderLabel)}
+      />
+      <LowerArmHit
+        checked={selected.has(lowerArmLabel)}
+        onChange={(label, value) =>
+          handleChange(lowerArmLabel, { label, value })
+        }
+        disabled={selected.has(shoulderLabel)}
+      />
       <Heat
         selected={
           selected.has(heatLabel) ? selected.get(heatLabel)!.label : undefined

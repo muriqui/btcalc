@@ -1,19 +1,25 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import ModifierComponent from "./Modifier";
+import Modifier from "./Modifier";
 
 export default {
   title: "UI/Modifier",
-  component: ModifierComponent,
-} as ComponentMeta<typeof ModifierComponent>;
+  component: Modifier,
+} as ComponentMeta<typeof Modifier>;
 
-const Template: ComponentStory<typeof ModifierComponent> = (args) => (
-  <ModifierComponent {...args} />
+const Template: ComponentStory<typeof Modifier> = (args) => (
+  <Modifier {...args} />
 );
 
-export const Modifier = Template.bind({});
-Modifier.args = {
+export const NormalValue = Template.bind({});
+NormalValue.args = {
   value: 2,
   hidden: false,
   darkBackground: false,
+};
+
+export const Impossible = Template.bind({});
+Impossible.args = {
+  ...NormalValue.args,
+  value: Infinity,
 };

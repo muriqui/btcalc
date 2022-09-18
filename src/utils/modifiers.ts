@@ -12,6 +12,9 @@ export interface modifierInterface {
  * Formats a modifier value.
  */
 export function formatModifier(value: number): string {
+  if (value === Infinity) {
+    return "Impossible";
+  }
   return (value <= 0 ? "" : "+") + value;
 }
 
