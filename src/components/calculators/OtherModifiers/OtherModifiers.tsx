@@ -37,6 +37,9 @@ import WoodsTargetHex, {
 import WoodsInterveningHex, {
   label as woodsInterveningLabel,
 } from "components/modifiers/WoodsIntervening/WoodsIntervening";
+import PartialCover, {
+  label as partialCoverLabel,
+} from "components/modifiers/PartialCover/PartialCover";
 
 interface OtherModifiersProps
   extends Omit<React.ComponentPropsWithoutRef<"div">, "onChange"> {
@@ -175,8 +178,12 @@ function OtherModifiers({
           handleChange(woodsInterveningLabel, { label, value, state })
         }
       />
-      <div>@todo Water</div>
-      <div>@todo Partial cover</div>
+      <PartialCover
+        checked={selected.has(partialCoverLabel)}
+        onChange={(label, value) =>
+          handleChange(partialCoverLabel, { label, value })
+        }
+      />
     </div>
   );
 }
