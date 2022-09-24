@@ -14,5 +14,4 @@ const Template: ComponentStory<typeof LabelComponent> = (args) => (
 export const Label = Template.bind({});
 Label.args = {
   children: "A label",
-  darkBackground: false,
 };

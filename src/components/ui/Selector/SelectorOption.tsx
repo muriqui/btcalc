@@ -44,13 +44,15 @@ function SelectorOption({
         disabled
           ? "cursor-not-allowed opacity-60"
           : checked
-          ? "bg-sky-800 text-white"
-          : "bg-white hover:bg-sky-100"
-      } relative flex w-full cursor-pointer items-center justify-between rounded-lg px-5 py-4 shadow-md focus-within:outline-none focus-within:ring-2 focus-within:ring-white focus-within:ring-opacity-60 focus-within:ring-offset-2 focus-within:ring-offset-sky-300`}
+          ? "border-amber-500 bg-amber-400 font-semibold text-slate-900 dark:bg-amber-500"
+          : "border-slate-900 dark:border-slate-300 dark:hover:border-amber-500 dark:hover:text-slate-900"
+      } relative flex w-full cursor-pointer items-center justify-between rounded-lg border px-5 py-4 focus-within:outline-none focus-within:ring-2 focus-within:ring-amber-500 focus-within:ring-offset-2 focus-within:ring-offset-slate-100 hover:bg-amber-300 dark:focus-within:ring-offset-slate-900 dark:hover:bg-amber-600`}
       onClick={disabled ? () => {} : handleChange}
       {...props}
     >
-      <div className={`${disabled ? "pointer-events-none" : ""} text-sm`}>
+      <div
+        className={`${disabled ? "pointer-events-none" : ""} flex-auto text-sm`}
+      >
         <input
           type="radio"
           id={`${id}-radio`}
@@ -60,14 +62,9 @@ function SelectorOption({
           onChange={handleChange}
           className="sr-only"
         />
-        <Label htmlFor={`${id}-radio`} darkBackground={checked && !disabled}>
-          {label}
-        </Label>
+        <Label htmlFor={`${id}-radio`}>{label}</Label>
         {description && (
-          <span
-            id={`${id}-description`}
-            className={`${checked && !disabled ? "text-sky-100" : ""} block`}
-          >
+          <span id={`${id}-description`} className="block text-xs">
             {description}
           </span>
         )}

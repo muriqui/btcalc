@@ -10,7 +10,7 @@ export interface WoodsInterveningState {
 }
 
 export interface WoodsInterveningProps
-  extends Omit<React.ComponentPropsWithoutRef<"div">, "onChange">,
+  extends Omit<React.ComponentPropsWithoutRef<"fieldset">, "onChange">,
     WoodsInterveningState {
   onChange?: (
     label: string,
@@ -54,9 +54,17 @@ function WoodsIntervening({
     });
 
   return (
-    <div {...props}>
-      <strong>Intervening woods hexes (not including the target hex)</strong>
-      <Modifier value={value} hidden={value === 0} />
+    <fieldset {...props}>
+      <div className="flex flex-col px-5">
+        <legend className="italic">
+          <span>Intervening woods hexes</span>
+          <br />
+          <span className="text-xs">(not including the target hex)</span>
+        </legend>
+        <span className="self-center">
+          <Modifier value={value} hidden={value === 0} />
+        </span>
+      </div>
       <NumberInput
         label="Light woods"
         value={lightWoods}
@@ -69,7 +77,7 @@ function WoodsIntervening({
         min={0}
         onChange={(heavyWoods) => handleChange({ lightWoods, heavyWoods })}
       />
-    </div>
+    </fieldset>
   );
 }
 

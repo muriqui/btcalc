@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .italic {
+    font-style: normal;
+    font-variation-settings: "slnt" -11, "CRSV" 1;
+  }
+}
+
+body {
+  @apply overflow-hidden overscroll-none bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-slate-300;
+}
+
+#root {
+  @apply h-screen w-full pt-12;
+}
+
 summary {
   list-style-image: none;
 }

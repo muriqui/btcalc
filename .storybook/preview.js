@@ -1,3 +1,4 @@
+import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import "!style-loader!css-loader!postcss-loader!../src/index.css";
 
 export const parameters = {
@@ -6,5 +7,8 @@ export const parameters = {
     matchers: {
       date: /Date$/,
     },
+  },
+  viewport: {
+    viewports: INITIAL_VIEWPORTS,
   },
 };

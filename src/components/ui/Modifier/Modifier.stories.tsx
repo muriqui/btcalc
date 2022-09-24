@@ -15,7 +15,6 @@ export const NormalValue = Template.bind({});
 NormalValue.args = {
   value: 2,
   hidden: false,
-  darkBackground: false,
 };
 
 export const Impossible = Template.bind({});

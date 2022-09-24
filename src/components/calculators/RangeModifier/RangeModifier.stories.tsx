@@ -5,6 +5,13 @@ import RangeModifierComponent from "./RangeModifier";
 export default {
   title: "Calculators/Range Modifier",
   component: RangeModifierComponent,
+  decorators: [
+    (Story) => (
+      <div className="h-full overflow-auto pb-14">
+        <Story />
+      </div>
+    ),
+  ],
 } as ComponentMeta<typeof RangeModifierComponent>;
 
 const Template: ComponentStory<typeof RangeModifierComponent> = (args) => (

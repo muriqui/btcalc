@@ -5,6 +5,13 @@ import AttackerMovementModifierComponent from "./AttackerMovementModifier";
 export default {
   title: "Calculators/Attacker Movement Modifier",
   component: AttackerMovementModifierComponent,
+  decorators: [
+    (Story) => (
+      <div className="h-full overflow-auto pb-14">
+        <Story />
+      </div>
+    ),
+  ],
 } as ComponentMeta<typeof AttackerMovementModifierComponent>;
 
 const Template: ComponentStory<typeof AttackerMovementModifierComponent> = (

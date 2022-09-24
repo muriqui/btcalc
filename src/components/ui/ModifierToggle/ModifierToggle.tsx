@@ -33,17 +33,14 @@ function ModifierToggle({
       onChange={handleChange}
       {...props}
     >
-      <div
-        className={
+      <Modifier
+        value={value}
+        hidden={disabled || !checked}
+        onClick={() => handleChange(!checked)}
+        className={`${
           disabled || !checked ? "pointer-events-none" : "cursor-pointer"
-        }
-      >
-        <Modifier
-          value={value}
-          hidden={disabled || !checked}
-          onClick={() => handleChange(!checked)}
-        />
-      </div>
+        } ml-4 flex-none leading-none`}
+      />
     </Toggle>
   );
 }

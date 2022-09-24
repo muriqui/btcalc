@@ -33,13 +33,13 @@ function ModifierSelectorOption({
       onChange={handleChange}
       {...props}
     >
-      <div className={disabled ? "pointer-events-none" : "cursor-pointer"}>
-        <Modifier
-          value={value}
-          hidden={disabled || !checked}
-          darkBackground={!disabled && checked}
-        />
-      </div>
+      <Modifier
+        value={value}
+        hidden={disabled || !checked}
+        className={`${
+          disabled ? "pointer-events-none" : "cursor-pointer"
+        } ml-4 flex-none`}
+      />
     </SelectorOption>
   );
 }

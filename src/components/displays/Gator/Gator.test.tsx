@@ -3,6 +3,6 @@ import Gator from "./Gator";
 
 test("renders Gator", async () => {
   render(<Gator />);
-  const totalElement = screen.getByText("Total: 4");
+  const totalElement = screen.getByText("Roll 4 or higher to hit");
   expect(totalElement).toBeInTheDocument();
 });

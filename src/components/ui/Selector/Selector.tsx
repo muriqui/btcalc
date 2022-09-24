@@ -11,8 +11,8 @@ export interface SelectorProps extends React.ComponentPropsWithoutRef<"div"> {
 function Selector({ label, children, ...props }: SelectorProps) {
   return (
     <div {...props}>
-      <fieldset className="space-y-2">
-        <legend className="px-5 font-medium">{label}</legend>
+      <fieldset className="mb-4 space-y-2">
+        <legend className="px-5 italic">{label}</legend>
         {children}
       </fieldset>
     </div>

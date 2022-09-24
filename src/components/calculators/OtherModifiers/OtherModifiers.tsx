@@ -84,6 +84,11 @@ function OtherModifiers({
       }
     } else {
       newSelected.delete(label);
+
+      // Turning off the first sensor hit also turns off the second.
+      if (label === sensorLabel) {
+        newSelected.delete(sensorSecondLabel);
+      }
     }
     onChange(newSelected);
   };
@@ -131,6 +136,7 @@ function OtherModifiers({
           selected.has(heatLabel) ? selected.get(heatLabel)!.label : undefined
         }
         onChange={(label, value) => handleChange(heatLabel, { label, value })}
+        className="my-8"
       />
       <SecondaryTargetForward
         checked={selected.has(secondaryForwardLabel)}
@@ -171,12 +177,14 @@ function OtherModifiers({
         onChange={(label, value) =>
           handleChange(woodsTargetLabel, { label, value })
         }
+        className="mt-8"
       />
       <WoodsInterveningHex
         {...woodsInterveningState}
         onChange={(label, value, state) =>
           handleChange(woodsInterveningLabel, { label, value, state })
         }
+        className="mt-8 mb-4"
       />
       <PartialCover
         checked={selected.has(partialCoverLabel)}
