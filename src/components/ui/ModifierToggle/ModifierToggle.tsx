@@ -39,7 +39,7 @@ function ModifierToggle({
         onClick={() => handleChange(!checked)}
         className={`${
           disabled || !checked ? "pointer-events-none" : "cursor-pointer"
-        } ml-4 flex-none leading-none`}
+        } flex-none leading-none`}
       />
     </Toggle>
   );

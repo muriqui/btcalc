@@ -33,7 +33,7 @@ function NumberInput({
     onChange(parseInt(event.target.value, 10));
 
   return (
-    <div className="mx-5 my-4 text-sm" {...props}>
+    <div className="mx-5 my-4 space-y-2" {...props}>
       <Label htmlFor={`${id}-input`}>{label}</Label>
       <input
         type="number"
@@ -47,7 +47,7 @@ function NumberInput({
           disabled
             ? "cursor-not-allowed bg-transparent opacity-60"
             : "bg-white text-slate-900 dark:bg-black dark:text-slate-300"
-        } w-full rounded border border-slate-300 bg-clip-padding px-3 py-1.5 selection:bg-amber-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-amber-500 focus-within:ring-offset-2 focus-within:ring-offset-slate-100 dark:selection:text-slate-900 dark:focus-within:ring-offset-slate-900`}
+        } w-full rounded border border-slate-300 bg-clip-padding px-3 py-1.5 selection:bg-amber-400 focus-within:outline-none focus-within:ring-2 focus-within:ring-amber-500 focus-within:ring-offset-2 focus-within:ring-offset-slate-100 dark:selection:text-slate-900 dark:focus-within:ring-amber-400 dark:focus-within:ring-offset-slate-900`}
       />
     </div>
   );

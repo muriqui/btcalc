@@ -21,7 +21,7 @@ function Disclosure({
     <details open={open} {...props}>
       <summary
         onClick={handleClick}
-        className="relative flex w-full cursor-pointer select-none list-none items-center justify-between rounded-lg border border-slate-900 bg-slate-50 px-5 py-4 focus-within:outline-none focus-within:ring-2 focus-within:ring-amber-500 focus-within:ring-offset-2 focus-within:ring-offset-slate-100 hover:bg-amber-300 dark:border-slate-300 dark:bg-transparent dark:focus-within:ring-offset-slate-900 dark:hover:border-amber-500 dark:hover:bg-amber-600 dark:hover:text-slate-900"
+        className="relative flex w-full cursor-pointer select-none list-none items-center justify-between rounded-lg border border-slate-900 px-5 py-4 focus-within:outline-none focus-within:ring-2 focus-within:ring-amber-500 focus-within:ring-offset-2 focus-within:ring-offset-slate-100 hover:border-amber-500 hover:bg-amber-500 hover:text-slate-900 dark:border-slate-300 dark:focus-within:ring-amber-400 dark:focus-within:ring-offset-slate-900"
       >
         <div className="font-semibold">
           {summary}

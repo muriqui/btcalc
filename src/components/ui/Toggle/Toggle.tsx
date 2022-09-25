@@ -32,8 +32,8 @@ function Toggle({
   return (
     <div
       className={`${disabled ? "cursor-not-allowed opacity-60" : ""} ${
-        checked ? "text-amber-700 dark:text-amber-500" : ""
-      } flex items-center px-5 py-4`}
+        checked ? "text-amber-700 dark:text-amber-400" : ""
+      } flex items-center gap-4 px-5 py-4`}
       {...props}
     >
       <button
@@ -47,23 +47,19 @@ function Toggle({
         onClick={disabled ? () => {} : handleChange}
         className={`${disabled ? "pointer-events-none" : ""} ${
           checked
-            ? "border-amber-500 bg-amber-400 dark:bg-amber-500"
+            ? "border-amber-400 bg-amber-400"
             : "border-slate-900 dark:border-slate-300"
-        } relative inline-flex h-6 w-11 flex-none items-center rounded-full border transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-slate-100 dark:focus:ring-offset-slate-900`}
+        } relative inline-flex h-7 w-14 flex-none items-center rounded-full border transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-slate-100 dark:focus:ring-amber-400 dark:focus:ring-offset-slate-900`}
       >
         <span
           className={`${
             checked
-              ? "translate-x-6 border-amber-400 bg-slate-900 dark:border-slate-900"
+              ? "translate-x-7 border-amber-400 bg-slate-900 dark:border-slate-900"
               : "translate-x-1 border-slate-100 bg-slate-900 dark:border-slate-900 dark:bg-slate-300"
-          } inline-block h-4 w-4 transform rounded-full border transition-transform`}
+          } inline-block h-5 w-5 transform rounded-full border transition-transform`}
         ></span>
       </button>
-      <div
-        className={`${
-          disabled ? "pointer-events-none" : ""
-        } ml-4 flex-auto text-sm`}
-      >
+      <div className={`${disabled ? "pointer-events-none" : ""} flex-auto`}>
         <Label id={`${id}-label`} htmlFor={`${id}-toggle`}>
           {label}
         </Label>
@@ -71,7 +67,7 @@ function Toggle({
           <span
             id={`${id}-description`}
             onClick={disabled ? () => {} : handleChange}
-            className="block cursor-pointer text-xs"
+            className="block cursor-pointer text-sm"
           >
             {description}
           </span>

@@ -9,12 +9,12 @@
   }
 }
 
-body {
-  @apply overflow-hidden overscroll-none bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-slate-300;
+html {
+  @apply overscroll-none;
 }
 
-#root {
-  @apply h-screen w-full pt-12;
+body {
+  @apply h-screen bg-slate-100 text-slate-900 dark:bg-slate-900 dark:text-slate-300;
 }
 
 summary {

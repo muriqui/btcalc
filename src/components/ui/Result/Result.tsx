@@ -1,30 +1,41 @@
 import React from "react";
 
-interface ResultProps {
+interface ResultProps extends React.ComponentPropsWithoutRef<"div"> {
   value: number;
+  htmlFor?: string;
+  form?: string;
 }
 
-function Result({ value }: ResultProps) {
-  let text: string, frame: string;
-  if (value <= 2) {
+function Result({
+  value,
+  htmlFor = undefined,
+  form = undefined,
+  ...props
+}: ResultProps) {
+  let text: string, bg: string;
+  if (isNaN(value)) {
+    text = "Invalid entry";
+    bg = "bg-black text-white";
+  } else if (value <= 2) {
     text = "Automatic hit";
-    frame = "bg-sky-300 dark:bg-sky-700";
+    bg = "bg-sky-700 text-white";
   } else if (value > 12) {
     text = "Impossible";
-    frame = "bg-red-300 dark:bg-red-800";
+    bg = "bg-red-700 dark:bg-red-800 text-white";
   } else {
     text = `Roll ${value}${value < 12 ? " or higher" : ""} to hit`;
-    frame = "bg-slate-300 dark:bg-slate-500";
+    bg = "bg-slate-300 dark:bg-slate-500 dark:text-white";
   }
 
   return (
-    <div
-      className={`${frame} flex h-14 items-center border-8 border-slate-100 dark:border-slate-900`}
-    >
-      <h2 className="sr-only">Result</h2>
-      <p className="w-full text-center text-lg font-semibold dark:text-white">
+    <div {...props}>
+      <output
+        htmlFor={htmlFor}
+        form={form}
+        className={`${bg} inline-flex h-full w-full items-center justify-center text-lg font-semibold`}
+      >
         {text}
-      </p>
+      </output>
     </div>
   );
 }

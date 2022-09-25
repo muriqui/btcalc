@@ -44,15 +44,13 @@ function SelectorOption({
         disabled
           ? "cursor-not-allowed opacity-60"
           : checked
-          ? "border-amber-500 bg-amber-400 font-semibold text-slate-900 dark:bg-amber-500"
-          : "border-slate-900 dark:border-slate-300 dark:hover:border-amber-500 dark:hover:text-slate-900"
-      } relative flex w-full cursor-pointer items-center justify-between rounded-lg border px-5 py-4 focus-within:outline-none focus-within:ring-2 focus-within:ring-amber-500 focus-within:ring-offset-2 focus-within:ring-offset-slate-100 hover:bg-amber-300 dark:focus-within:ring-offset-slate-900 dark:hover:bg-amber-600`}
+          ? "border-amber-400 bg-amber-400 font-semibold text-slate-900"
+          : "border-slate-900 hover:border-amber-500 hover:bg-amber-500 hover:text-slate-900 dark:border-slate-300"
+      } relative flex w-full cursor-pointer items-center justify-between rounded-lg border px-5 py-4 focus-within:outline-none focus-within:ring-2 focus-within:ring-amber-500 focus-within:ring-offset-2 focus-within:ring-offset-slate-100 dark:focus-within:ring-amber-400 dark:focus-within:ring-offset-slate-900`}
       onClick={disabled ? () => {} : handleChange}
       {...props}
     >
-      <div
-        className={`${disabled ? "pointer-events-none" : ""} flex-auto text-sm`}
-      >
+      <div className={`${disabled ? "pointer-events-none" : ""} flex-auto`}>
         <input
           type="radio"
           id={`${id}-radio`}
@@ -64,7 +62,7 @@ function SelectorOption({
         />
         <Label htmlFor={`${id}-radio`}>{label}</Label>
         {description && (
-          <span id={`${id}-description`} className="block text-xs">
+          <span id={`${id}-description`} className="block text-sm">
             {description}
           </span>
         )}

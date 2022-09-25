@@ -17,7 +17,7 @@ function Modifier({ value, hidden, ...props }: ModifierProps) {
       <span
         className={`${
           hidden || value === 0 ? "invisible" : ""
-        } inline-flex h-6 min-w-[2.5rem] items-center justify-center rounded-full bg-amber-900 px-2 text-xs font-semibold text-white`}
+        } inline-flex h-7 min-w-[3rem] items-center justify-center rounded-full bg-amber-900 px-2 text-sm font-semibold text-white`}
       >
         {formatModifier(value)}
       </span>

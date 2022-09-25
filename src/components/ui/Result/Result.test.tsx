@@ -7,6 +7,12 @@ test("renders Result", () => {
   expect(element).toBeInTheDocument();
 });
 
+test("Result reports invalid data", () => {
+  render(<Result value={NaN} />);
+  const element = screen.getByText("Invalid entry");
+  expect(element).toBeInTheDocument();
+});
+
 test("Result correctly reports maximum", () => {
   render(<Result value={12} />);
   const element = screen.getByText("Roll 12 to hit");
