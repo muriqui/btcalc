@@ -1,0 +1,14 @@
+{
+  "short_name": "BTCalc",
+  "name": "BTCalc: A BattleTech shot calculator",
+  "icons": [
+    {
+      "src": "/precision-tool-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "display": "fullscreen",
+  "theme_color": "#fbbf24",
+  "background_color": "#fbbf24"
+}
