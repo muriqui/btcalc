@@ -1,3 +1,8 @@
 export default function Root() {
-  return <h1 className="text-3xl font-bold">Hello, world!</h1>;
+  return (
+    <header>
+      <h1>BTcalc</h1>
+      <p>A BattleTech shot calculator</p>
+    </header>
+  );
 }
