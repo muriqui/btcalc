@@ -7,7 +7,7 @@ export default function Link({ to, className, children, ...props }: LinkProps) {
   return (
     <RouterLink
       to={to}
-      className={`font-semibold text-gray-900 hover:underline${className ? " " + className : ""}`}
+      className={`font-semibold text-gray-900 dark:text-gray-200 hover:underline${className ? " " + className : ""}`}
       {...props}
     >
       {children}

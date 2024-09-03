@@ -5,6 +5,7 @@ import "../src/index.css";
 const preview: Preview = {
   decorators: [withRouter],
   parameters: {
+    backgrounds: { disable: true },
     controls: {
       matchers: {
         color: /(background|color)$/i,
