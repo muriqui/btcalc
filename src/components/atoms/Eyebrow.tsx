@@ -12,7 +12,7 @@ export default function Eyebrow({
 }: EyebrowProps) {
   return (
     <p
-      className={`text-base font-semibold text-amber-700 dark:text-amber-600${className ? " " + className : ""}`}
+      className={`text-base font-semibold leading-7 text-amber-700 dark:text-amber-600${className ? " " + className : ""}`}
       {...props}
     >
       {children}
