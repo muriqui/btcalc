@@ -1,4 +1,5 @@
 import ButtonLink from "../atoms/ButtonLink";
+import Eyebrow from "../atoms/Eyebrow";
 import Heading from "../atoms/Heading";
 import Link from "../atoms/Link";
 
@@ -20,13 +21,7 @@ export default function RouteError({ status, statusText }: RouteErrorProps) {
 
   return (
     <div className="text-center">
-      {status ? (
-        <p className="text-base font-semibold text-amber-700 dark:text-amber-600">
-          {status}
-        </p>
-      ) : (
-        ""
-      )}
+      {status ? <Eyebrow>{status}</Eyebrow> : ""}
       <Heading level={1}>{statusText}</Heading>
       <p className="mt-6 text-base leading-7 text-gray-600 dark:text-gray-400">
         {message}
