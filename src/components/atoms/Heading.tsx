@@ -14,12 +14,12 @@ export default function Heading({
   children,
   ...props
 }: HeadingProps) {
-  className = `mt-4 font-bold tracking-tight text-gray-900 dark:text-gray-200${className ? " " + className : ""}`;
+  className = `font-bold tracking-tight text-balance text-gray-900 dark:text-gray-200${className ? " " + className : ""}`;
 
   switch (level) {
     case 1:
       return (
-        <h1 className={`text-3xl sm:text-5xl ${className}`} {...props}>
+        <h1 className={`text-4xl sm:text-6xl ${className}`} {...props}>
           {children}
         </h1>
       );
