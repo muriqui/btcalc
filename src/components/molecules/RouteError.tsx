@@ -1,4 +1,5 @@
 import ButtonLink from "../atoms/ButtonLink";
+import Heading from "../atoms/Heading";
 import Link from "../atoms/Link";
 
 export interface RouteErrorProps {
@@ -26,9 +27,7 @@ export default function RouteError({ status, statusText }: RouteErrorProps) {
       ) : (
         ""
       )}
-      <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-gray-200">
-        {statusText}
-      </h1>
+      <Heading level={1}>{statusText}</Heading>
       <p className="mt-6 text-base leading-7 text-gray-600 dark:text-gray-400">
         {message}
       </p>

@@ -1,4 +1,5 @@
 import ButtonLink from "../components/atoms/ButtonLink";
+import Heading from "../components/atoms/Heading";
 import Link from "../components/atoms/Link";
 
 export default function Root() {
@@ -6,9 +7,7 @@ export default function Root() {
     <main className="grid min-h-full place-items-center px-6 py-24 sm:py-32 lg:px-8">
       <div className="text-center">
         <header>
-          <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl dark:text-gray-200">
-            BTcalc
-          </h1>
+          <Heading level={1}>BTcalc</Heading>
           <p className="mt-6 text-base leading-7 text-gray-600 dark:text-gray-400">
             A BattleTech shot calculator
           </p>
