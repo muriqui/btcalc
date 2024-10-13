@@ -1,5 +1,5 @@
-import ButtonLink from "./ButtonLink";
-import Link from "./Link";
+import ButtonLink from "../atoms/ButtonLink";
+import Link from "../atoms/Link";
 
 export interface RouteErrorProps {
   /** The status code; e.g., 404. */

@@ -1,5 +1,5 @@
-import ButtonLink from "../components/ButtonLink";
-import Link from "../components/Link";
+import ButtonLink from "../components/atoms/ButtonLink";
+import Link from "../components/atoms/Link";
 
 export default function Root() {
   return (

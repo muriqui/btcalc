@@ -1,5 +1,5 @@
 import { isRouteErrorResponse, useRouteError } from "react-router-dom";
-import RouteError from "./components/RouteError";
+import RouteError from "./components/molecules/RouteError";
 
 export default function ErrorPage() {
   const error = useRouteError();
