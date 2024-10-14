@@ -6,13 +6,17 @@ import "./index.css";
 
 import Root from "./routes/Root";
 import Home from "./routes/Home";
+import Setup from "./routes/Setup";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
     errorElement: <ErrorPage />,
-    children: [{ index: true, element: <Home /> }],
+    children: [
+      { index: true, element: <Home /> },
+      { path: "setup", element: <Setup /> },
+    ],
   },
 ]);
 
