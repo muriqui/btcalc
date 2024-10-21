@@ -39,7 +39,7 @@ export default function CallToAction({
   eyebrow,
   body,
   align = "center",
-  className,
+  className = "",
   children,
   ...props
 }: CallToActionProps) {
@@ -47,10 +47,7 @@ export default function CallToAction({
   const buttonAlignClass = align === "center" ? " justify-center" : "";
 
   return (
-    <div
-      className={`${containerAlignClass}${className ? " " + className : ""}`}
-      {...props}
-    >
+    <div className={`${containerAlignClass} ${className}`.trim()} {...props}>
       {eyebrow ? (
         <hgroup>
           {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
@@ -72,7 +69,9 @@ export default function CallToAction({
 
       {children}
 
-      <div className={`mt-10 flex items-center gap-x-6${buttonAlignClass}`}>
+      <div
+        className={`mt-10 flex flex-col items-center gap-x-6 gap-y-6 sm:flex-row ${buttonAlignClass}`.trim()}
+      >
         <ButtonLink to={primaryTo}>{primaryText}</ButtonLink>
         {secondaryText && secondaryTo && (
           <Link to={secondaryTo}>

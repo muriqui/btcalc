@@ -15,7 +15,7 @@ export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
 export default function Heading({
   level,
   displayLevel,
-  className,
+  className = "",
   children,
   ...props
 }: HeadingProps) {
@@ -45,7 +45,8 @@ export default function Heading({
       levelClasses = "text-sm";
       break;
   }
-  className = `${levelClasses} font-bold tracking-tight text-balance text-gray-900 dark:text-gray-200${className ? " " + className : ""}`;
+  className =
+    `${levelClasses} font-bold tracking-tight text-balance text-gray-900 dark:text-gray-200 ${className}`.trim();
 
   switch (level) {
     case 1:

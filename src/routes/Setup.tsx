@@ -31,58 +31,81 @@ export default function Setup() {
   ];
 
   return (
-    <>
-      <Heading level={1}>Set up a new game</Heading>
-      <section>
+    <div className="max-w-5xl pb-12 pt-6 sm:pb-24 sm:pt-12 lg:mx-auto">
+      <Heading level={1}>Set up a game</Heading>
+      <section className="my-6 max-w-2xl sm:my-12">
         <Heading level={2}>My units</Heading>
         {units.map((unit) => (
-          <fieldset
+          <div
             key={unit.id}
-            className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-7"
+            className="mt-6 flex flex-row items-center gap-x-6 lg:gap-x-8"
           >
-            <div className="sm:col-span-1">
-              <legend className="block font-medium text-gray-900 dark:text-gray-200">{`Unit #${unit.id}`}</legend>
-            </div>
-            <Input
-              type="text"
-              label="Name"
-              value={unit.name}
-              className="sm:col-span-4"
-            />
-            <Select label="Gunnery skill" className="sm:col-span-2">
-              {gunneryOptions.map((option) => (
-                <option
-                  key={`${unit.id}-${option.value}`}
-                  value={option.value}
-                  selected={option.value === unit.gunnery}
-                >
-                  {option.name}
-                </option>
-              ))}
-            </Select>
-          </fieldset>
+            <fieldset className="isolate max-w-sm flex-1 -space-y-px rounded-md shadow-sm sm:flex sm:max-w-none sm:flex-none sm:-space-x-px sm:space-y-0">
+              <legend className="sr-only">Unit {unit.id}</legend>
+              <Input
+                type="text"
+                label="Name"
+                value={unit.name}
+                className="rounded-b-none sm:w-96 sm:flex-none sm:rounded-r-none sm:rounded-bl-md"
+                noShadow={true}
+              />
+              <Select
+                label="Gunnery skill"
+                className="rounded-t-none sm:flex-none sm:rounded-l-none sm:rounded-tr-md"
+                noShadow={true}
+              >
+                {gunneryOptions.map((option) => (
+                  <option
+                    key={`${unit.id}-${option.value}`}
+                    value={option.value}
+                    selected={option.value === unit.gunnery}
+                  >
+                    {option.name}
+                  </option>
+                ))}
+              </Select>
+            </fieldset>
+            <button className="-mx-2.5 flex-none px-2.5 py-2.5 font-semibold text-amber-800 hover:text-amber-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-800 dark:text-amber-600 hover:dark:text-amber-500">
+              <span className="text-xl">⊖</span>
+              <span className="sr-only"> remove</span>
+            </button>
+          </div>
         ))}
+        <button className="-mx-2.5 my-3.5 px-2.5 py-2.5 font-semibold text-amber-800 hover:text-amber-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-800 dark:text-amber-600 hover:dark:text-amber-500">
+          <span className="text-xl">⊕</span> Add a unit
+        </button>
       </section>
-      <section>
+      <section className="my-6 max-w-2xl sm:my-12">
         <Heading level={2}>Opposing units</Heading>
         {opponents.map((opponent) => (
           <div
             key={opponent.id}
-            className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-5"
+            className="mt-6 flex flex-row items-center gap-x-6 lg:gap-x-8"
           >
-            <div className="sm:col-span-1">
-              <legend className="block font-medium text-gray-900 dark:text-gray-200">{`Opponent #${opponent.id}`}</legend>
+            <div className="max-w-sm flex-1 sm:max-w-none sm:flex-none">
+              <legend className="sr-only">Opponent {opponent.id}</legend>
+              <Input
+                type="text"
+                label="Name"
+                value={opponent.name}
+                className="sm:w-96"
+              />
             </div>
-            <Input
-              type="text"
-              label="Name"
-              value={opponent.name}
-              className="sm:col-span-4"
-            />
+            <button className="-mx-2.5 flex-none px-2.5 py-2.5 font-semibold text-amber-800 hover:text-amber-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-800 dark:text-amber-600 hover:dark:text-amber-500">
+              <span className="text-xl">⊖</span>
+              <span className="sr-only"> remove</span>
+            </button>
           </div>
         ))}
+        <button className="-mx-2.5 my-3.5 px-2.5 py-2.5 font-semibold text-amber-800 hover:text-amber-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-800 dark:text-amber-600 hover:dark:text-amber-500">
+          <span className="text-xl">⊕</span> Add an opponent
+        </button>
       </section>
-      <ButtonLink to="/play">Start game</ButtonLink>
-    </>
+      <div className="my-6 flex justify-center sm:my-12">
+        <ButtonLink to="/play" className="inline-block">
+          Start game
+        </ButtonLink>
+      </div>
+    </div>
   );
 }
