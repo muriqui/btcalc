@@ -1,5 +1,8 @@
 import { Link } from "react-router-dom";
 
+/**
+ * The app's main navigation bar.
+ */
 export default function TopBar() {
   return (
     <header className="bg-amber-400 px-6 py-4 lg:px-8 dark:bg-black">
