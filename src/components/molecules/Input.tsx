@@ -4,6 +4,7 @@ import { InputHTMLAttributes, useId } from "react";
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   /** The input label. */
   label: string;
+  /** Set this to true to omit the drop shadow below the input element. */
   noShadow?: boolean;
 }
 

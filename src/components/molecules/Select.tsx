@@ -4,6 +4,7 @@ import { SelectHTMLAttributes, useId } from "react";
 export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   /** The select box label. */
   label: string;
+  /** Set this to true to omit the drop shadow below the select element. */
   noShadow?: boolean;
 }
 
