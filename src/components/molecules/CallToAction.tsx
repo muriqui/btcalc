@@ -14,6 +14,8 @@ export interface CallToActionProps extends HTMLAttributes<HTMLDivElement> {
   primaryText: string;
   /** The "to" prop for the primary action button link. */
   primaryTo: LinkProps["to"];
+  /** Optional onClick event handler for the primary button. */
+  primaryOnClick?: React.MouseEventHandler<HTMLAnchorElement>;
   /** Text for an optional secondary action link. */
   secondaryText?: string;
   /** The "to" prop for an optional secondary action link. */
@@ -34,6 +36,7 @@ export default function CallToAction({
   level = 1,
   primaryText,
   primaryTo,
+  primaryOnClick,
   secondaryText,
   secondaryTo,
   eyebrow,
@@ -72,7 +75,9 @@ export default function CallToAction({
       <div
         className={`mt-10 flex flex-col items-center gap-x-6 gap-y-6 sm:flex-row ${buttonAlignClass}`.trim()}
       >
-        <ButtonLink to={primaryTo}>{primaryText}</ButtonLink>
+        <ButtonLink to={primaryTo} onClick={primaryOnClick}>
+          {primaryText}
+        </ButtonLink>
         {secondaryText && secondaryTo && (
           <Link to={secondaryTo}>
             {secondaryText} <span aria-hidden="true">&rarr;</span>
