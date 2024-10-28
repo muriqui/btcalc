@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+export const localStoragePrefix = "btcalc.";
+
 /**
  * Gets a value from local storage.
  * @param key The key of the local storage value you want to retrieve.
@@ -21,10 +23,12 @@ export function useLocalStorage<Type>(
   key: string,
   defaultValue: Type,
 ): [Type, React.Dispatch<React.SetStateAction<Type>>] {
-  const [value, setValue] = useState(() => getStorageValue(key, defaultValue));
+  const [value, setValue] = useState(() =>
+    getStorageValue(`${localStoragePrefix}${key}`, defaultValue),
+  );
 
   useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
+    localStorage.setItem(`${localStoragePrefix}${key}`, JSON.stringify(value));
   }, [key, value]);
 
   return [value, setValue];
