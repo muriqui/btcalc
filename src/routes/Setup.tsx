@@ -1,4 +1,5 @@
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import Button from "../components/atoms/Button";
 import ButtonLink from "../components/atoms/ButtonLink";
 import Heading from "../components/atoms/Heading";
 import Input from "../components/molecules/Input";
@@ -115,21 +116,18 @@ export default function Setup() {
                 <option value={5}>5 (Green)</option>
               </Select>
             </fieldset>
-            <button
-              className="-mx-2.5 flex-none px-2.5 py-2.5 font-semibold text-amber-800 hover:text-amber-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-800 dark:text-amber-600 hover:dark:text-amber-500"
+            <Button
+              className="-mx-2.5 flex-none"
               onClick={() => handleDeleteUnit(unit.id)}
             >
               <span className="text-xl">⊖</span>
               <span className="sr-only"> remove</span>
-            </button>
+            </Button>
           </div>
         ))}
-        <button
-          className="-mx-2.5 my-3.5 px-2.5 py-2.5 font-semibold text-amber-800 hover:text-amber-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-800 dark:text-amber-600 hover:dark:text-amber-500"
-          onClick={handleAddUnit}
-        >
+        <Button className="-mx-2.5 my-3.5" onClick={handleAddUnit}>
           <span className="text-xl">⊕</span> Add a unit
-        </button>
+        </Button>
       </section>
 
       <section className="my-6 max-w-2xl sm:my-12">
@@ -150,21 +148,18 @@ export default function Setup() {
                 }
               />
             </div>
-            <button
-              className="-mx-2.5 flex-none px-2.5 py-2.5 font-semibold text-amber-800 hover:text-amber-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-800 dark:text-amber-600 hover:dark:text-amber-500"
+            <Button
+              className="-mx-2.5 flex-none"
               onClick={() => handleDeleteOpponent(opponent.id)}
             >
               <span className="text-xl">⊖</span>
               <span className="sr-only"> remove</span>
-            </button>
+            </Button>
           </div>
         ))}
-        <button
-          className="-mx-2.5 my-3.5 px-2.5 py-2.5 font-semibold text-amber-800 hover:text-amber-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-800 dark:text-amber-600 hover:dark:text-amber-500"
-          onClick={handleAddOpponent}
-        >
+        <Button className="-mx-2.5 my-3.5" onClick={handleAddOpponent}>
           <span className="text-xl">⊕</span> Add an opponent
-        </button>
+        </Button>
       </section>
 
       <div className="my-6 flex justify-center sm:my-12">
