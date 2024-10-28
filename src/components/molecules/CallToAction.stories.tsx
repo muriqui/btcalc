@@ -6,6 +6,7 @@ import CallToAction from "./CallToAction";
 const meta = {
   component: CallToAction,
   tags: ["autodocs"],
+  args: { primaryOnClick: fn() },
 } satisfies Meta<typeof CallToAction>;
 
 export default meta;
@@ -17,7 +18,6 @@ export const Basic: Story = {
     heading: "Some heading text",
     primaryText: "Primary action",
     primaryTo: "/",
-    primaryOnClick: fn(),
   },
 };
 
