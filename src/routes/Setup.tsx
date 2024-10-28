@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 import ButtonLink from "../components/atoms/ButtonLink";
 import Heading from "../components/atoms/Heading";
 import Input from "../components/molecules/Input";
@@ -19,13 +19,9 @@ interface opponentInterface {
  * The setup page.
  */
 export default function Setup() {
-  const [units, setUnits] = useState<unitInterface[]>(() => {
-    const saved = localStorage.getItem("units");
-    const units = saved
-      ? (JSON.parse(saved) as unitInterface[])
-      : [{ id: crypto.randomUUID(), name: "", gunnery: 4 }];
-    return units;
-  });
+  const [units, setUnits] = useLocalStorage<unitInterface[]>("units", [
+    { id: crypto.randomUUID(), name: "", gunnery: 4 },
+  ]);
 
   const handleUpdateUnit = (
     unitId: string,
@@ -48,17 +44,10 @@ export default function Setup() {
     setUnits(newUnits);
   };
 
-  useEffect(() => {
-    localStorage.setItem("units", JSON.stringify(units));
-  }, [units]);
-
-  const [opponents, setOpponents] = useState<opponentInterface[]>(() => {
-    const saved = localStorage.getItem("opponents");
-    const opponents = saved
-      ? (JSON.parse(saved) as opponentInterface[])
-      : [{ id: crypto.randomUUID(), name: "" }];
-    return opponents;
-  });
+  const [opponents, setOpponents] = useLocalStorage<opponentInterface[]>(
+    "opponents",
+    [{ id: crypto.randomUUID(), name: "" }],
+  );
 
   const handleUpdateOpponent = (
     opponentId: string,
@@ -84,10 +73,6 @@ export default function Setup() {
     );
     setOpponents(newOpponents);
   };
-
-  useEffect(() => {
-    localStorage.setItem("opponents", JSON.stringify(opponents));
-  }, [opponents]);
 
   return (
     <div className="max-w-5xl pb-12 pt-6 sm:pb-24 sm:pt-12 lg:mx-auto">
