@@ -1,45 +1,27 @@
-import { useLocalStorageState } from "../../hooks/useLocalStorage";
+import { opponentInterface } from "../../types";
 import Button from "../atoms/Button";
 import Input from "../molecules/Input";
 
-export interface opponentInterface {
-  id: string;
-  name?: string;
+export interface OpponentSetupProps {
+  /** A list of opponent units. */
+  opponents: opponentInterface[];
+  /** Callback for adding an opponent. */
+  onAddOpponent: () => void;
+  /** Callback for updating an opponent. */
+  onUpdateOpponent: (opponent: opponentInterface) => void;
+  /** Callback for deleting an opponent. */
+  onDeleteOpponent: (id: string) => void;
 }
 
 /**
  * The opponent setup form.
  */
-export default function OpponentSetup() {
-  const [opponents, setOpponents] = useLocalStorageState("opponents", [
-    { id: crypto.randomUUID(), name: "" },
-  ] as opponentInterface[]);
-
-  const handleUpdateOpponent = (
-    opponentId: string,
-    updatedOpponent: Omit<opponentInterface, "id">,
-  ) => {
-    setOpponents((prevOpponents) =>
-      prevOpponents.map((opponent) =>
-        opponent.id === opponentId
-          ? { ...opponent, ...updatedOpponent }
-          : opponent,
-      ),
-    );
-  };
-
-  const handleAddOpponent = () => {
-    const newOpponent = { id: crypto.randomUUID(), name: "" };
-    setOpponents([...opponents, newOpponent]);
-  };
-
-  const handleDeleteOpponent = (opponentId: string) => {
-    const newOpponents = opponents.filter(
-      (opponent) => opponent.id !== opponentId,
-    );
-    setOpponents(newOpponents);
-  };
-
+export default function OpponentSetup({
+  opponents,
+  onAddOpponent,
+  onUpdateOpponent,
+  onDeleteOpponent,
+}: OpponentSetupProps) {
   return (
     <>
       {opponents.map((opponent) => (
@@ -54,20 +36,20 @@ export default function OpponentSetup() {
               value={opponent.name}
               className="sm:w-96"
               onChange={(e) =>
-                handleUpdateOpponent(opponent.id, { name: e.target.value })
+                onUpdateOpponent({ ...opponent, name: e.target.value })
               }
             />
           </div>
           <Button
             className="-mx-2.5 flex-none"
-            onClick={() => handleDeleteOpponent(opponent.id)}
+            onClick={() => onDeleteOpponent(opponent.id)}
           >
             <span className="text-xl">⊖</span>
             <span className="sr-only"> remove</span>
           </Button>
         </div>
       ))}
-      <Button className="-mx-2.5 my-3.5" onClick={handleAddOpponent}>
+      <Button className="-mx-2.5 my-3.5" onClick={onAddOpponent}>
         <span className="text-xl">⊕</span> Add an opponent
       </Button>
     </>
