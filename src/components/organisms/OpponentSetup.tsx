@@ -1,4 +1,4 @@
-import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useLocalStorageState } from "../../hooks/useLocalStorage";
 import Button from "../atoms/Button";
 import Input from "../molecules/Input";
 
@@ -11,10 +11,9 @@ export interface opponentInterface {
  * The opponent setup form.
  */
 export default function OpponentSetup() {
-  const [opponents, setOpponents] = useLocalStorage<opponentInterface[]>(
-    "opponents",
-    [{ id: crypto.randomUUID(), name: "" }],
-  );
+  const [opponents, setOpponents] = useLocalStorageState("opponents", [
+    { id: crypto.randomUUID(), name: "" },
+  ] as opponentInterface[]);
 
   const handleUpdateOpponent = (
     opponentId: string,

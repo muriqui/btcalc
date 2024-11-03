@@ -1,4 +1,4 @@
-import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { useLocalStorageReducer } from "../../hooks/useLocalStorage";
 import Button from "../atoms/Button";
 import Input from "../molecules/Input";
 import Select from "../molecules/Select";
@@ -9,34 +9,54 @@ export interface unitInterface {
   gunnery?: number;
 }
 
+type unitReducerAction =
+  | { type: "add"; unit: unitInterface }
+  | { type: "update"; unit: unitInterface }
+  | { type: "delete"; id: string };
+
 /**
  * The unit setup form.
  */
 export default function UnitSetup() {
-  const [units, setUnits] = useLocalStorage<unitInterface[]>("units", [
+  function unitReducer(
+    units: unitInterface[],
+    action: unitReducerAction,
+  ): unitInterface[] {
+    switch (action.type) {
+      case "add":
+        return [...units, action.unit];
+
+      case "update":
+        return units.map((unit) =>
+          unit.id === action.unit.id ? action.unit : unit,
+        );
+
+      case "delete":
+        return units.filter((unit) => unit.id !== action.id);
+    }
+  }
+
+  const [units, dispatch] = useLocalStorageReducer("units", unitReducer, [
     { id: crypto.randomUUID(), name: "", gunnery: 4 },
-  ]);
+  ] as unitInterface[]);
 
-  const handleUpdateUnit = (
-    unitId: string,
-    updatedUnit: Omit<unitInterface, "id">,
-  ) => {
-    setUnits((prevUnits) =>
-      prevUnits.map((unit) =>
-        unit.id === unitId ? { ...unit, ...updatedUnit } : unit,
-      ),
-    );
-  };
+  const handleAddUnit = () =>
+    dispatch({
+      type: "add",
+      unit: { id: crypto.randomUUID(), name: "", gunnery: 4 },
+    });
 
-  const handleAddUnit = () => {
-    const newUnit = { id: crypto.randomUUID(), name: "", gunnery: 4 };
-    setUnits([...units, newUnit]);
-  };
+  const handleUpdateUnit = (unit: unitInterface) =>
+    dispatch({
+      type: "update",
+      unit,
+    });
 
-  const handleDeleteUnit = (unitId: string) => {
-    const newUnits = units.filter((unit) => unit.id !== unitId);
-    setUnits(newUnits);
-  };
+  const handleDeleteUnit = (id: string) =>
+    dispatch({
+      type: "delete",
+      id,
+    });
 
   return (
     <>
@@ -53,7 +73,7 @@ export default function UnitSetup() {
               className="rounded-b-none sm:w-96 sm:flex-none sm:rounded-r-none sm:rounded-bl-md"
               noShadow={true}
               onChange={(e) =>
-                handleUpdateUnit(unit.id, { name: e.target.value })
+                handleUpdateUnit({ ...unit, name: e.target.value })
               }
             />
             <Select
@@ -62,9 +82,7 @@ export default function UnitSetup() {
               className="rounded-t-none sm:flex-none sm:rounded-l-none sm:rounded-tr-md"
               noShadow={true}
               onChange={(e) =>
-                handleUpdateUnit(unit.id, {
-                  gunnery: parseInt(e.target.value),
-                })
+                handleUpdateUnit({ ...unit, gunnery: parseInt(e.target.value) })
               }
             >
               <option value={0}>0 (Mythical)</option>
