@@ -21,7 +21,7 @@ export default function Select({
   const id = useId();
   return (
     <div
-      className={`rounded-md px-3 pb-1.5 pt-2.5 ${noShadow ? "" : "shadow-sm"} ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-amber-600 dark:bg-black ${className}`.trim()}
+      className={`rounded-md pb-1.5 pl-3 pr-1 pt-2.5 ${noShadow ? "" : "shadow-sm"} ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-amber-600 dark:bg-black ${className}`.trim()}
     >
       <Label htmlFor={id} className="text-xs">
         {label}

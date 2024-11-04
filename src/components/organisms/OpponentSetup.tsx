@@ -27,21 +27,20 @@ export default function OpponentSetup({
       {opponents.map((opponent) => (
         <div
           key={opponent.id}
-          className="mt-6 flex flex-row items-center gap-x-6 lg:gap-x-8"
+          className="mt-4 flex flex-row items-center gap-x-2"
         >
-          <div className="max-w-sm flex-1 sm:max-w-none sm:flex-none">
+          <div className="flex-grow">
             <Input
               type="text"
               label="Name"
               value={opponent.name}
-              className="sm:w-96"
               onChange={(e) =>
                 onUpdateOpponent({ ...opponent, name: e.target.value })
               }
             />
           </div>
           <Button
-            className="-mx-2.5 flex-none"
+            className="size-12 flex-none"
             onClick={() => onDeleteOpponent(opponent.id)}
           >
             <span className="text-xl">⊖</span>
@@ -49,7 +48,7 @@ export default function OpponentSetup({
           </Button>
         </div>
       ))}
-      <Button className="-mx-2.5 my-3.5" onClick={onAddOpponent}>
+      <Button className="my-2 -ml-2.5" onClick={onAddOpponent}>
         <span className="text-xl">⊕</span> Add an opponent
       </Button>
     </>

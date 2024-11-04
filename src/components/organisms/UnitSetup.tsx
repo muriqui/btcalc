@@ -28,21 +28,21 @@ export default function UnitSetup({
       {units.map((unit) => (
         <div
           key={unit.id}
-          className="mt-6 flex flex-row items-center gap-x-6 lg:gap-x-8"
+          className="mt-4 flex flex-row items-center gap-x-2 @container"
         >
-          <fieldset className="isolate max-w-sm flex-1 -space-y-px rounded-md shadow-sm sm:flex sm:max-w-none sm:flex-none sm:-space-x-px sm:space-y-0">
+          <fieldset className="isolate flex-grow -space-y-px rounded-md shadow-sm @md:flex @md:-space-x-px @md:space-y-0">
             <Input
               type="text"
               label="Name"
               value={unit.name}
-              className="rounded-b-none sm:w-96 sm:flex-none sm:rounded-r-none sm:rounded-bl-md"
+              className="rounded-b-none @md:flex-grow @md:rounded-r-none @md:rounded-bl-md"
               noShadow={true}
               onChange={(e) => onUpdateUnit({ ...unit, name: e.target.value })}
             />
             <Select
               label="Gunnery skill"
               value={unit.gunnery}
-              className="rounded-t-none sm:flex-none sm:rounded-l-none sm:rounded-tr-md"
+              className="rounded-t-none @md:flex-none @md:rounded-l-none @md:rounded-tr-md"
               noShadow={true}
               onChange={(e) =>
                 onUpdateUnit({ ...unit, gunnery: parseInt(e.target.value) })
@@ -57,7 +57,7 @@ export default function UnitSetup({
             </Select>
           </fieldset>
           <Button
-            className="-mx-2.5 flex-none"
+            className="size-12 flex-none"
             onClick={() => onDeleteUnit(unit.id)}
           >
             <span className="text-xl">⊖</span>
@@ -65,7 +65,7 @@ export default function UnitSetup({
           </Button>
         </div>
       ))}
-      <Button className="-mx-2.5 my-3.5" onClick={onAddUnit}>
+      <Button className="my-2 -ml-2.5" onClick={onAddUnit}>
         <span className="text-xl">⊕</span> Add a unit
       </Button>
     </>

@@ -7,7 +7,7 @@ export default function Root() {
   return (
     <>
       {location.pathname !== "/" && <TopBar />}
-      <main className="mx-auto h-full max-w-7xl px-6 lg:px-8">
+      <main className="mx-auto w-full max-w-7xl grow px-6 lg:px-8">
         <Outlet />
       </main>
     </>

@@ -14,10 +14,12 @@ export default function Setup() {
     useOpponents();
 
   return (
-    <div className="max-w-5xl pb-12 pt-6 sm:pb-24 sm:pt-12 lg:mx-auto">
-      <Heading level={1}>Set up a game</Heading>
+    <div className="grid grid-cols-1 gap-x-4 gap-y-4 pb-12 pt-6 sm:gap-y-6 lg:grid-cols-12">
+      <Heading level={1} className="mb-4 mt-2 lg:col-span-12">
+        Set up a game
+      </Heading>
 
-      <section className="my-6 max-w-2xl sm:my-12">
+      <section className="-mr-4 lg:col-span-7 lg:mr-0">
         <Heading level={2}>My units</Heading>
         <UnitSetup
           units={units}
@@ -27,7 +29,7 @@ export default function Setup() {
         />
       </section>
 
-      <section className="my-6 max-w-2xl sm:my-12">
+      <section className="-mr-4 lg:col-span-4 lg:col-end-13">
         <Heading level={2}>Opposing units</Heading>
         <OpponentSetup
           opponents={opponents}
@@ -37,8 +39,11 @@ export default function Setup() {
         />
       </section>
 
-      <div className="my-6 flex justify-center sm:my-12">
-        <ButtonLink to="/play" className="inline-block">
+      <div className="flex justify-center lg:col-span-12">
+        <ButtonLink
+          to="/play"
+          className="mt-2 w-full max-w-96 text-center text-lg"
+        >
           Start game
         </ButtonLink>
       </div>

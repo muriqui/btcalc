@@ -75,11 +75,11 @@ export default function CallToAction({
       <div
         className={`mt-10 flex flex-col items-center gap-x-6 gap-y-6 sm:flex-row ${buttonAlignClass}`.trim()}
       >
-        <ButtonLink to={primaryTo} onClick={primaryOnClick}>
+        <ButtonLink to={primaryTo} onClick={primaryOnClick} className="text-lg">
           {primaryText}
         </ButtonLink>
         {secondaryText && secondaryTo && (
-          <Link to={secondaryTo}>
+          <Link to={secondaryTo} className="text-lg">
             {secondaryText} <span aria-hidden="true">&rarr;</span>
           </Link>
         )}
