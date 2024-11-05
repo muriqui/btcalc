@@ -13,6 +13,11 @@ export default function Setup() {
   const [opponents, addOpponent, updateOpponent, deleteOpponent] =
     useOpponents();
 
+  // Check whether every unit on both teams has a name.
+  const allNamed =
+    units.every((unit) => unit.name?.length ?? 0 > 0) &&
+    opponents.every((opponent) => opponent.name?.length ?? 0 > 0);
+
   return (
     <div className="grid grid-cols-1 gap-x-4 gap-y-4 pb-12 pt-6 sm:gap-y-6 lg:grid-cols-12">
       <Heading level={1} className="mb-4 mt-2 lg:col-span-12">
@@ -42,11 +47,17 @@ export default function Setup() {
       <div className="flex justify-center lg:col-span-12">
         <ButtonLink
           to="/play"
+          isDisabled={!allNamed}
           className="mt-2 w-full max-w-96 text-center text-lg"
         >
           Start game
         </ButtonLink>
       </div>
+      {!allNamed && (
+        <div className="flex justify-center lg:col-span-12">
+          All units and opponents must be named.
+        </div>
+      )}
     </div>
   );
 }

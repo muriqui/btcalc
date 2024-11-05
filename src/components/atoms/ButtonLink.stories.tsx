@@ -27,3 +27,10 @@ export const Small: Story = {
     ...Default.args,
   },
 };
+
+export const Disabled: Story = {
+  args: {
+    ...Default.args,
+    isDisabled: true,
+  },
+};
