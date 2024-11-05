@@ -28,7 +28,7 @@ export default function UnitSetup({
       {units.map((unit) => (
         <div
           key={unit.id}
-          className="mt-4 flex flex-row items-center gap-x-2 @container"
+          className="mt-4 flex max-w-3xl flex-row items-center gap-x-2 @container"
         >
           <fieldset className="isolate flex-grow -space-y-px rounded-md shadow-sm @md:flex @md:-space-x-px @md:space-y-0">
             <Input

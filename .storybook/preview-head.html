@@ -7,13 +7,23 @@
 <style>
   body {
     background-color: #fff;
+    color: #111827;
   }
   @media (prefers-color-scheme: dark) {
-    body {
-      background-color: #111827;
-    }
+    body,
+    #storybook-docs > .sbdocs-wrapper,
     #storybook-docs .docs-story {
       background-color: #111827;
+      color: #e5e7eb;
+    }
+    #storybook-docs .sbdocs-title,
+    #storybook-docs .sbdocs-title + p,
+    #storybook-docs .sb-anchor > h3 {
+      color: #e5e7eb;
+    }
+    #storybook-docs #stories,
+    #storybook-docs .docblock-argstable-head th {
+      color: #9ca3af;
     }
   }
 </style>

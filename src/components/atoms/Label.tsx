@@ -11,10 +11,7 @@ export default function Label({
   ...props
 }: LabelProps) {
   return (
-    <label
-      className={`block font-medium text-gray-900 dark:text-gray-200 ${className}`.trim()}
-      {...props}
-    >
+    <label className={`block font-medium ${className}`.trim()} {...props}>
       {children}
     </label>
   );

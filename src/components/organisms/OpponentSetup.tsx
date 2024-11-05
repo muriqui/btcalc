@@ -27,7 +27,7 @@ export default function OpponentSetup({
       {opponents.map((opponent) => (
         <div
           key={opponent.id}
-          className="mt-4 flex flex-row items-center gap-x-2"
+          className="mt-4 flex max-w-3xl flex-row items-center gap-x-2"
         >
           <div className="flex-grow">
             <Input

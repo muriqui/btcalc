@@ -46,7 +46,7 @@ export default function Heading({
       break;
   }
   className =
-    `${levelClasses} font-bold tracking-tight text-balance text-gray-900 dark:text-gray-200 ${className}`.trim();
+    `${levelClasses} font-bold tracking-tight text-balance ${className}`.trim();
 
   switch (level) {
     case 1:
