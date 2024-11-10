@@ -1,14 +1,14 @@
 import { useLocalStorageReducer } from "./useLocalStorage";
 import { uuid } from "../services/utilityService";
-import { crudAction, opponentInterface } from "../types";
+import { CrudAction, OpponentInterface } from "../types";
 
 /**
  * Available actions for the reducer function.
  */
 type opponentReducerAction =
-  | { type: crudAction.Add; opponent: opponentInterface }
-  | { type: crudAction.Update; opponent: opponentInterface }
-  | { type: crudAction.Delete; id: string };
+  | { type: CrudAction.Add; opponent: OpponentInterface }
+  | { type: CrudAction.Update; opponent: OpponentInterface }
+  | { type: CrudAction.Delete; id: string };
 
 /**
  * Reducer function for the CRUD operations on the opponent units list.
@@ -17,19 +17,19 @@ type opponentReducerAction =
  * @returns The updated unit list.
  */
 function opponentReducer(
-  opponents: opponentInterface[],
+  opponents: OpponentInterface[],
   action: opponentReducerAction,
-): opponentInterface[] {
+): OpponentInterface[] {
   switch (action.type) {
-    case crudAction.Add:
+    case CrudAction.Add:
       return [...opponents, action.opponent];
 
-    case crudAction.Update:
+    case CrudAction.Update:
       return opponents.map((opponent) =>
         opponent.id === action.opponent.id ? action.opponent : opponent,
       );
 
-    case crudAction.Delete:
+    case CrudAction.Delete:
       return opponents.filter((opponent) => opponent.id !== action.id);
   }
 }
@@ -39,32 +39,32 @@ function opponentReducer(
  * @returns The opponent units list and the add, update, and delete handlers.
  */
 export default function useOpponents(): [
-  opponentInterface[],
+  OpponentInterface[],
   () => void,
-  (opponent: opponentInterface) => void,
+  (opponent: OpponentInterface) => void,
   (id: string) => void,
 ] {
   const [opponents, dispatch] = useLocalStorageReducer(
     "opponents",
     opponentReducer,
-    [{ id: uuid(), name: "" }] as opponentInterface[],
+    [{ id: uuid(), name: "" }] as OpponentInterface[],
   );
 
   const handleAddOpponent = () =>
     dispatch({
-      type: crudAction.Add,
+      type: CrudAction.Add,
       opponent: { id: uuid(), name: "" },
     });
 
-  const handleUpdateOpponent = (opponent: opponentInterface) =>
+  const handleUpdateOpponent = (opponent: OpponentInterface) =>
     dispatch({
-      type: crudAction.Update,
+      type: CrudAction.Update,
       opponent,
     });
 
   const handleDeleteOpponent = (id: string) =>
     dispatch({
-      type: crudAction.Delete,
+      type: CrudAction.Delete,
       id,
     });
 

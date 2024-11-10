@@ -5,7 +5,7 @@
 /**
  * Reducer actions for CRUD operations.
  */
-export enum crudAction {
+export enum CrudAction {
   Add = "add",
   Update = "update",
   Delete = "delete",
@@ -14,7 +14,7 @@ export enum crudAction {
 /**
  * Describes a player's unit.
  */
-export interface unitInterface {
+export interface UnitInterface {
   id: string;
   name?: string;
   gunnery?: number;
@@ -23,7 +23,16 @@ export interface unitInterface {
 /**
  * Describes an opponent's unit.
  */
-export interface opponentInterface {
+export interface OpponentInterface {
   id: string;
   name?: string;
+}
+
+/**
+ * The main steps of using the calculator; these correspond to routes under /play.
+ */
+export enum Step {
+  NotStarted = "",
+  Movement = "movement",
+  SelectTargets = "targets",
 }

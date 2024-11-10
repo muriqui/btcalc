@@ -1,14 +1,14 @@
 import { useLocalStorageReducer } from "./useLocalStorage";
 import { uuid } from "../services/utilityService";
-import { crudAction, unitInterface } from "../types";
+import { CrudAction, UnitInterface } from "../types";
 
 /**
  * Available actions for the reducer function.
  */
 type unitReducerAction =
-  | { type: crudAction.Add; unit: unitInterface }
-  | { type: crudAction.Update; unit: unitInterface }
-  | { type: crudAction.Delete; id: string };
+  | { type: CrudAction.Add; unit: UnitInterface }
+  | { type: CrudAction.Update; unit: UnitInterface }
+  | { type: CrudAction.Delete; id: string };
 
 /**
  * Reducer function for the CRUD operations on the player units list.
@@ -17,19 +17,19 @@ type unitReducerAction =
  * @returns The updated unit list.
  */
 function unitReducer(
-  units: unitInterface[],
+  units: UnitInterface[],
   action: unitReducerAction,
-): unitInterface[] {
+): UnitInterface[] {
   switch (action.type) {
-    case crudAction.Add:
+    case CrudAction.Add:
       return [...units, action.unit];
 
-    case crudAction.Update:
+    case CrudAction.Update:
       return units.map((unit) =>
         unit.id === action.unit.id ? action.unit : unit,
       );
 
-    case crudAction.Delete:
+    case CrudAction.Delete:
       return units.filter((unit) => unit.id !== action.id);
   }
 }
@@ -39,30 +39,30 @@ function unitReducer(
  * @returns The units list and the add, update, and delete handlers.
  */
 export default function useUnits(): [
-  unitInterface[],
+  UnitInterface[],
   () => void,
-  (unit: unitInterface) => void,
+  (unit: UnitInterface) => void,
   (id: string) => void,
 ] {
   const [units, dispatch] = useLocalStorageReducer("units", unitReducer, [
     { id: uuid(), name: "", gunnery: 4 },
-  ] as unitInterface[]);
+  ] as UnitInterface[]);
 
   const handleAddUnit = () =>
     dispatch({
-      type: crudAction.Add,
+      type: CrudAction.Add,
       unit: { id: uuid(), name: "", gunnery: 4 },
     });
 
-  const handleUpdateUnit = (unit: unitInterface) =>
+  const handleUpdateUnit = (unit: UnitInterface) =>
     dispatch({
-      type: crudAction.Update,
+      type: CrudAction.Update,
       unit,
     });
 
   const handleDeleteUnit = (id: string) =>
     dispatch({
-      type: crudAction.Delete,
+      type: CrudAction.Delete,
       id,
     });
 

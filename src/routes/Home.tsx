@@ -1,15 +1,19 @@
+import { useLoaderData } from "react-router-dom";
 import CallToAction from "../components/molecules/CallToAction";
-import { clearStorage, getStorage } from "../hooks/useLocalStorage";
+import { clearStorage } from "../services/utilityService";
+import { loaderHome } from "../services/loaders";
 
 /**
  * The home page.
  */
 export default function Home() {
+  const { step } = useLoaderData() as Awaited<ReturnType<typeof loaderHome>>;
+
   // Properties for a secondary action link only shown when there is a game in local storage.
-  const secondaryProps = getStorage("units", undefined)
+  const secondaryProps = step
     ? {
         secondaryText: "Continue your last game",
-        secondaryTo: "/play",
+        secondaryTo: `/play/${step}`,
       }
     : {};
 
@@ -18,7 +22,7 @@ export default function Home() {
       <CallToAction
         heading="BTcalc"
         primaryText="Set up a new game"
-        primaryTo="/setup"
+        primaryTo="/play"
         primaryOnClick={clearStorage}
         body="A BattleTech shot calculator"
         {...secondaryProps}

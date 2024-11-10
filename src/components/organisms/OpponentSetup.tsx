@@ -1,14 +1,14 @@
-import { opponentInterface } from "../../types";
+import { OpponentInterface } from "../../types";
 import Button from "../atoms/Button";
 import Input from "../molecules/Input";
 
 export interface OpponentSetupProps {
   /** A list of opponent units. */
-  opponents: opponentInterface[];
+  opponents: OpponentInterface[];
   /** Callback for adding an opponent. */
   onAddOpponent: () => void;
   /** Callback for updating an opponent. */
-  onUpdateOpponent: (opponent: opponentInterface) => void;
+  onUpdateOpponent: (opponent: OpponentInterface) => void;
   /** Callback for deleting an opponent. */
   onDeleteOpponent: (id: string) => void;
 }

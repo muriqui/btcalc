@@ -1,9 +1,12 @@
-import useUnits from "../hooks/useUnits";
-import useOpponents from "../hooks/useOpponents";
-import UnitSetup from "../components/organisms/UnitSetup";
-import OpponentSetup from "../components/organisms/OpponentSetup";
-import ButtonLink from "../components/atoms/ButtonLink";
-import Heading from "../components/atoms/Heading";
+import useUnits from "../../hooks/useUnits";
+import useOpponents from "../../hooks/useOpponents";
+import UnitSetup from "../../components/organisms/UnitSetup";
+import OpponentSetup from "../../components/organisms/OpponentSetup";
+import ButtonLink from "../../components/atoms/ButtonLink";
+import Heading from "../../components/atoms/Heading";
+
+import { setStep } from "../../services/utilityService";
+import { Step } from "../../types";
 
 /**
  * The setup page.
@@ -46,8 +49,9 @@ export default function Setup() {
 
       <div className="flex justify-center lg:col-span-12">
         <ButtonLink
-          to="/play"
+          to={`/play/${Step.Movement}`}
           isDisabled={!allNamed}
+          onClick={() => setStep(Step.Movement)}
           className="mt-2 w-full max-w-96 text-center text-lg"
         >
           Start game

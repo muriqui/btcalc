@@ -1,15 +1,15 @@
-import { unitInterface } from "../../types";
+import { UnitInterface } from "../../types";
 import Button from "../atoms/Button";
 import Input from "../molecules/Input";
 import Select from "../molecules/Select";
 
 export interface UnitSetupProps {
   /** A list of units. */
-  units: unitInterface[];
+  units: UnitInterface[];
   /** Callback for adding a new unit. */
   onAddUnit: () => void;
   /** Callback for updating a unit. */
-  onUpdateUnit: (unit: unitInterface) => void;
+  onUpdateUnit: (unit: UnitInterface) => void;
   /** Callback for deleting a unit. */
   onDeleteUnit: (id: string) => void;
 }
