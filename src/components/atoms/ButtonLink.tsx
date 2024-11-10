@@ -17,7 +17,7 @@ export default function ButtonLink({
 }: ButtonLinkProps) {
   return isDisabled ? (
     <div
-      className={`cursor-not-allowed select-none rounded-md bg-gray-800 px-3.5 py-2.5 font-semibold text-gray-400 shadow-sm ${className}`.trim()}
+      className={`cursor-not-allowed select-none rounded-md bg-gray-200 px-3.5 py-2.5 font-semibold text-gray-600 shadow-sm dark:bg-gray-800 dark:text-gray-400 ${className}`.trim()}
     >
       {children}
     </div>
