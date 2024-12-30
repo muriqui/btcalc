@@ -22,9 +22,58 @@ export const Default: Story = {
   },
 };
 
+export const Text: Story = {
+  args: {
+    ...Default.args,
+    variant: "text",
+  },
+};
+
+export const TextDisabled: Story = {
+  args: {
+    ...Text.args,
+    disabled: true,
+  },
+};
+
+export const Filled: Story = {
+  args: {
+    ...Default.args,
+    variant: "filled",
+  },
+};
+
+export const FilledDisabled: Story = {
+  args: {
+    ...Filled.args,
+    disabled: true,
+  },
+};
+
+export const Outlined: Story = {
+  args: {
+    ...Default.args,
+    variant: "outlined",
+  },
+};
+
+export const OutlinedDisabled: Story = {
+  args: {
+    ...Outlined.args,
+    disabled: true,
+  },
+};
+
 export const Primary: Story = {
   args: {
     ...Default.args,
-    primary: true,
+    variant: "primary",
+  },
+};
+
+export const PrimaryDisabled: Story = {
+  args: {
+    ...Primary.args,
+    disabled: true,
   },
 };

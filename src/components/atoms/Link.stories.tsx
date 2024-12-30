@@ -21,9 +21,24 @@ export const Default: Story = {
   },
 };
 
-export const Small: Story = {
+export const Text: Story = {
   args: {
-    className: "text-sm",
     ...Default.args,
+    variant: "text",
+  },
+  decorators: [
+    (Story) => (
+      <p>
+        This is some text surrounding the <Story />. The link should flow with
+        the text, but stand out as clickable.
+      </p>
+    ),
+  ],
+};
+
+export const SecondaryAction: Story = {
+  args: {
+    ...Default.args,
+    variant: "secondary",
   },
 };

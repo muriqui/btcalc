@@ -74,8 +74,8 @@ export function setStep(step: Step) {
 }
 
 /**
- * Gets the player units list asynchronously, for use in route loaders.
- * @returns The units list.
+ * Gets the player's unit list asynchronously, for use in route loaders.
+ * @returns The unit list.
  */
 export function getUnits(): Promise<UnitInterface[]> {
   return new Promise((resolve) => {
@@ -85,12 +85,28 @@ export function getUnits(): Promise<UnitInterface[]> {
 }
 
 /**
- * Gets the opposing units list asynchronously, for use in route loaders.
- * @returns The opponents list.
+ * Sets the player's unit list.
+ * @param units The player's unit list.
+ */
+export function setUnits(units: UnitInterface[]) {
+  setStorage("units", units);
+}
+
+/**
+ * Gets the opponent's unit list asynchronously, for use in route loaders.
+ * @returns The opponent's unit list.
  */
 export function getOpponents(): Promise<OpponentInterface[]> {
   return new Promise((resolve) => {
     const opponents = getStorage("opponents", []);
     resolve(opponents);
   });
+}
+
+/**
+ * Set the opponent's unit list.
+ * @param opponents The opponent's unit list.
+ */
+export function setOpponents(opponents: OpponentInterface[]) {
+  setStorage("opponents", opponents);
 }

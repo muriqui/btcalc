@@ -5,17 +5,15 @@ import ErrorPage from "./ErrorPage";
 import "./index.css";
 
 import Root from "./routes/Root";
-import Home from "./routes/Home";
-import Play from "./routes/play/Play";
-import Setup from "./routes/play/Setup";
-import Movement from "./routes/play/Movement";
-import SelectTargets from "./routes/play/SelectTargets";
+import Home from "./routes/index/Home";
+import homeLoader from "./routes/index/Home.loader";
 
-import {
-  loaderHome,
-  loaderMovement,
-  loaderSelectTargets,
-} from "./services/loaders";
+import Play from "./routes/play/Play";
+import playLoader from "./routes/play/Play.loader";
+import Setup from "./routes/play/index/Setup";
+import setupAction from "./routes/play/index/Setup.action";
+import Movement from "./routes/play/movement/Movement";
+import SelectTargets from "./routes/play/targets/SelectTargets";
 
 import { Step } from "./types";
 
@@ -24,19 +22,19 @@ const router = createBrowserRouter([
     path: "/",
     element: <Root />,
     errorElement: <ErrorPage />,
-    children: [{ index: true, element: <Home />, loader: loaderHome }],
+    children: [{ index: true, element: <Home />, loader: homeLoader }],
   },
   {
     path: "play",
     element: <Play />,
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <Setup /> },
-      { path: Step.Movement, element: <Movement />, loader: loaderMovement },
+      { index: true, element: <Setup />, action: setupAction },
+      { path: Step.Movement, element: <Movement />, loader: playLoader },
       {
         path: Step.SelectTargets,
         element: <SelectTargets />,
-        loader: loaderSelectTargets,
+        loader: playLoader,
       },
     ],
   },

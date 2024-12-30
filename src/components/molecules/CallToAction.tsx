@@ -1,30 +1,21 @@
-import ButtonLink from "../atoms/ButtonLink";
-import Eyebrow from "../atoms/Eyebrow";
-import { default as Heading, HeadingProps } from "../atoms/Heading";
-import Link from "../atoms/Link";
-import { LinkProps } from "react-router-dom";
-import { HTMLAttributes } from "react";
+import { ButtonLinkProps } from "../atoms/ButtonLink";
+import { EyebrowProps } from "../atoms/Eyebrow";
+import { HeadingProps } from "../atoms/Heading";
+import { LinkProps } from "../atoms/Link";
+import { cloneElement, HTMLAttributes, ReactElement } from "react";
 
 export interface CallToActionProps extends HTMLAttributes<HTMLDivElement> {
-  /** The heading text. */
-  heading: string;
-  /** The heading level. Defaults to 1. */
-  level?: HeadingProps["level"];
-  /** Text for the primary action button link. */
-  primaryText: string;
-  /** The "to" prop for the primary action button link. */
-  primaryTo: LinkProps["to"];
-  /** Optional onClick event handler for the primary button. */
-  primaryOnClick?: React.MouseEventHandler<HTMLAnchorElement>;
-  /** Text for an optional secondary action link. */
-  secondaryText?: string;
-  /** The "to" prop for an optional secondary action link. */
-  secondaryTo?: LinkProps["to"];
+  /** The heading component. */
+  heading: ReactElement<HeadingProps>;
+  /** The primary action button link. */
+  primary: ReactElement<ButtonLinkProps>;
+  /** The secondary action link. */
+  secondary?: ReactElement<LinkProps>;
   /** Optional eyebrow text above the heading. */
-  eyebrow?: string | number;
-  /** Optional body text between the heading and buttons. */
-  body?: string;
-  /** Horizontal alignment. Default is 'center'. */
+  eyebrow?: ReactElement<EyebrowProps>;
+  /** Optional paragraph text between the heading and buttons. */
+  children?: HTMLAttributes<HTMLParagraphElement>["children"];
+  /** Horizontal alignment; default is 'center'. */
   align?: "left" | "center";
 }
 
@@ -33,56 +24,63 @@ export interface CallToActionProps extends HTMLAttributes<HTMLDivElement> {
  */
 export default function CallToAction({
   heading,
-  level = 1,
-  primaryText,
-  primaryTo,
-  primaryOnClick,
-  secondaryText,
-  secondaryTo,
+  primary,
+  secondary,
   eyebrow,
-  body,
+  children,
   align = "center",
   className = "",
-  children,
   ...props
 }: CallToActionProps) {
-  const containerAlignClass = align === "center" ? "text-center" : "";
-  const buttonAlignClass = align === "center" ? " justify-center" : "";
+  const clonedHeading = cloneElement(heading, {
+    displayLevel: 1,
+    className: eyebrow
+      ? `mt-2 ${heading.props.className ?? ""}`.trim()
+      : heading.props.className,
+    level: heading.props.level || 1,
+  });
+
+  const clonedPrimary = cloneElement(primary, {
+    variant: "primary",
+  });
+
+  const clonedSecondary = secondary
+    ? cloneElement(
+        secondary,
+        {
+          variant: "secondary",
+        },
+        secondary.props.children,
+        " ",
+        <span aria-hidden="true">&rarr;</span>,
+      )
+    : undefined;
 
   return (
-    <div className={`${containerAlignClass} ${className}`.trim()} {...props}>
+    <div
+      className={`${align === "center" ? "text-center" : ""} ${className}`.trim()}
+      {...props}
+    >
       {eyebrow ? (
         <hgroup>
-          {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-          <Heading level={level} displayLevel={1} className="mt-2">
-            {heading}
-          </Heading>
+          {eyebrow}
+          {clonedHeading}
         </hgroup>
       ) : (
-        <Heading level={level} displayLevel={1}>
-          {heading}
-        </Heading>
+        clonedHeading
       )}
 
-      {body && (
+      {children && (
         <p className="mt-6 text-xl leading-8 text-gray-600 dark:text-gray-400">
-          {body}
+          {children}
         </p>
       )}
 
-      {children}
-
       <div
-        className={`mt-10 flex flex-col items-center gap-x-6 gap-y-6 sm:flex-row ${buttonAlignClass}`.trim()}
+        className={`mt-10 flex flex-col items-center gap-x-6 gap-y-6 sm:flex-row ${align === "center" ? "justify-center" : ""}`.trim()}
       >
-        <ButtonLink to={primaryTo} onClick={primaryOnClick} className="text-lg">
-          {primaryText}
-        </ButtonLink>
-        {secondaryText && secondaryTo && (
-          <Link to={secondaryTo} className="text-lg">
-            {secondaryText} <span aria-hidden="true">&rarr;</span>
-          </Link>
-        )}
+        {clonedPrimary}
+        {clonedSecondary}
       </div>
     </div>
   );

@@ -21,16 +21,30 @@ export const Default: Story = {
   },
 };
 
-export const Small: Story = {
+export const Text: Story = {
   args: {
-    className: "text-sm",
     ...Default.args,
+    variant: "text",
   },
 };
 
-export const Disabled: Story = {
+export const Filled: Story = {
   args: {
     ...Default.args,
-    isDisabled: true,
+    variant: "filled",
+  },
+};
+
+export const Outlined: Story = {
+  args: {
+    ...Default.args,
+    variant: "outlined",
+  },
+};
+
+export const Primary: Story = {
+  args: {
+    ...Default.args,
+    variant: "primary",
   },
 };

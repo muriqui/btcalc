@@ -35,4 +35,5 @@ export enum Step {
   NotStarted = "",
   Movement = "movement",
   SelectTargets = "targets",
+  ResolveWeapons = "weapons",
 }

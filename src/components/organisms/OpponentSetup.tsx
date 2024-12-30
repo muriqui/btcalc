@@ -1,54 +1,100 @@
-import { OpponentInterface } from "../../types";
+import { useReducer } from "react";
+import { CrudAction, OpponentInterface } from "../../types";
+import { uuid } from "../../services/utilityService";
 import Button from "../atoms/Button";
 import Input from "../molecules/Input";
 
-export interface OpponentSetupProps {
-  /** A list of opponent units. */
-  opponents: OpponentInterface[];
-  /** Callback for adding an opponent. */
-  onAddOpponent: () => void;
-  /** Callback for updating an opponent. */
-  onUpdateOpponent: (opponent: OpponentInterface) => void;
-  /** Callback for deleting an opponent. */
-  onDeleteOpponent: (id: string) => void;
+/**
+ * Available actions for the reducer function.
+ */
+type opponentReducerAction =
+  | { type: CrudAction.Add; opponent: OpponentInterface }
+  | { type: CrudAction.Update; opponent: OpponentInterface }
+  | { type: CrudAction.Delete; id: string };
+
+/**
+ * Reducer function for the opponent's unit list.
+ * @param opponents The opponent's unit list.
+ * @param action The action to perform.
+ * @returns The updated unit list.
+ */
+function opponentReducer(
+  opponents: OpponentInterface[],
+  action: opponentReducerAction,
+): OpponentInterface[] {
+  switch (action.type) {
+    case CrudAction.Add:
+      return [...opponents, action.opponent];
+
+    case CrudAction.Update:
+      return opponents.map((opponent) =>
+        opponent.id === action.opponent.id ? action.opponent : opponent,
+      );
+
+    case CrudAction.Delete:
+      return opponents.filter((opponent) => opponent.id !== action.id);
+  }
 }
 
 /**
- * The opponent setup form.
+ * The opponent setup form elements.
  */
-export default function OpponentSetup({
-  opponents,
-  onAddOpponent,
-  onUpdateOpponent,
-  onDeleteOpponent,
-}: OpponentSetupProps) {
+export default function OpponentSetup() {
+  const [opponents, dispatch] = useReducer(opponentReducer, [
+    { id: uuid(), name: "" },
+  ]);
+
+  const handleAddOpponent = () =>
+    dispatch({
+      type: CrudAction.Add,
+      opponent: { id: uuid(), name: "" },
+    });
+
+  const handleUpdateOpponent = (opponent: OpponentInterface) =>
+    dispatch({
+      type: CrudAction.Update,
+      opponent,
+    });
+
+  const handleDeleteOpponent = (id: string) =>
+    dispatch({
+      type: CrudAction.Delete,
+      id,
+    });
+
   return (
     <>
-      {opponents.map((opponent) => (
+      {opponents.map((opponent, index) => (
         <div
           key={opponent.id}
           className="mt-4 flex max-w-3xl flex-row items-center gap-x-2"
         >
           <div className="flex-grow">
+            <input
+              type="hidden"
+              name={`opponents[${index}][id]`}
+              value={opponent.id}
+            />
             <Input
+              name={`opponents[${index}][name]`}
               type="text"
-              label="Name"
+              label="Opponent name"
               value={opponent.name}
               onChange={(e) =>
-                onUpdateOpponent({ ...opponent, name: e.target.value })
+                handleUpdateOpponent({ ...opponent, name: e.target.value })
               }
             />
           </div>
           <Button
             className="size-12 flex-none"
-            onClick={() => onDeleteOpponent(opponent.id)}
+            onClick={() => handleDeleteOpponent(opponent.id)}
           >
             <span className="text-xl">⊖</span>
             <span className="sr-only"> remove</span>
           </Button>
         </div>
       ))}
-      <Button className="my-2 -ml-2.5" onClick={onAddOpponent}>
+      <Button className="my-2" onClick={handleAddOpponent}>
         <span className="text-xl">⊕</span> Add an opponent
       </Button>
     </>
