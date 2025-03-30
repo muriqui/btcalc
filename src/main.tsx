@@ -17,28 +17,39 @@ import SelectTargets from "./routes/play/targets/SelectTargets";
 
 import { Step } from "./types";
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <Root />,
+      errorElement: <ErrorPage />,
+      children: [{ index: true, element: <Home />, loader: homeLoader }],
+    },
+    {
+      path: "play",
+      element: <Play />,
+      errorElement: <ErrorPage />,
+      children: [
+        { index: true, element: <Setup />, action: setupAction },
+        { path: Step.Movement, element: <Movement />, loader: playLoader },
+        {
+          path: Step.SelectTargets,
+          element: <SelectTargets />,
+          loader: playLoader,
+        },
+      ],
+    },
+  ],
   {
-    path: "/",
-    element: <Root />,
-    errorElement: <ErrorPage />,
-    children: [{ index: true, element: <Home />, loader: homeLoader }],
+    future: {
+      v7_relativeSplatPath: true,
+      v7_fetcherPersist: true,
+      v7_normalizeFormMethod: true,
+      v7_partialHydration: true,
+      v7_skipActionErrorRevalidation: true,
+    },
   },
-  {
-    path: "play",
-    element: <Play />,
-    errorElement: <ErrorPage />,
-    children: [
-      { index: true, element: <Setup />, action: setupAction },
-      { path: Step.Movement, element: <Movement />, loader: playLoader },
-      {
-        path: Step.SelectTargets,
-        element: <SelectTargets />,
-        loader: playLoader,
-      },
-    ],
-  },
-]);
+);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
