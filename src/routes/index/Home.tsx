@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router";
 import CallToAction from "../../components/molecules/CallToAction";
 import Heading from "../../components/atoms/Heading";
 import ButtonLink from "../../components/atoms/ButtonLink";
@@ -10,6 +10,7 @@ import { clearStorage } from "../../services/utilityService";
  * The home page.
  */
 export default function Home() {
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
   const { step } = useLoaderData() as Awaited<ReturnType<typeof homeLoader>>;
 
   return (

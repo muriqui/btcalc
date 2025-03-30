@@ -1,4 +1,4 @@
-import { Form, useActionData } from "react-router-dom";
+import { Form, useActionData } from "react-router";
 import UnitSetup from "../../../components/organisms/UnitSetup";
 import OpponentSetup from "../../../components/organisms/OpponentSetup";
 import Button from "../../../components/atoms/Button";
@@ -9,6 +9,7 @@ import { ActionErrorData } from "./Setup.action";
  * The setup page.
  */
 export default function Setup() {
+  // eslint-disable-next-line @typescript-eslint/non-nullable-type-assertion-style
   const errors = useActionData() as ActionErrorData;
 
   return (

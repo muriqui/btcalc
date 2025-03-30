@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router";
 import Heading from "../../../components/atoms/Heading";
 import ButtonLink from "../../../components/atoms/ButtonLink";
 import playLoader from "../Play.loader";
@@ -10,6 +10,7 @@ import { Step } from "../../../types";
  * The movement page.
  */
 export default function Movement() {
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
   const { units, opponents } = useLoaderData() as Awaited<
     ReturnType<typeof playLoader>
   >;

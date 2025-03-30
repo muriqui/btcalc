@@ -1,4 +1,4 @@
-import { ActionFunctionArgs, redirect } from "react-router-dom";
+import { ActionFunctionArgs, redirect } from "react-router";
 import qs from "qs";
 import { UnitInterface, OpponentInterface } from "../../../types";
 import { setUnits, setOpponents } from "../../../services/utilityService";

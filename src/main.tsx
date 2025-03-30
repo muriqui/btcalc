@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router";
 import ErrorPage from "./ErrorPage";
 import "./index.css";
 
@@ -17,39 +17,28 @@ import SelectTargets from "./routes/play/targets/SelectTargets";
 
 import { Step } from "./types";
 
-const router = createBrowserRouter(
-  [
-    {
-      path: "/",
-      element: <Root />,
-      errorElement: <ErrorPage />,
-      children: [{ index: true, element: <Home />, loader: homeLoader }],
-    },
-    {
-      path: "play",
-      element: <Play />,
-      errorElement: <ErrorPage />,
-      children: [
-        { index: true, element: <Setup />, action: setupAction },
-        { path: Step.Movement, element: <Movement />, loader: playLoader },
-        {
-          path: Step.SelectTargets,
-          element: <SelectTargets />,
-          loader: playLoader,
-        },
-      ],
-    },
-  ],
+const router = createBrowserRouter([
   {
-    future: {
-      v7_relativeSplatPath: true,
-      v7_fetcherPersist: true,
-      v7_normalizeFormMethod: true,
-      v7_partialHydration: true,
-      v7_skipActionErrorRevalidation: true,
-    },
+    path: "/",
+    element: <Root />,
+    errorElement: <ErrorPage />,
+    children: [{ index: true, element: <Home />, loader: homeLoader }],
   },
-);
+  {
+    path: "play",
+    element: <Play />,
+    errorElement: <ErrorPage />,
+    children: [
+      { index: true, element: <Setup />, action: setupAction },
+      { path: Step.Movement, element: <Movement />, loader: playLoader },
+      {
+        path: Step.SelectTargets,
+        element: <SelectTargets />,
+        loader: playLoader,
+      },
+    ],
+  },
+]);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

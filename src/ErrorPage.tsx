@@ -1,4 +1,4 @@
-import { isRouteErrorResponse, useRouteError } from "react-router-dom";
+import { isRouteErrorResponse, useRouteError } from "react-router";
 import RouteError from "./components/molecules/RouteError";
 
 export default function ErrorPage() {
