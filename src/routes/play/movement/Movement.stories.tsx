@@ -2,8 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { reactRouterParameters } from "storybook-addon-remix-react-router";
 import { userEvent, within, expect } from "@storybook/test";
 
-import Movement from "./Movement";
-import playLoader from "../Play.loader";
+import { default as Movement, clientLoader } from "./Movement";
 import { Step } from "../../../types";
 import { setOpponents, setUnits } from "../../../services/utilityService";
 import Play from "../Play";
@@ -32,7 +31,7 @@ export const Default: Story = {
               loader: async () => {
                 setUnits([{ id: "test-unit-1", name: "Atlas", gunnery: 2 }]);
                 setOpponents([{ id: "test-opp-1", name: "Dire Wolf" }]);
-                return await playLoader();
+                return await clientLoader();
               },
             },
           ],

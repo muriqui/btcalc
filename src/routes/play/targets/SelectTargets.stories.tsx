@@ -1,9 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { reactRouterParameters } from "storybook-addon-remix-react-router";
 import { userEvent, within, expect } from "@storybook/test";
-
-import SelectTargets from "./SelectTargets";
-import playLoader from "../Play.loader";
+import { default as SelectTargets, clientLoader } from "./SelectTargets";
 import { Step } from "../../../types";
 import { setUnits } from "../../../services/utilityService";
 import Play from "../Play";
@@ -31,7 +29,7 @@ export const Default: Story = {
               useStoryElement: true,
               loader: async () => {
                 setUnits([{ id: "test-unit-1", name: "Atlas", gunnery: 2 }]);
-                return await playLoader();
+                return await clientLoader();
               },
             },
           ],

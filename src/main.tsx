@@ -7,9 +7,6 @@ import "./index.css";
 import Root from "./routes/Root";
 
 import Play from "./routes/play/Play";
-import playLoader from "./routes/play/Play.loader";
-import Movement from "./routes/play/movement/Movement";
-import SelectTargets from "./routes/play/targets/SelectTargets";
 
 import { Step } from "./types";
 
@@ -44,11 +41,13 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, lazy: () => import("./routes/play/Setup").then(convert) },
-      { path: Step.Movement, element: <Movement />, loader: playLoader },
+      {
+        path: Step.Movement,
+        lazy: () => import("./routes/play/movement/Movement").then(convert),
+      },
       {
         path: Step.SelectTargets,
-        element: <SelectTargets />,
-        loader: playLoader,
+        lazy: () => import("./routes/play/targets/SelectTargets").then(convert),
       },
     ],
   },

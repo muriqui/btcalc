@@ -1,10 +1,18 @@
 import { useLoaderData } from "react-router";
 import Heading from "../../../components/atoms/Heading";
 import ButtonLink from "../../../components/atoms/ButtonLink";
-import playLoader from "../Play.loader";
-
-import { setStep } from "../../../services/utilityService";
+import {
+  getOpponents,
+  getUnits,
+  setStep,
+} from "../../../services/utilityService";
 import { Step } from "../../../types";
+
+export async function clientLoader() {
+  const units = await getUnits();
+  const opponents = await getOpponents();
+  return { units, opponents };
+}
 
 /**
  * The movement page.
@@ -12,7 +20,7 @@ import { Step } from "../../../types";
 export default function Movement() {
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
   const { units, opponents } = useLoaderData() as Awaited<
-    ReturnType<typeof playLoader>
+    ReturnType<typeof clientLoader>
   >;
 
   return (
