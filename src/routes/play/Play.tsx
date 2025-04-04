@@ -1,5 +1,10 @@
 import { Outlet } from "react-router";
 import TopBar from "../../components/organisms/TopBar";
+import ErrorPage from "../../ErrorPage";
+
+export function ErrorBoundary() {
+  return <ErrorPage />;
+}
 
 /**
  * The wrapper for "play" path.

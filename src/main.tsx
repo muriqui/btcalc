@@ -1,14 +1,8 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router";
-import ErrorPage from "./ErrorPage";
-import "./index.css";
-
-import Root from "./routes/Root";
-
-import Play from "./routes/play/Play";
-
 import { Step } from "./types";
+import "./index.css";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function convert(m: any) {
@@ -29,16 +23,14 @@ function convert(m: any) {
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
-    errorElement: <ErrorPage />,
+    lazy: () => import("./routes/Root").then(convert),
     children: [
       { index: true, lazy: () => import("./routes/Home").then(convert) },
     ],
   },
   {
     path: "play",
-    element: <Play />,
-    errorElement: <ErrorPage />,
+    lazy: () => import("./routes/play/Play").then(convert),
     children: [
       { index: true, lazy: () => import("./routes/play/Setup").then(convert) },
       {
