@@ -1,17 +1,21 @@
 import { useLoaderData } from "react-router";
-import CallToAction from "../../components/molecules/CallToAction";
-import Heading from "../../components/atoms/Heading";
-import ButtonLink from "../../components/atoms/ButtonLink";
-import Link from "../../components/atoms/Link";
-import homeLoader from "./Home.loader";
-import { clearStorage } from "../../services/utilityService";
+import CallToAction from "../components/molecules/CallToAction";
+import Heading from "../components/atoms/Heading";
+import ButtonLink from "../components/atoms/ButtonLink";
+import Link from "../components/atoms/Link";
+import { clearStorage, getStep } from "../services/utilityService";
+
+export async function clientLoader() {
+  const step = await getStep();
+  return { step };
+}
 
 /**
  * The home page.
  */
 export default function Home() {
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-  const { step } = useLoaderData() as Awaited<ReturnType<typeof homeLoader>>;
+  const { step } = useLoaderData() as Awaited<ReturnType<typeof clientLoader>>;
 
   return (
     <div className="grid min-h-full place-items-center py-24 sm:py-32">

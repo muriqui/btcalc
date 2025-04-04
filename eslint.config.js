@@ -33,7 +33,21 @@ export default tseslint.config(
       ...reactHooks.configs.recommended.rules,
       "react-refresh/only-export-components": [
         "warn",
-        { allowConstantExport: true },
+        {
+          allowExportNames: [
+            "loader",
+            "clientLoader",
+            "action",
+            "clientAction",
+            "ErrorBoundary",
+            "HydrateFallback",
+            "headers",
+            "handle",
+            "links",
+            "meta",
+            "shouldRevalidate",
+          ],
+        },
       ],
       ...react.configs.recommended.rules,
       ...react.configs["jsx-runtime"].rules,

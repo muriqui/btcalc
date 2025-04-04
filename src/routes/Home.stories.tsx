@@ -2,11 +2,10 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { reactRouterParameters } from "storybook-addon-remix-react-router";
 import { userEvent, within, expect } from "@storybook/test";
 
-import Home from "./Home";
-import homeLoader from "./Home.loader";
-import { Step } from "../../types";
-import { setStep } from "../../services/utilityService";
-import Root from "../Root";
+import { default as Home, clientLoader } from "./Home";
+import { Step } from "../types";
+import { setStep } from "../services/utilityService";
+import Root from "./Root";
 
 const meta = {
   component: Home,
@@ -31,7 +30,7 @@ export const Default: Story = {
               useStoryElement: true,
               loader: async () => {
                 setStep(Step.NotStarted);
-                return await homeLoader();
+                return await clientLoader();
               },
             },
           ],
@@ -88,7 +87,7 @@ export const GameInProgress: Story = {
               useStoryElement: true,
               loader: async () => {
                 setStep(Step.SelectTargets);
-                return await homeLoader();
+                return await clientLoader();
               },
             },
           ],

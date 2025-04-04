@@ -5,8 +5,6 @@ import ErrorPage from "./ErrorPage";
 import "./index.css";
 
 import Root from "./routes/Root";
-import Home from "./routes/index/Home";
-import homeLoader from "./routes/index/Home.loader";
 
 import Play from "./routes/play/Play";
 import playLoader from "./routes/play/Play.loader";
@@ -17,12 +15,30 @@ import SelectTargets from "./routes/play/targets/SelectTargets";
 
 import { Step } from "./types";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function convert(m: any) {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { clientLoader, clientAction, default: Component, ...rest } = m;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+  return {
+    ...rest,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    loader: clientLoader,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    action: clientAction,
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    Component,
+  };
+}
+
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
     errorElement: <ErrorPage />,
-    children: [{ index: true, element: <Home />, loader: homeLoader }],
+    children: [
+      { index: true, lazy: () => import("./routes/Home").then(convert) },
+    ],
   },
   {
     path: "play",

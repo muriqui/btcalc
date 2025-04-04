@@ -3,8 +3,7 @@ import { reactRouterParameters } from "storybook-addon-remix-react-router";
 
 import ErrorPage from "./ErrorPage";
 
-import Home from "./routes/index/Home";
-import homeLoader from "./routes/index/Home.loader";
+import { default as Home, clientLoader as homeLoader } from "./routes/Home";
 import { Step } from "./types";
 import { setStep } from "./services/utilityService";
 import Root from "./routes/Root";
