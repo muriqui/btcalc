@@ -8,8 +8,6 @@ import Root from "./routes/Root";
 
 import Play from "./routes/play/Play";
 import playLoader from "./routes/play/Play.loader";
-import Setup from "./routes/play/index/Setup";
-import setupAction from "./routes/play/index/Setup.action";
 import Movement from "./routes/play/movement/Movement";
 import SelectTargets from "./routes/play/targets/SelectTargets";
 
@@ -45,7 +43,7 @@ const router = createBrowserRouter([
     element: <Play />,
     errorElement: <ErrorPage />,
     children: [
-      { index: true, element: <Setup />, action: setupAction },
+      { index: true, lazy: () => import("./routes/play/Setup").then(convert) },
       { path: Step.Movement, element: <Movement />, loader: playLoader },
       {
         path: Step.SelectTargets,

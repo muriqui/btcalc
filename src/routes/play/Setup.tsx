@@ -1,9 +1,16 @@
-import { ActionFunctionArgs, redirect } from "react-router";
+import {
+  Form,
+  useActionData,
+  ActionFunctionArgs,
+  redirect,
+} from "react-router";
 import qs from "qs";
-import { UnitInterface, OpponentInterface } from "../../../types";
-import { setUnits, setOpponents } from "../../../services/utilityService";
-import { setStep } from "../../../services/utilityService";
-import { Step } from "../../../types";
+import { UnitInterface, OpponentInterface, Step } from "../../types";
+import { setUnits, setOpponents, setStep } from "../../services/utilityService";
+import UnitSetup from "../../components/organisms/UnitSetup";
+import OpponentSetup from "../../components/organisms/OpponentSetup";
+import Button from "../../components/atoms/Button";
+import Heading from "../../components/atoms/Heading";
 
 interface QueryUnits {
   id?: string;
@@ -25,7 +32,7 @@ export interface ActionErrorData {
   unnamed?: string;
 }
 
-export default async function setupAction({ request }: ActionFunctionArgs) {
+export async function clientAction({ request }: ActionFunctionArgs) {
   const text = await request.text();
   const { units, opponents } = qs.parse(text) as QueryParams;
 
@@ -81,4 +88,50 @@ export default async function setupAction({ request }: ActionFunctionArgs) {
   setOpponents(validatedOpponents);
   setStep(Step.Movement);
   return redirect(`/play/${Step.Movement}`);
+}
+
+/**
+ * The setup page.
+ */
+export default function Setup() {
+  // eslint-disable-next-line @typescript-eslint/non-nullable-type-assertion-style
+  const errors = useActionData() as ActionErrorData;
+
+  return (
+    <Form
+      method="post"
+      className="grid grid-cols-1 gap-x-4 gap-y-4 pb-12 pt-6 sm:gap-y-6 lg:grid-cols-12"
+    >
+      <Heading level={1} className="mb-4 mt-2 lg:col-span-12">
+        Set up a game
+      </Heading>
+
+      <section className="-mr-4 lg:col-span-7 lg:mr-0">
+        <Heading level={2}>My units</Heading>
+        <UnitSetup />
+      </section>
+
+      <section className="-mr-4 lg:col-span-4 lg:col-end-13">
+        <Heading level={2}>Opposing units</Heading>
+        <OpponentSetup />
+      </section>
+
+      <div className="flex justify-center lg:col-span-12">
+        <Button
+          type="submit"
+          variant="primary"
+          className="mt-2 w-full max-w-96 text-center"
+        >
+          Start game
+        </Button>
+      </div>
+      <div
+        role="alert"
+        aria-atomic="true"
+        className="flex justify-center lg:col-span-12"
+      >
+        {errors?.unnamed && <p>{errors.unnamed}</p>}
+      </div>
+    </Form>
+  );
 }

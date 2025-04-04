@@ -2,10 +2,9 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { reactRouterParameters } from "storybook-addon-remix-react-router";
 import { userEvent, within } from "@storybook/test";
 
-import Setup from "./Setup";
-import setupAction from "./Setup.action";
-import { Step } from "../../../types";
-import Play from "../Play";
+import { default as Setup, clientAction } from "./Setup";
+import { Step } from "../../types";
+import Play from "./Play";
 
 const meta = {
   component: Setup,
@@ -18,7 +17,7 @@ const meta = {
           path: "play",
           element: <Play />,
           children: [
-            { index: true, useStoryElement: true, action: setupAction },
+            { index: true, useStoryElement: true, action: clientAction },
           ],
         },
         {
