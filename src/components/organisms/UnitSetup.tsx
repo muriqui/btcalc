@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { CrudAction, UnitInterface } from "../../types";
+import { CrudAction, type UnitInterface } from "../../types";
 import { uuid } from "../../services/utilityService";
 import Button from "../atoms/Button";
 import Input from "../molecules/Input";

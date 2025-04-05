@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+import type { HTMLAttributes } from "react";
 
 type HeadingLevels = 1 | 2 | 3 | 4 | 5 | 6;
 

@@ -5,11 +5,11 @@
   "type": "module",
   "homepage": "https://muriqui.net/btcalc",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "react-router build",
+    "dev": "react-router dev",
     "lint": "eslint .",
-    "preview": "vite preview",
     "prepare": "husky",
+    "typecheck": "react-router typegen && tsc",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test-storybook": "test-storybook",
@@ -23,6 +23,8 @@
     "**/!(*.ts|*.tsx)": "prettier --write --ignore-unknown"
   },
   "dependencies": {
+    "@react-router/node": "^7.4.1",
+    "isbot": "^5",
     "qs": "^6.13.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -31,6 +33,7 @@
   "devDependencies": {
     "@chromatic-com/storybook": "^1.8.0",
     "@eslint/js": "^9.9.0",
+    "@react-router/dev": "^7.4.1",
     "@storybook/addon-a11y": "^8.2.9",
     "@storybook/addon-essentials": "^8.2.9",
     "@storybook/addon-interactions": "^8.2.9",

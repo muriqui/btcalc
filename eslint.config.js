@@ -7,7 +7,7 @@ import tseslint from "typescript-eslint";
 import eslintConfigPrettier from "eslint-config-prettier";
 
 export default tseslint.config(
-  { ignores: ["dist"] },
+  { ignores: ["dist", ".react-router"] },
   {
     extends: [
       js.configs.recommended,
@@ -16,10 +16,10 @@ export default tseslint.config(
     ],
     files: ["**/*.{ts,tsx}"],
     languageOptions: {
-      ecmaVersion: 2020,
+      ecmaVersion: 2022,
       globals: globals.browser,
       parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
+        project: ["./tsconfig.json"],
         tsconfigRootDir: import.meta.dirname,
       },
     },

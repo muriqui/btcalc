@@ -6,11 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-*.local
+*storybook.log
 
 # Editor directories and files
 .vscode/*
@@ -23,4 +19,9 @@ dist-ssr
 *.sln
 *.sw?
 
-*storybook.log
+# Dependencies, packaging, type data
+node_modules
+dist
+dist-ssr
+*.local
+.react-router/

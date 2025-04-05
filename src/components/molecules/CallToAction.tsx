@@ -1,8 +1,8 @@
-import { ButtonLinkProps } from "../atoms/ButtonLink";
-import { EyebrowProps } from "../atoms/Eyebrow";
-import { HeadingProps } from "../atoms/Heading";
-import { LinkProps } from "../atoms/Link";
-import { cloneElement, HTMLAttributes, ReactElement } from "react";
+import type { ButtonLinkProps } from "../atoms/ButtonLink";
+import type { EyebrowProps } from "../atoms/Eyebrow";
+import type { HeadingProps } from "../atoms/Heading";
+import type { LinkProps } from "../atoms/Link";
+import { cloneElement, type HTMLAttributes, type ReactElement } from "react";
 
 export interface CallToActionProps extends HTMLAttributes<HTMLDivElement> {
   /** The heading component. */

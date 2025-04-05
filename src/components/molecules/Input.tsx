@@ -1,5 +1,5 @@
 import Label from "../atoms/Label";
-import { InputHTMLAttributes, useId } from "react";
+import { type InputHTMLAttributes, useId } from "react";
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   /** The input label. */

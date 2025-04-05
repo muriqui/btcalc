@@ -1,11 +1,11 @@
 import {
   Form,
   useActionData,
-  ActionFunctionArgs,
+  type ActionFunctionArgs,
   redirect,
 } from "react-router";
 import qs from "qs";
-import { UnitInterface, OpponentInterface, Step } from "../../types";
+import { type UnitInterface, type OpponentInterface, Step } from "../../types";
 import { setUnits, setOpponents, setStep } from "../../services/utilityService";
 import UnitSetup from "../../components/organisms/UnitSetup";
 import OpponentSetup from "../../components/organisms/OpponentSetup";

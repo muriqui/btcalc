@@ -2,7 +2,7 @@
  * @file Utility functions.
  */
 
-import { OpponentInterface, Step, UnitInterface } from "../types";
+import { type OpponentInterface, Step, type UnitInterface } from "../types";
 
 /**
  * @returns A universally unique identifier.

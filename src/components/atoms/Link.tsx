@@ -1,4 +1,7 @@
-import { Link as RouterLink, LinkProps as RouterLinkProps } from "react-router";
+import {
+  Link as RouterLink,
+  type LinkProps as RouterLinkProps,
+} from "react-router";
 
 export interface LinkProps extends RouterLinkProps {
   /** How the link is displayed: "text" for use in body text, or "secondary" for use a secondary call-to-action. */

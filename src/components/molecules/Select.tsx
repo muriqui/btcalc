@@ -1,5 +1,5 @@
 import Label from "../atoms/Label";
-import { SelectHTMLAttributes, useId } from "react";
+import { type SelectHTMLAttributes, useId } from "react";
 
 export interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   /** The select box label. */

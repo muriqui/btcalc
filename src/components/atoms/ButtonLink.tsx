@@ -1,4 +1,4 @@
-import { Link, LinkProps } from "react-router";
+import { Link, type LinkProps } from "react-router";
 
 export interface ButtonLinkProps extends LinkProps {
   /** How the button is displayed. */
