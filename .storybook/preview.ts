@@ -5,6 +5,7 @@ import "../src/index.css";
 const preview: Preview = {
   decorators: [withRouter],
   parameters: {
+    a11y: { test: "error" },
     backgrounds: { disable: true },
     controls: {
       matchers: {

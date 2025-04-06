@@ -5,9 +5,10 @@ import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import tseslint from "typescript-eslint";
 import eslintConfigPrettier from "eslint-config-prettier";
+import storybook from "eslint-plugin-storybook";
 
 export default tseslint.config(
-  { ignores: ["dist", ".react-router"] },
+  { ignores: ["dist", ".react-router", "!.storybook"] },
   {
     extends: [
       js.configs.recommended,
@@ -53,5 +54,6 @@ export default tseslint.config(
       ...react.configs["jsx-runtime"].rules,
     },
   },
+  ...storybook.configs["flat/recommended"],
   eslintConfigPrettier,
 );
