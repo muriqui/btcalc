@@ -68,16 +68,16 @@ export default function UnitSetup() {
       {units.map((unit, index) => (
         <div
           key={unit.id}
-          className="mt-4 flex max-w-3xl flex-row items-center gap-x-2 @container"
+          className="@container mt-4 flex max-w-3xl flex-row items-center gap-x-2"
         >
-          <fieldset className="isolate flex-grow -space-y-px rounded-md shadow-sm @md:flex @md:-space-x-px @md:space-y-0">
+          <fieldset className="isolate grow -space-y-px rounded-md shadow-xs @md:flex @md:space-y-0 @md:-space-x-px">
             <input type="hidden" name={`units[${index}][id]`} value={unit.id} />
             <Input
               name={`units[${index}][name]`}
               type="text"
               label="Unit name"
               value={unit.name}
-              className="rounded-b-none @md:flex-grow @md:rounded-r-none @md:rounded-bl-md"
+              className="rounded-b-none @-md:grow @md:rounded-r-none @md:rounded-bl-md"
               noShadow={true}
               onChange={(e) =>
                 handleUpdateUnit({ ...unit, name: e.target.value })

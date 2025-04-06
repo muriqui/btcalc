@@ -21,13 +21,13 @@ export default function Link({
   switch (variant) {
     case "secondary":
       linkClasses =
-        "text-lg text-gray-900 hover:text-black dark:text-gray-200 hover:dark:text-white";
+        "text-lg text-gray-900 hover:text-black dark:text-gray-200 dark:hover:text-white";
       break;
 
     case "text":
     default:
       linkClasses =
-        "text-amber-800 hover:text-amber-700 dark:text-amber-600 hover:dark:text-amber-500";
+        "text-amber-800 hover:text-amber-700 dark:text-amber-600 dark:hover:text-amber-500";
   }
 
   return (
