@@ -18,7 +18,7 @@ export default function Home() {
   const { step } = useLoaderData() as Awaited<ReturnType<typeof clientLoader>>;
 
   return (
-    <div className="grid min-h-full place-items-center py-24 sm:py-32">
+    <main className="grid min-h-full place-items-center px-6 py-24 sm:py-32 lg:px-8">
       <CallToAction
         heading={<Heading level={1}>BTcalc</Heading>}
         primary={
@@ -34,6 +34,6 @@ export default function Home() {
       >
         A BattleTech shot calculator
       </CallToAction>
-    </div>
+    </main>
   );
 }

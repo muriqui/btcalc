@@ -5,7 +5,6 @@ import { userEvent, within, expect } from "@storybook/test";
 import { default as Home, clientLoader } from "./Home";
 import { Step } from "../types";
 import { setStep } from "../services/utilityService";
-import Root from "./Root";
 
 const meta = {
   component: Home,
@@ -23,17 +22,11 @@ export const Default: Story = {
       routing: [
         {
           path: "/",
-          element: <Root />,
-          children: [
-            {
-              index: true,
-              useStoryElement: true,
-              loader: async () => {
-                setStep(Step.NotStarted);
-                return await clientLoader();
-              },
-            },
-          ],
+          useStoryElement: true,
+          loader: async () => {
+            setStep(Step.NotStarted);
+            return await clientLoader();
+          },
         },
         {
           path: "play",
@@ -80,17 +73,11 @@ export const GameInProgress: Story = {
       routing: [
         {
           path: "/",
-          element: <Root />,
-          children: [
-            {
-              index: true,
-              useStoryElement: true,
-              loader: async () => {
-                setStep(Step.SelectTargets);
-                return await clientLoader();
-              },
-            },
-          ],
+          useStoryElement: true,
+          loader: async () => {
+            setStep(Step.SelectTargets);
+            return await clientLoader();
+          },
         },
         {
           path: `play/${Step.SelectTargets}`,
