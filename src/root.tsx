@@ -9,8 +9,9 @@ import {
 } from "react-router";
 import RouteError from "./components/molecules/RouteError";
 import "./index.css";
+import type { Route } from "./+types/root";
 
-export const meta = () => [
+export const meta: Route.MetaFunction = () => [
   { title: "BTcalc: A BattleTech shot calculator" },
   {
     name: "description",
@@ -20,7 +21,7 @@ export const meta = () => [
   { name: "theme-color", content: "#fbbf24" },
 ];
 
-export const links = () => [
+export const links: Route.LinksFunction = () => [
   { rel: "manifest", href: "/manifest.json" },
   { rel: "icon", type: "image/svg+xml", href: "/precision-tool.svg" },
   { rel: "mask-icon", href: "/precision-tool.svg", color: "#000000" },

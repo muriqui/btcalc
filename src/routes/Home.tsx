@@ -4,6 +4,7 @@ import Heading from "../components/atoms/Heading";
 import ButtonLink from "../components/atoms/ButtonLink";
 import Link from "../components/atoms/Link";
 import { clearStorage, getStep } from "../services/utilityService";
+import type { Route } from "./+types/Home";
 
 export async function clientLoader() {
   const step = await getStep();
@@ -14,8 +15,7 @@ export async function clientLoader() {
  * The home page.
  */
 export default function Home() {
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-  const { step } = useLoaderData() as Awaited<ReturnType<typeof clientLoader>>;
+  const { step }: Route.ComponentProps["loaderData"] = useLoaderData();
 
   return (
     <main className="grid min-h-full place-items-center px-6 py-24 sm:py-32 lg:px-8">

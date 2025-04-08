@@ -7,6 +7,7 @@ import {
   setStep,
 } from "../../../services/utilityService";
 import { Step } from "../../../types";
+import type { Route } from "./+types/Movement";
 
 export async function clientLoader() {
   const units = await getUnits();
@@ -18,14 +19,12 @@ export async function clientLoader() {
  * The movement page.
  */
 export default function Movement() {
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-  const { units, opponents } = useLoaderData() as Awaited<
-    ReturnType<typeof clientLoader>
-  >;
+  const { units, opponents }: Route.ComponentProps["loaderData"] =
+    useLoaderData();
 
   return (
     <>
-      <Heading level={1} className="mb-4 mt-8">
+      <Heading level={1} className="mt-8 mb-4">
         Movement
       </Heading>
       <p>Select a unit to resolve its movement.</p>

@@ -3,6 +3,7 @@ import Heading from "../../../components/atoms/Heading";
 import ButtonLink from "../../../components/atoms/ButtonLink";
 import { getUnits, setStep } from "../../../services/utilityService";
 import { Step } from "../../../types";
+import type { Route } from "./+types/SelectTargets";
 
 export async function clientLoader() {
   const units = await getUnits();
@@ -13,12 +14,11 @@ export async function clientLoader() {
  * The target selection page.
  */
 export default function SelectTargets() {
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-  const { units } = useLoaderData() as Awaited<ReturnType<typeof clientLoader>>;
+  const { units }: Route.ComponentProps["loaderData"] = useLoaderData();
 
   return (
     <>
-      <Heading level={1} className="mb-4 mt-8">
+      <Heading level={1} className="mt-8 mb-4">
         Select Targets
       </Heading>
 

@@ -11,6 +11,7 @@ import UnitSetup from "../../components/organisms/UnitSetup";
 import OpponentSetup from "../../components/organisms/OpponentSetup";
 import Button from "../../components/atoms/Button";
 import Heading from "../../components/atoms/Heading";
+import type { Route } from "./+types/Setup";
 
 interface QueryUnits {
   id?: string;
@@ -26,10 +27,6 @@ interface QueryOpponents {
 interface QueryParams {
   units?: QueryUnits[];
   opponents?: QueryOpponents[];
-}
-
-export interface ActionErrorData {
-  unnamed?: string;
 }
 
 export async function clientAction({ request }: ActionFunctionArgs) {
@@ -77,10 +74,9 @@ export async function clientAction({ request }: ActionFunctionArgs) {
 
   // If either side lacks a valid unit, return error data to the form.
   if (!validatedUnits.length || !validatedOpponents.length) {
-    const errors: ActionErrorData = {
+    return {
       unnamed: "Each team must have at least one named unit.",
     };
-    return errors;
   }
 
   // Save the validated data and go to Movement page to start the game.
@@ -94,15 +90,14 @@ export async function clientAction({ request }: ActionFunctionArgs) {
  * The setup page.
  */
 export default function Setup() {
-  // eslint-disable-next-line @typescript-eslint/non-nullable-type-assertion-style
-  const errors = useActionData() as ActionErrorData;
+  const errors: Route.ComponentProps["actionData"] = useActionData();
 
   return (
     <Form
       method="post"
-      className="grid grid-cols-1 gap-x-4 gap-y-4 pb-12 pt-6 sm:gap-y-6 lg:grid-cols-12"
+      className="grid grid-cols-1 gap-x-4 gap-y-4 pt-6 pb-12 sm:gap-y-6 lg:grid-cols-12"
     >
-      <Heading level={1} className="mb-4 mt-2 lg:col-span-12">
+      <Heading level={1} className="mt-2 mb-4 lg:col-span-12">
         Set up a game
       </Heading>
 
