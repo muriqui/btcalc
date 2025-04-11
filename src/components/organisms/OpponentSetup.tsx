@@ -90,7 +90,7 @@ export default function OpponentSetup() {
             onClick={() => handleDeleteOpponent(opponent.id)}
           >
             <span className="text-xl">⊖</span>
-            <span className="sr-only"> remove</span>
+            <span className="sr-only">{` remove ${opponent.name}`}</span>
           </Button>
         </div>
       ))}

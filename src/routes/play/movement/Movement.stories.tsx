@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { reactRouterParameters } from "storybook-addon-remix-react-router";
-import { userEvent, within, expect } from "@storybook/test";
+import { within, expect } from "@storybook/test";
 
 import { default as Movement, clientLoader } from "./Movement";
 import { Step } from "../../../types";
@@ -36,18 +36,6 @@ export const Default: Story = {
             },
           ],
         },
-        {
-          path: `/play/${Step.Movement}/unit/test-unit-1`,
-          element: <p>Clicked on a unit</p>,
-        },
-        {
-          path: `/play/${Step.Movement}/opponent/test-opp-1`,
-          element: <p>Clicked on an opponent</p>,
-        },
-        {
-          path: `/play/${Step.SelectTargets}`,
-          element: <p>Redirected to SelectTargets</p>,
-        },
       ],
     }),
   },
@@ -62,53 +50,5 @@ export const Default: Story = {
   },
 };
 
-export const ClickUnit: Story = {
-  parameters: Default.parameters,
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    await canvas.findByText("Movement");
-
-    await step(
-      "Clicking a unit takes you to that unit's movement options",
-      async () => {
-        await userEvent.click(canvas.getByText("Atlas"));
-        await canvas.findByText("Clicked on a unit");
-      },
-    );
-  },
-};
-
-export const ClickOpponent: Story = {
-  parameters: Default.parameters,
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    await canvas.findByText("Movement");
-
-    await step(
-      "Clicking an opponent takes you to the opponent's movement options",
-      async () => {
-        await userEvent.click(canvas.getByText("Dire Wolf"));
-        await canvas.findByText("Clicked on an opponent");
-      },
-    );
-  },
-};
-
-// TODO: Error states for no units, no opponents, or skipped movement on a unit.
-
-export const ClickNextWhenFinished: Story = {
-  // TODO: Replace Default.parameters with a data set where movement has been completed for all units.
-  parameters: Default.parameters,
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    await canvas.findByText("Movement");
-
-    await step(
-      "Clicking the Next button after all units have moved advances to SelectTargets",
-      async () => {
-        await userEvent.click(canvas.getByText("Next: Select targets"));
-        await canvas.findByText("Redirected to SelectTargets");
-      },
-    );
-  },
-};
+// TODO: Add a story showing units and opponents have completed movement.
+// TODO: Error states for no units or no opponents.

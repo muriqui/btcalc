@@ -42,7 +42,7 @@ export const FilledIn: Story = {
     });
 
     await step("Remove the second unit", async () => {
-      await userEvent.click(canvas.getAllByText("⊖")[1]);
+      await userEvent.click(canvas.getByText("remove Banshee"));
       await expect(canvas.getByDisplayValue("Atlas")).toBeInTheDocument();
       await expect(canvas.getByDisplayValue("2 (Elite)")).toBeInTheDocument();
       await expect(

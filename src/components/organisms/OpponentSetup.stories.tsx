@@ -37,7 +37,7 @@ export const FilledIn: Story = {
     });
 
     await step("Remove the second unit", async () => {
-      await userEvent.click(canvas.getAllByText("⊖")[1]);
+      await userEvent.click(canvas.getByText("remove Stormcrow"));
       await expect(canvas.getByDisplayValue("Dire Wolf")).toBeInTheDocument();
       await expect(
         canvas.queryByDisplayValue("Stormcrow"),

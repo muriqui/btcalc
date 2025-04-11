@@ -106,7 +106,7 @@ export default function UnitSetup() {
             onClick={() => handleDeleteUnit(unit.id)}
           >
             <span className="text-xl">⊖</span>
-            <span className="sr-only"> remove</span>
+            <span className="sr-only">{` remove ${unit.name}`}</span>
           </Button>
         </div>
       ))}

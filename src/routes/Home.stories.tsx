@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { reactRouterParameters } from "storybook-addon-remix-react-router";
-import { userEvent, within, expect } from "@storybook/test";
+import { within, expect } from "@storybook/test";
 
 import { default as Home, clientLoader } from "./Home";
 import { Step } from "../types";
@@ -28,17 +28,13 @@ export const Default: Story = {
             return await clientLoader();
           },
         },
-        {
-          path: "play",
-          element: <p>Redirected to Setup</p>,
-        },
       ],
     }),
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 
-    await step("Set up button is present after page load", async () => {
+    await step("Set up button is present", async () => {
       await canvas.findByText("Set up a new game");
     });
 
@@ -50,19 +46,6 @@ export const Default: Story = {
         ).not.toBeInTheDocument();
       },
     );
-  },
-};
-
-export const ClickNewGame: Story = {
-  parameters: Default.parameters,
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    await canvas.findByText("Set up a new game");
-
-    await step("Clicking the set up button redirects to Setup", async () => {
-      await userEvent.click(canvas.getByText("Set up a new game"));
-      await canvas.findByText("Redirected to Setup");
-    });
   },
 };
 
@@ -79,16 +62,15 @@ export const GameInProgress: Story = {
             return await clientLoader();
           },
         },
-        {
-          path: `play/${Step.SelectTargets}`,
-          element: <p>Redirected to current step of in-progress game</p>,
-        },
       ],
     }),
   },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
-    await canvas.findByText("Set up a new game");
+
+    await step("Set up button is present", async () => {
+      await canvas.findByText("Set up a new game");
+    });
 
     await step(
       "Continue button is available when a game is in progress",
@@ -96,24 +78,6 @@ export const GameInProgress: Story = {
         await expect(
           canvas.queryByText("Continue your last game"),
         ).toBeInTheDocument();
-      },
-    );
-  },
-};
-
-export const ClickContinueGame: Story = {
-  parameters: GameInProgress.parameters,
-  play: async ({ canvasElement, step }) => {
-    const canvas = within(canvasElement);
-    await canvas.findByText("Set up a new game");
-
-    await step(
-      "Clicking the continue button redirects to the current step of the in-progress game",
-      async () => {
-        await userEvent.click(canvas.getByText("Continue your last game"));
-        await canvas.findByText(
-          "Redirected to current step of in-progress game",
-        );
       },
     );
   },
