@@ -22,6 +22,7 @@ export default function SelectTargets({
       <Heading level={1} className="mt-8 mb-4">
         Select Targets
       </Heading>
+      <p className="mb-8">Select a unit to designate its target.</p>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-4">
         {units.map((unit) => (
