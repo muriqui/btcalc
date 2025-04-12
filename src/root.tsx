@@ -1,6 +1,5 @@
 import {
   isRouteErrorResponse,
-  useRouteError,
   Links,
   Meta,
   Outlet,
@@ -64,23 +63,24 @@ export default function App() {
   return <Outlet />;
 }
 
-export function ErrorBoundary() {
-  const error = useRouteError();
+export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   let status = undefined;
-  let statusText = "Unknown Error";
+  let statusText = undefined;
+  let stack = undefined;
 
   if (isRouteErrorResponse(error)) {
     status = error.status;
     statusText = error.statusText;
-  } else if (import.meta.env.DEV && error instanceof Error && error.message) {
+  } else if (import.meta.env.DEV && error && error instanceof Error) {
     statusText = error.message;
+    stack = error.stack;
   } else if (typeof error === "string") {
     statusText = error;
   }
 
   return (
     <main className="grid min-h-full place-items-center px-6 py-24 sm:py-32 lg:px-8">
-      <RouteError status={status} statusText={statusText} />
+      <RouteError status={status} statusText={statusText} stack={stack} />
     </main>
   );
 }
