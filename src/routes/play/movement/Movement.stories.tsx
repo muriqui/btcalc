@@ -2,14 +2,36 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { reactRouterParameters } from "storybook-addon-remix-react-router";
 import { within, expect } from "@storybook/test";
 
-import { default as Movement, clientLoader } from "./Movement";
+import Movement from "./Movement";
 import { Step } from "../../../types";
-import { setOpponents, setUnits } from "../../../services/utilityService";
 import Play from "../Play";
+
+const route = {
+  element: <Play />,
+  children: [{ path: Step.Movement, useStoryElement: true }],
+};
 
 const meta = {
   component: Movement,
   title: "Routes/play/Movement",
+  args: {
+    loaderData: {
+      units: [{ id: "test-unit-1", name: "Atlas", gunnery: 2 }],
+      opponents: [{ id: "test-opp-1", name: "Dire Wolf" }],
+    },
+  },
+  parameters: {
+    reactRouter: reactRouterParameters({
+      location: { path: `/play/${Step.Movement}` },
+      routing: [
+        { path: "play", ...route },
+        { path: "/", ...route },
+        { path: `play/${Step.SelectTargets}`, ...route },
+        { path: `play/${Step.Movement}/unit/:id`, ...route },
+        { path: `play/${Step.Movement}/opponent/:id`, ...route },
+      ],
+    }),
+  },
 } satisfies Meta<typeof Movement>;
 
 export default meta;
@@ -17,28 +39,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  parameters: {
-    reactRouter: reactRouterParameters({
-      location: { path: `/play/${Step.Movement}` },
-      routing: [
-        {
-          path: "play",
-          element: <Play />,
-          children: [
-            {
-              path: Step.Movement,
-              useStoryElement: true,
-              loader: async () => {
-                setUnits([{ id: "test-unit-1", name: "Atlas", gunnery: 2 }]);
-                setOpponents([{ id: "test-opp-1", name: "Dire Wolf" }]);
-                return await clientLoader();
-              },
-            },
-          ],
-        },
-      ],
-    }),
-  },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
     await canvas.findByText("Movement");

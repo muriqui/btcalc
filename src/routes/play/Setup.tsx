@@ -1,9 +1,4 @@
-import {
-  Form,
-  useActionData,
-  type ActionFunctionArgs,
-  redirect,
-} from "react-router";
+import { Form, redirect } from "react-router";
 import qs from "qs";
 import { type UnitInterface, type OpponentInterface, Step } from "../../types";
 import { setUnits, setOpponents, setStep } from "../../services/utilityService";
@@ -29,7 +24,7 @@ interface QueryParams {
   opponents?: QueryOpponents[];
 }
 
-export async function clientAction({ request }: ActionFunctionArgs) {
+export async function clientAction({ request }: Route.ClientActionArgs) {
   const text = await request.text();
   const { units, opponents } = qs.parse(text) as QueryParams;
 
@@ -75,7 +70,7 @@ export async function clientAction({ request }: ActionFunctionArgs) {
   // If either side lacks a valid unit, return error data to the form.
   if (!validatedUnits.length || !validatedOpponents.length) {
     return {
-      unnamed: "Each team must have at least one named unit.",
+      error: "Each team must have at least one named unit.",
     };
   }
 
@@ -89,9 +84,9 @@ export async function clientAction({ request }: ActionFunctionArgs) {
 /**
  * The setup page.
  */
-export default function Setup() {
-  const errors: Route.ComponentProps["actionData"] = useActionData();
-
+export default function Setup({
+  actionData,
+}: Pick<Route.ComponentProps, "actionData">) {
   return (
     <Form
       method="post"
@@ -125,7 +120,7 @@ export default function Setup() {
         aria-atomic="true"
         className="flex justify-center lg:col-span-12"
       >
-        {errors?.unnamed && <p>{errors.unnamed}</p>}
+        {actionData?.error && <p>{actionData.error}</p>}
       </div>
     </Form>
   );

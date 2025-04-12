@@ -6,6 +6,11 @@ import Play from "./Play";
 import { FilledIn as UnitFilledIn } from "~/components/organisms/UnitSetup.stories";
 import { FilledIn as OpponentFilledIn } from "~/components/organisms/OpponentSetup.stories";
 
+const route = {
+  element: <Play />,
+  children: [{ index: true, useStoryElement: true, action: () => undefined }],
+};
+
 const meta = {
   component: Setup,
   title: "Routes/play/Setup",
@@ -13,11 +18,8 @@ const meta = {
     reactRouter: reactRouterParameters({
       location: { path: "/play" },
       routing: [
-        {
-          path: "play",
-          element: <Play />,
-          children: [{ index: true, useStoryElement: true }],
-        },
+        { path: "play", ...route },
+        { path: "/", ...route },
       ],
     }),
   },
@@ -36,5 +38,13 @@ export const FilledIn: Story = {
     }
     await UnitFilledIn.play(args);
     await OpponentFilledIn.play(args);
+  },
+};
+
+export const ValidationError: Story = {
+  args: {
+    actionData: {
+      error: "Sample error: The form submission failed validation.",
+    },
   },
 };

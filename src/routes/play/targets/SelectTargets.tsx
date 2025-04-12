@@ -1,4 +1,3 @@
-import { useLoaderData } from "react-router";
 import Heading from "../../../components/atoms/Heading";
 import ButtonLink from "../../../components/atoms/ButtonLink";
 import { getUnits, setStep } from "../../../services/utilityService";
@@ -13,8 +12,10 @@ export async function clientLoader() {
 /**
  * The target selection page.
  */
-export default function SelectTargets() {
-  const { units }: Route.ComponentProps["loaderData"] = useLoaderData();
+export default function SelectTargets({
+  loaderData,
+}: Pick<Route.ComponentProps, "loaderData">) {
+  const { units } = loaderData;
 
   return (
     <>

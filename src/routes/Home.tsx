@@ -1,4 +1,3 @@
-import { useLoaderData } from "react-router";
 import CallToAction from "../components/molecules/CallToAction";
 import Heading from "../components/atoms/Heading";
 import ButtonLink from "../components/atoms/ButtonLink";
@@ -14,8 +13,10 @@ export async function clientLoader() {
 /**
  * The home page.
  */
-export default function Home() {
-  const { step }: Route.ComponentProps["loaderData"] = useLoaderData();
+export default function Home({
+  loaderData,
+}: Pick<Route.ComponentProps, "loaderData">) {
+  const { step } = loaderData;
 
   return (
     <main className="grid min-h-full place-items-center px-6 py-24 sm:py-32 lg:px-8">

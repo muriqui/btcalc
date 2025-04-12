@@ -1,14 +1,35 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { reactRouterParameters } from "storybook-addon-remix-react-router";
 import { within, expect } from "@storybook/test";
-import { default as SelectTargets, clientLoader } from "./SelectTargets";
+
+import SelectTargets from "./SelectTargets";
 import { Step } from "../../../types";
-import { setUnits } from "../../../services/utilityService";
 import Play from "../Play";
+
+const route = {
+  element: <Play />,
+  children: [{ path: Step.SelectTargets, useStoryElement: true }],
+};
 
 const meta = {
   component: SelectTargets,
   title: "Routes/play/Select Targets",
+  args: {
+    loaderData: {
+      units: [{ id: "test-unit-1", name: "Atlas", gunnery: 2 }],
+    },
+  },
+  parameters: {
+    reactRouter: reactRouterParameters({
+      location: { path: `/play/${Step.SelectTargets}` },
+      routing: [
+        { path: "play", ...route },
+        { path: "/", ...route },
+        { path: `play/${Step.ResolveWeapons}`, ...route },
+        { path: `play/${Step.SelectTargets}/unit/:id`, ...route },
+      ],
+    }),
+  },
 } satisfies Meta<typeof SelectTargets>;
 
 export default meta;
@@ -16,27 +37,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  parameters: {
-    reactRouter: reactRouterParameters({
-      location: { path: `/play/${Step.SelectTargets}` },
-      routing: [
-        {
-          path: "play",
-          element: <Play />,
-          children: [
-            {
-              path: Step.SelectTargets,
-              useStoryElement: true,
-              loader: async () => {
-                setUnits([{ id: "test-unit-1", name: "Atlas", gunnery: 2 }]);
-                return await clientLoader();
-              },
-            },
-          ],
-        },
-      ],
-    }),
-  },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
     await canvas.findByText("Select Targets");

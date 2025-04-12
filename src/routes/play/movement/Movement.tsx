@@ -1,4 +1,3 @@
-import { useLoaderData } from "react-router";
 import Heading from "../../../components/atoms/Heading";
 import ButtonLink from "../../../components/atoms/ButtonLink";
 import {
@@ -18,9 +17,10 @@ export async function clientLoader() {
 /**
  * The movement page.
  */
-export default function Movement() {
-  const { units, opponents }: Route.ComponentProps["loaderData"] =
-    useLoaderData();
+export default function Movement({
+  loaderData,
+}: Pick<Route.ComponentProps, "loaderData">) {
+  const { units, opponents } = loaderData;
 
   return (
     <>
