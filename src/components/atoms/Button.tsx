@@ -53,7 +53,7 @@ export default function Button({
   return (
     <button
       type={type}
-      className={`rounded-md border p-2.5 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-800 ${buttonClasses} ${className}`.trim()}
+      className={`cursor-pointer rounded-md border p-2.5 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-800 ${buttonClasses} ${className}`.trim()}
       {...props}
       disabled={disabled}
     >
