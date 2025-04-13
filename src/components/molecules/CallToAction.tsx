@@ -2,6 +2,7 @@ import type { ButtonLinkProps } from "../atoms/ButtonLink";
 import type { EyebrowProps } from "../atoms/Eyebrow";
 import type { HeadingProps } from "../atoms/Heading";
 import type { LinkProps } from "../atoms/Link";
+import ButtonGroup from "./ButtonGroup";
 import { cloneElement, type HTMLAttributes, type ReactElement } from "react";
 
 export interface CallToActionProps extends HTMLAttributes<HTMLDivElement> {
@@ -76,12 +77,10 @@ export default function CallToAction({
         </p>
       )}
 
-      <div
-        className={`mt-10 flex flex-col items-center gap-x-6 gap-y-6 sm:flex-row ${align === "center" ? "justify-center" : ""}`.trim()}
-      >
+      <ButtonGroup align={align} className="mt-10">
         {clonedPrimary}
         {clonedSecondary}
-      </div>
+      </ButtonGroup>
     </div>
   );
 }
