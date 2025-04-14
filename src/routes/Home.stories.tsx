@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { reactRouterParameters } from "storybook-addon-remix-react-router";
-import { within, expect } from "@storybook/test";
+import { within, expect, userEvent } from "@storybook/test";
 
 import Home from "./Home";
 import { Step } from "../types";
@@ -61,5 +61,42 @@ export const GameInProgress: Story = {
         ).toBeInTheDocument();
       },
     );
+  },
+};
+
+export const StartNewGame: Story = {
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await expect(
+      canvas.queryByText("Choose which game system to use:"),
+    ).not.toBeVisible();
+
+    await step("Click the set up button", async () => {
+      await userEvent.click(canvas.getByText("Set up a new game"));
+      await expect(
+        canvas.queryByText("Choose which game system to use:"),
+      ).toBeVisible();
+    });
+  },
+};
+
+export const CancelNewGame: Story = {
+  play: async ({ canvasElement, step }) => {
+    const canvas = within(canvasElement);
+
+    await step("Click the set up button", async () => {
+      await userEvent.click(canvas.getByText("Set up a new game"));
+      await expect(
+        canvas.queryByText("Choose which game system to use:"),
+      ).toBeVisible();
+    });
+
+    await step("Close the modal", async () => {
+      await userEvent.click(canvas.getByText("x"));
+      await expect(
+        canvas.queryByText("Choose which game system to use:"),
+      ).not.toBeVisible();
+    });
   },
 };

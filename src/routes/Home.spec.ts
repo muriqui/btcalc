@@ -12,7 +12,7 @@ test.describe("Home", () => {
       page.getByRole("heading", { name: "BTcalc", level: 1 }),
     ).toBeVisible();
     await expect(
-      page.getByRole("link", { name: "Set up a new game" }),
+      page.getByRole("button", { name: "Set up a new game" }),
     ).toBeVisible();
     await expect(
       page.getByRole("link", { name: "Continue your last game" }),
@@ -21,7 +21,8 @@ test.describe("Home", () => {
 
   test("should show Continue when a game is in progress", async ({ page }) => {
     // Set up a game.
-    await page.getByRole("link", { name: "Set up a new game" }).click();
+    await page.getByRole("button", { name: "Set up a new game" }).click();
+    await page.getByRole("link", { name: "Total Warfare" }).click();
     await expect(
       page.getByRole("heading", { name: "Set up a game", level: 1 }),
     ).toBeVisible();
