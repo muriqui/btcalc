@@ -1,10 +1,11 @@
 import { test, expect } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/play");
+  await page.goto("/total-warfare");
   await page.getByLabel("Unit name").fill("Atlas");
   await page.getByLabel("Opponent name").fill("Dire Wolf");
   await page.getByRole("button", { name: "Start game" }).click();
+  await expect(page.getByText("BattleTech: Total Warfare")).toBeVisible();
   await expect(
     page.getByRole("heading", { name: "Movement", level: 1 }),
   ).toBeVisible();
@@ -27,12 +28,13 @@ test.describe("Movement", () => {
 
   // TODO: Error state for skipped movement on a unit or opponent.
 
-  test("clicking the Next button after all units have moved takes you to the Select Targets page", async ({
+  test("clicking the Next button after all units have moved takes you to the Weapon Attacks page", async ({
     page,
   }) => {
-    await page.getByRole("link", { name: "Next: Select targets" }).click();
+    await page.getByRole("link", { name: "Next: Weapon attacks" }).click();
+    await expect(page.getByText("BattleTech: Total Warfare")).toBeVisible();
     await expect(
-      page.getByRole("heading", { name: "Select Targets", level: 1 }),
+      page.getByRole("heading", { name: "Weapon Attacks", level: 1 }),
     ).toBeVisible();
   });
 });

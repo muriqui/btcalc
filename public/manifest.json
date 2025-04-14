@@ -1,6 +1,6 @@
 {
   "short_name": "BTCalc",
-  "name": "BTCalc: A BattleTech shot calculator",
+  "name": "BTCalc: A BattleTech calculator",
   "icons": [
     {
       "src": "/precision-tool-512.png",

@@ -1,7 +1,16 @@
 import { Form, redirect } from "react-router";
 import qs from "qs";
-import { type UnitInterface, type OpponentInterface, Step } from "../../types";
-import { setUnits, setOpponents, setStep } from "../../services/utilityService";
+import {
+  type TWPlayerInterface,
+  type TWOpponentInterface,
+  System,
+  Step,
+} from "../../types";
+import {
+  setPlayerUnits,
+  setOpponentUnits,
+  setStep,
+} from "../../services/utilityService";
 import UnitSetup from "../../components/organisms/UnitSetup";
 import OpponentSetup from "../../components/organisms/OpponentSetup";
 import Button from "../../components/atoms/Button";
@@ -29,7 +38,7 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
   const { units, opponents } = qs.parse(text) as QueryParams;
 
   // Validate the player's units.
-  const validatedUnits: UnitInterface[] = [];
+  const validatedUnits: TWPlayerInterface[] = [];
   if (Array.isArray(units)) {
     units.forEach((unit) => {
       const id = unit?.id;
@@ -50,7 +59,7 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
   }
 
   // Validate the opponent's units.
-  const validatedOpponents: OpponentInterface[] = [];
+  const validatedOpponents: TWOpponentInterface[] = [];
   if (Array.isArray(opponents)) {
     opponents.forEach((opponent) => {
       const id = opponent?.id;
@@ -75,10 +84,10 @@ export async function clientAction({ request }: Route.ClientActionArgs) {
   }
 
   // Save the validated data and go to Movement page to start the game.
-  setUnits(validatedUnits);
-  setOpponents(validatedOpponents);
+  setPlayerUnits(validatedUnits);
+  setOpponentUnits(validatedOpponents);
   setStep(Step.Movement);
-  return redirect(`/play/${Step.Movement}`);
+  return redirect(`/${System.TotalWarfare}/${Step.Movement}`);
 }
 
 /**

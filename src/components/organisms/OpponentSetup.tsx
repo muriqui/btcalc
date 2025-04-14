@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { CrudAction, type OpponentInterface } from "../../types";
+import { DataAction, type TWOpponentInterface } from "../../types";
 import { uuid } from "../../services/utilityService";
 import Button from "../atoms/Button";
 import Input from "../molecules/Input";
@@ -8,9 +8,9 @@ import Input from "../molecules/Input";
  * Available actions for the reducer function.
  */
 type opponentReducerAction =
-  | { type: CrudAction.Add; opponent: OpponentInterface }
-  | { type: CrudAction.Update; opponent: OpponentInterface }
-  | { type: CrudAction.Delete; id: string };
+  | { type: DataAction.Add; opponent: TWOpponentInterface }
+  | { type: DataAction.Update; opponent: TWOpponentInterface }
+  | { type: DataAction.Delete; id: string };
 
 /**
  * Reducer function for the opponent's unit list.
@@ -19,19 +19,19 @@ type opponentReducerAction =
  * @returns The updated unit list.
  */
 function opponentReducer(
-  opponents: OpponentInterface[],
+  opponents: TWOpponentInterface[],
   action: opponentReducerAction,
-): OpponentInterface[] {
+): TWOpponentInterface[] {
   switch (action.type) {
-    case CrudAction.Add:
+    case DataAction.Add:
       return [...opponents, action.opponent];
 
-    case CrudAction.Update:
+    case DataAction.Update:
       return opponents.map((opponent) =>
         opponent.id === action.opponent.id ? action.opponent : opponent,
       );
 
-    case CrudAction.Delete:
+    case DataAction.Delete:
       return opponents.filter((opponent) => opponent.id !== action.id);
   }
 }
@@ -46,19 +46,19 @@ export default function OpponentSetup() {
 
   const handleAddOpponent = () =>
     dispatch({
-      type: CrudAction.Add,
+      type: DataAction.Add,
       opponent: { id: uuid(), name: "" },
     });
 
-  const handleUpdateOpponent = (opponent: OpponentInterface) =>
+  const handleUpdateOpponent = (opponent: TWOpponentInterface) =>
     dispatch({
-      type: CrudAction.Update,
+      type: DataAction.Update,
       opponent,
     });
 
   const handleDeleteOpponent = (id: string) =>
     dispatch({
-      type: CrudAction.Delete,
+      type: DataAction.Delete,
       id,
     });
 

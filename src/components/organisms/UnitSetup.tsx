@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { CrudAction, type UnitInterface } from "../../types";
+import { DataAction, type TWPlayerInterface } from "../../types";
 import { uuid } from "../../services/utilityService";
 import Button from "../atoms/Button";
 import Input from "../molecules/Input";
@@ -9,9 +9,9 @@ import Select from "../molecules/Select";
  * Available actions for the reducer function.
  */
 type unitReducerAction =
-  | { type: CrudAction.Add; unit: UnitInterface }
-  | { type: CrudAction.Update; unit: UnitInterface }
-  | { type: CrudAction.Delete; id: string };
+  | { type: DataAction.Add; unit: TWPlayerInterface }
+  | { type: DataAction.Update; unit: TWPlayerInterface }
+  | { type: DataAction.Delete; id: string };
 
 /**
  * Reducer function for the player's unit list.
@@ -20,19 +20,19 @@ type unitReducerAction =
  * @returns The updated unit list.
  */
 function unitReducer(
-  units: UnitInterface[],
+  units: TWPlayerInterface[],
   action: unitReducerAction,
-): UnitInterface[] {
+): TWPlayerInterface[] {
   switch (action.type) {
-    case CrudAction.Add:
+    case DataAction.Add:
       return [...units, action.unit];
 
-    case CrudAction.Update:
+    case DataAction.Update:
       return units.map((unit) =>
         unit.id === action.unit.id ? action.unit : unit,
       );
 
-    case CrudAction.Delete:
+    case DataAction.Delete:
       return units.filter((unit) => unit.id !== action.id);
   }
 }
@@ -47,19 +47,19 @@ export default function UnitSetup() {
 
   const handleAddUnit = () =>
     dispatch({
-      type: CrudAction.Add,
+      type: DataAction.Add,
       unit: { id: uuid(), name: "", gunnery: 4 },
     });
 
-  const handleUpdateUnit = (unit: UnitInterface) =>
+  const handleUpdateUnit = (unit: TWPlayerInterface) =>
     dispatch({
-      type: CrudAction.Update,
+      type: DataAction.Update,
       unit,
     });
 
   const handleDeleteUnit = (id: string) =>
     dispatch({
-      type: CrudAction.Delete,
+      type: DataAction.Delete,
       id,
     });
 

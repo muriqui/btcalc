@@ -1,7 +1,8 @@
 import { test, expect } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/play");
+  await page.goto("/total-warfare");
+  await expect(page.getByText("BattleTech: Total Warfare")).toBeVisible();
   await expect(
     page.getByRole("heading", { name: "Set up a game", level: 1 }),
   ).toBeVisible();

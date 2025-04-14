@@ -23,16 +23,9 @@ test.describe("Home", () => {
     // Set up a game.
     await page.getByRole("button", { name: "Set up a new game" }).click();
     await page.getByRole("link", { name: "Total Warfare" }).click();
+    await expect(page.getByText("BattleTech: Total Warfare")).toBeVisible();
     await expect(
       page.getByRole("heading", { name: "Set up a game", level: 1 }),
-    ).toBeVisible();
-    await page.getByLabel("Unit name").fill("Atlas");
-    await page.getByLabel("Opponent name").fill("Dire Wolf");
-    await page.getByRole("button", { name: "Start game" }).click();
-
-    // Starting the game should take us to the Movement phase.
-    await expect(
-      page.getByRole("heading", { name: "Movement", level: 1 }),
     ).toBeVisible();
 
     // Click back to the home page and confirm the Continue option is now present.
@@ -44,8 +37,33 @@ test.describe("Home", () => {
       page.getByRole("link", { name: "Continue your last game" }),
     ).toBeVisible();
 
-    // Clicking Continue should take us back to Movement.
+    // Clicking Continue should take us back to Setup.
     await page.getByRole("link", { name: "Continue your last game" }).click();
+    await expect(page.getByText("BattleTech: Total Warfare")).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Set up a game", level: 1 }),
+    ).toBeVisible();
+
+    // Finish setting up and start a game.
+    await page.getByLabel("Unit name").fill("Atlas");
+    await page.getByLabel("Opponent name").fill("Dire Wolf");
+    await page.getByRole("button", { name: "Start game" }).click();
+
+    // Starting the game should take us to the Movement phase.
+    await expect(page.getByText("BattleTech: Total Warfare")).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Movement", level: 1 }),
+    ).toBeVisible();
+
+    // Click back to the home page.
+    await page.getByRole("link", { name: "Home" }).click();
+    await expect(
+      page.getByRole("heading", { name: "BTcalc", level: 1 }),
+    ).toBeVisible();
+
+    // Now clicking Continue should take us back to Movement.
+    await page.getByRole("link", { name: "Continue your last game" }).click();
+    await expect(page.getByText("BattleTech: Total Warfare")).toBeVisible();
     await expect(
       page.getByRole("heading", { name: "Movement", level: 1 }),
     ).toBeVisible();

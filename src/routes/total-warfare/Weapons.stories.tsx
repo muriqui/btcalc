@@ -2,35 +2,36 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { reactRouterParameters } from "storybook-addon-remix-react-router";
 import { within, expect } from "@storybook/test";
 
-import SelectTargets from "./SelectTargets";
-import { Step } from "../../../types";
-import Play from "../Play";
+import Weapons from "./Weapons";
+import { System, Step } from "../../types";
+import TotalWarfare from "./TotalWarfare";
 
 const route = {
-  element: <Play />,
-  children: [{ path: Step.SelectTargets, useStoryElement: true }],
+  element: <TotalWarfare />,
+  children: [{ path: Step.Weapons, useStoryElement: true }],
 };
 
 const meta = {
-  component: SelectTargets,
-  title: "Routes/play/Select Targets",
+  component: Weapons,
+  title: "Routes/Total Warfare/Weapon Attacks",
   args: {
     loaderData: {
       units: [{ id: "test-unit-1", name: "Atlas", gunnery: 2 }],
     },
   },
   parameters: {
+    layout: "fullscreen",
     reactRouter: reactRouterParameters({
-      location: { path: `/play/${Step.SelectTargets}` },
+      location: { path: `/${System.TotalWarfare}/${Step.Weapons}` },
       routing: [
-        { path: "play", ...route },
+        { path: System.TotalWarfare, ...route },
         { path: "/", ...route },
-        { path: `play/${Step.ResolveWeapons}`, ...route },
-        { path: `play/${Step.SelectTargets}/unit/:id`, ...route },
+        { path: `${System.TotalWarfare}/${Step.Physical}`, ...route },
+        { path: `${System.TotalWarfare}/${Step.Weapons}/unit/:id`, ...route },
       ],
     }),
   },
-} satisfies Meta<typeof SelectTargets>;
+} satisfies Meta<typeof Weapons>;
 
 export default meta;
 
@@ -39,7 +40,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
-    await canvas.findByText("Select Targets");
+    await canvas.findByText("Weapon Attacks");
 
     await step("Loaded units are displayed", async () => {
       await expect(canvas.queryByText("Atlas")).toBeInTheDocument();

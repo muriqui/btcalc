@@ -1,16 +1,16 @@
-import Heading from "../../../components/atoms/Heading";
-import ButtonLink from "../../../components/atoms/ButtonLink";
+import Heading from "../../components/atoms/Heading";
+import ButtonLink from "../../components/atoms/ButtonLink";
 import {
-  getOpponents,
-  getUnits,
+  getOpponentUnits,
+  getPlayerUnits,
   setStep,
-} from "../../../services/utilityService";
-import { Step } from "../../../types";
+} from "../../services/utilityService";
+import { System, Step } from "../../types";
 import type { Route } from "./+types/Movement";
 
 export async function clientLoader() {
-  const units = await getUnits();
-  const opponents = await getOpponents();
+  const units = await getPlayerUnits();
+  const opponents = await getOpponentUnits();
   return { units, opponents };
 }
 
@@ -38,7 +38,7 @@ export default function Movement({
             <ButtonLink
               variant="outlined"
               key={unit.id}
-              to={`/play/${Step.Movement}/unit/${unit.id}`}
+              to={`/${System.TotalWarfare}/${Step.Movement}/unit/${unit.id}`}
             >
               {unit.name}
             </ButtonLink>
@@ -55,7 +55,7 @@ export default function Movement({
             <ButtonLink
               variant="outlined"
               key={opponent.id}
-              to={`/play/${Step.Movement}/opponent/${opponent.id}`}
+              to={`/${System.TotalWarfare}/${Step.Movement}/opponent/${opponent.id}`}
             >
               {opponent.name}
             </ButtonLink>
@@ -66,11 +66,11 @@ export default function Movement({
       <div className="flex justify-center lg:col-span-12">
         <ButtonLink
           variant="primary"
-          to={`/play/${Step.SelectTargets}`}
-          onClick={() => setStep(Step.SelectTargets)}
+          to={`/${System.TotalWarfare}/${Step.Weapons}`}
+          onClick={() => setStep(Step.Weapons)}
           className="mt-2 w-full max-w-96 text-center text-lg"
         >
-          Next: Select targets
+          Next: Weapon attacks
         </ButtonLink>
       </div>
     </>

@@ -6,12 +6,20 @@ import ButtonGroup from "~/components/molecules/ButtonGroup";
 import ButtonLink from "../components/atoms/ButtonLink";
 import Link from "../components/atoms/Link";
 import Modal from "~/components/molecules/Modal";
-import { clearStorage, getStep } from "../services/utilityService";
+import {
+  clearStorage,
+  getSystem,
+  getStep,
+  setSystem,
+  setStep,
+} from "../services/utilityService";
+import { System, Step } from "~/types";
 import type { Route } from "./+types/Home";
 
 export async function clientLoader() {
+  const system = await getSystem();
   const step = await getStep();
-  return { step };
+  return { system, step };
 }
 
 /**
@@ -20,7 +28,7 @@ export async function clientLoader() {
 export default function Home({
   loaderData,
 }: Pick<Route.ComponentProps, "loaderData">) {
-  const { step } = loaderData;
+  const { system, step } = loaderData;
   const [isModalOpen, setModalOpen] = useState<boolean>(false);
 
   return (
@@ -34,12 +42,12 @@ export default function Home({
             </Button>
           }
           secondary={
-            step ? (
-              <Link to={`/play/${step}`}>Continue your last game</Link>
+            system ? (
+              <Link to={`/${system}/${step}`}>Continue your last game</Link>
             ) : undefined
           }
         >
-          A BattleTech shot calculator
+          A BattleTech calculator
         </CallToAction>
       </main>
       <Modal
@@ -50,17 +58,25 @@ export default function Home({
         <Heading level={2}>Choose which game system to use:</Heading>
         <ButtonGroup className="mt-4">
           <ButtonLink
-            to="/alpha-strike"
+            to={`/${System.AlphaStrike}`}
             variant="filled"
-            onClick={clearStorage}
+            onClick={() => {
+              clearStorage();
+              setSystem(System.AlphaStrike);
+              setStep(Step.NotStarted);
+            }}
             tabIndex={0}
           >
             Alpha Strike
           </ButtonLink>
           <ButtonLink
-            to="/play"
+            to={`/${System.TotalWarfare}`}
             variant="filled"
-            onClick={clearStorage}
+            onClick={() => {
+              clearStorage();
+              setSystem(System.TotalWarfare);
+              setStep(Step.NotStarted);
+            }}
             tabIndex={0}
           >
             Total Warfare

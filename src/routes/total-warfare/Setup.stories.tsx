@@ -1,24 +1,26 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { reactRouterParameters } from "storybook-addon-remix-react-router";
+import { System } from "~/types";
 
 import Setup from "./Setup";
-import Play from "./Play";
+import TotalWarfare from "./TotalWarfare";
 import { FilledIn as UnitFilledIn } from "~/components/organisms/UnitSetup.stories";
 import { FilledIn as OpponentFilledIn } from "~/components/organisms/OpponentSetup.stories";
 
 const route = {
-  element: <Play />,
+  element: <TotalWarfare />,
   children: [{ index: true, useStoryElement: true, action: () => undefined }],
 };
 
 const meta = {
   component: Setup,
-  title: "Routes/play/Setup",
+  title: "Routes/Total Warfare/Setup",
   parameters: {
+    layout: "fullscreen",
     reactRouter: reactRouterParameters({
-      location: { path: "/play" },
+      location: { path: `/${System.TotalWarfare}` },
       routing: [
-        { path: "play", ...route },
+        { path: System.TotalWarfare, ...route },
         { path: "/", ...route },
       ],
     }),

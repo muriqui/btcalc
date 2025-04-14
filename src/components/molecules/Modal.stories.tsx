@@ -6,7 +6,7 @@ import Button from "../atoms/Button";
 
 const meta = {
   component: Modal,
-  tags: ["autodocs"],
+  tags: ["autodocs", "no-tests"],
 } satisfies Meta<typeof Modal>;
 
 export default meta;

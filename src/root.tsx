@@ -11,11 +11,11 @@ import "./index.css";
 import type { Route } from "./+types/root";
 
 export const meta: Route.MetaFunction = () => [
-  { title: "BTcalc: A BattleTech shot calculator" },
+  { title: "BTcalc: A BattleTech calculator" },
   {
     name: "description",
     content:
-      "Calculates attack roll target numbers for the BattleTech board game.",
+      "Calculates target numbers for the BattleTech: Total Warfare and BattleTech: Alpha Strike tabletop games.",
   },
   { name: "theme-color", content: "#fbbf24" },
 ];

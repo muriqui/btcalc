@@ -2,7 +2,14 @@
  * @file Utility functions.
  */
 
-import { type OpponentInterface, Step, type UnitInterface } from "../types";
+import {
+  System,
+  Step,
+  type ASPlayerInterface,
+  type ASOpponentInterface,
+  type TWPlayerInterface,
+  type TWOpponentInterface,
+} from "../types";
 
 /**
  * @returns A universally unique identifier.
@@ -56,7 +63,25 @@ export function clearStorage() {
 }
 
 /**
- * Gets the current calculator step asynchronously, for use in route loaders.
+ * Gets the current game system.
+ * @return The current game system.
+ */
+export function getSystem(): Promise<System | undefined> {
+  return new Promise((resolve) => {
+    const system = getStorage("system", undefined);
+    resolve(system);
+  });
+}
+
+/**
+ * Sets the current game system.
+ */
+export function setSystem(system: System) {
+  setStorage("system", system);
+}
+
+/**
+ * Gets the current calculator step.
  * @returns The current step.
  */
 export function getStep(): Promise<Step> {
@@ -74,12 +99,14 @@ export function setStep(step: Step) {
 }
 
 /**
- * Gets the player's unit list asynchronously, for use in route loaders.
- * @returns The unit list.
+ * Gets the player's unit list.
+ * @returns The player's unit list.
  */
-export function getUnits(): Promise<UnitInterface[]> {
+export function getPlayerUnits(): Promise<
+  ASPlayerInterface[] | TWPlayerInterface[]
+> {
   return new Promise((resolve) => {
-    const units = getStorage("units", []);
+    const units = getStorage("player", []);
     resolve(units);
   });
 }
@@ -88,25 +115,31 @@ export function getUnits(): Promise<UnitInterface[]> {
  * Sets the player's unit list.
  * @param units The player's unit list.
  */
-export function setUnits(units: UnitInterface[]) {
-  setStorage("units", units);
+export function setPlayerUnits(
+  units: ASPlayerInterface[] | TWPlayerInterface[],
+) {
+  setStorage("player", units);
 }
 
 /**
- * Gets the opponent's unit list asynchronously, for use in route loaders.
+ * Gets the opponent's unit list.
  * @returns The opponent's unit list.
  */
-export function getOpponents(): Promise<OpponentInterface[]> {
+export function getOpponentUnits(): Promise<
+  ASOpponentInterface[] | TWOpponentInterface[]
+> {
   return new Promise((resolve) => {
-    const opponents = getStorage("opponents", []);
-    resolve(opponents);
+    const units = getStorage("opponent", []);
+    resolve(units);
   });
 }
 
 /**
- * Set the opponent's unit list.
+ * Sets the opponent's unit list.
  * @param opponents The opponent's unit list.
  */
-export function setOpponents(opponents: OpponentInterface[]) {
-  setStorage("opponents", opponents);
+export function setOpponentUnits(
+  opponents: ASOpponentInterface[] | TWOpponentInterface[],
+) {
+  setStorage("opponent", opponents);
 }

@@ -3,19 +3,23 @@ import { reactRouterParameters } from "storybook-addon-remix-react-router";
 import { within, expect, userEvent } from "@storybook/test";
 
 import Home from "./Home";
-import { Step } from "../types";
+import { System, Step } from "../types";
 
 const meta = {
   component: Home,
   title: "Routes/Home",
-  args: { loaderData: { step: Step.NotStarted } },
+  args: { loaderData: { system: undefined, step: Step.NotStarted } },
   parameters: {
+    layout: "fullscreen",
     reactRouter: reactRouterParameters({
       location: { path: "/" },
       routing: [
         { path: "/", useStoryElement: true },
-        { path: "play", useStoryElement: true },
-        { path: `play/${Step.SelectTargets}`, useStoryElement: true },
+        { path: System.TotalWarfare, useStoryElement: true },
+        {
+          path: `${System.TotalWarfare}/${Step.Weapons}`,
+          useStoryElement: true,
+        },
       ],
     }),
   },
@@ -45,7 +49,7 @@ export const Default: Story = {
 };
 
 export const GameInProgress: Story = {
-  args: { loaderData: { step: Step.SelectTargets } },
+  args: { loaderData: { system: System.TotalWarfare, step: Step.Weapons } },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 

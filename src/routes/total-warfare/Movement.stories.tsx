@@ -3,17 +3,17 @@ import { reactRouterParameters } from "storybook-addon-remix-react-router";
 import { within, expect } from "@storybook/test";
 
 import Movement from "./Movement";
-import { Step } from "../../../types";
-import Play from "../Play";
+import { System, Step } from "../../types";
+import TotalWarfare from "./TotalWarfare";
 
 const route = {
-  element: <Play />,
+  element: <TotalWarfare />,
   children: [{ path: Step.Movement, useStoryElement: true }],
 };
 
 const meta = {
   component: Movement,
-  title: "Routes/play/Movement",
+  title: "Routes/Total Warfare/Movement",
   args: {
     loaderData: {
       units: [{ id: "test-unit-1", name: "Atlas", gunnery: 2 }],
@@ -21,14 +21,18 @@ const meta = {
     },
   },
   parameters: {
+    layout: "fullscreen",
     reactRouter: reactRouterParameters({
-      location: { path: `/play/${Step.Movement}` },
+      location: { path: `/${System.TotalWarfare}/${Step.Movement}` },
       routing: [
-        { path: "play", ...route },
+        { path: System.TotalWarfare, ...route },
         { path: "/", ...route },
-        { path: `play/${Step.SelectTargets}`, ...route },
-        { path: `play/${Step.Movement}/unit/:id`, ...route },
-        { path: `play/${Step.Movement}/opponent/:id`, ...route },
+        { path: `${System.TotalWarfare}/${Step.Weapons}`, ...route },
+        { path: `${System.TotalWarfare}/${Step.Movement}/unit/:id`, ...route },
+        {
+          path: `${System.TotalWarfare}/${Step.Movement}/opponent/:id`,
+          ...route,
+        },
       ],
     }),
   },

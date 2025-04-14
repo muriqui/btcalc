@@ -1,3 +1,3 @@
-# BTcalc: A BattleTech shot calculator
+# BTcalc: A BattleTech calculator
 
-Calculates attack roll target numbers for the BattleTech board game.
+Calculates target numbers for the _BattleTech: Total Warfare_ and _BattleTech: Alpha Strike_ tabletop games.
