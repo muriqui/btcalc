@@ -1,5 +1,6 @@
 import { Outlet } from "react-router";
 import TopBar from "../../components/molecules/TopBar";
+import GameContainer from "~/components/molecules/GameContainer";
 import { System } from "~/types";
 
 /**
@@ -9,9 +10,9 @@ export default function TotalWarfare() {
   return (
     <>
       <TopBar system={System.TotalWarfare} />
-      <main className="mx-auto w-full max-w-7xl grow px-6 lg:px-8">
+      <GameContainer>
         <Outlet />
-      </main>
+      </GameContainer>
     </>
   );
 }
