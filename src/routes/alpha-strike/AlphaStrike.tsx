@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import TopBar from "../../components/organisms/TopBar";
+import TopBar from "../../components/molecules/TopBar";
 import { System } from "~/types";
 
 /**
