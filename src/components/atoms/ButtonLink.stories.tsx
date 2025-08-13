@@ -28,6 +28,13 @@ export const Text: Story = {
   },
 };
 
+export const Subtle: Story = {
+  args: {
+    ...Default.args,
+    variant: "subtle",
+  },
+};
+
 export const Filled: Story = {
   args: {
     ...Default.args,

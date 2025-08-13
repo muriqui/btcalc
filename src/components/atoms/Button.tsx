@@ -2,7 +2,7 @@ import type { HTMLAttributes } from "react";
 
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   /** How the button is displayed. */
-  variant?: "text" | "filled" | "outlined" | "primary";
+  variant?: "text" | "filled" | "subtle" | "outlined" | "primary";
   /** Is the button disabled? */
   disabled?: boolean;
   /** The button type. */
@@ -27,6 +27,12 @@ export default function Button({
       buttonClasses = disabled
         ? "bg-gray-200 border-gray-200 text-gray-600 shadow-xs dark:bg-gray-800 dark:border-gray-800 dark:text-gray-400"
         : "bg-amber-800 border-amber-800 text-white shadow-xs hover:bg-amber-700 hover:border-amber-700";
+      break;
+
+    case "subtle":
+      buttonClasses = disabled
+        ? "border-gray-50 text-gray-400 dark:border-gray-800"
+        : "text-amber-800 bg-gray-50 border-gray-50 hover:text-amber-700 dark:text-amber-600 dark:bg-gray-800 dark:border-gray-800 dark:hover:text-amber-500";
       break;
 
     case "outlined":

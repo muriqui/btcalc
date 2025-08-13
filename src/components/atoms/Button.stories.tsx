@@ -36,6 +36,20 @@ export const TextDisabled: Story = {
   },
 };
 
+export const Subtle: Story = {
+  args: {
+    ...Default.args,
+    variant: "subtle",
+  },
+};
+
+export const SubtleDisabled: Story = {
+  args: {
+    ...Subtle.args,
+    disabled: true,
+  },
+};
+
 export const Filled: Story = {
   args: {
     ...Default.args,
