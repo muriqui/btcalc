@@ -3,12 +3,16 @@ import { reactRouterParameters } from "storybook-addon-remix-react-router";
 import { System } from "~/types";
 
 import Setup from "./Setup";
-import TotalWarfare from "./TotalWarfare";
+import GameplayLayout from "~/layouts/GameplayLayout";
 import { FilledIn as UnitFilledIn } from "~/components/organisms/UnitSetup.stories";
 import { FilledIn as OpponentFilledIn } from "~/components/organisms/OpponentSetup.stories";
 
+const loaderData = {
+  system: System.TotalWarfare,
+};
+
 const route = {
-  element: <TotalWarfare />,
+  element: <GameplayLayout loaderData={loaderData} />,
   children: [{ index: true, useStoryElement: true, action: () => undefined }],
 };
 

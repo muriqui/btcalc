@@ -84,3 +84,8 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
     </main>
   );
 }
+
+export function HydrateFallback() {
+  // TODO: Style this.
+  return <p>Loading, please wait...</p>;
+}

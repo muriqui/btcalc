@@ -2,14 +2,21 @@
  * @file Utility functions.
  */
 
-import {
-  System,
-  Step,
-  type ASPlayerInterface,
-  type ASOpponentInterface,
-  type TWPlayerInterface,
-  type TWOpponentInterface,
-} from "../types";
+import { System, Step } from "../types";
+
+/**
+ * Describes a unit ('Mech, vehicle, etc.).
+ */
+export interface UnitInterface {
+  /** The unit's UUID. */
+  id: string;
+  /** The unit name. */
+  name: string;
+  /** Whether the unit has been destroyed. */
+  destroyed?: boolean;
+  /** Whether the unit is currently immobilized. */
+  immobile?: boolean;
+}
 
 /**
  * @returns A universally unique identifier.
@@ -63,8 +70,7 @@ export function clearStorage() {
 }
 
 /**
- * Gets the current game system.
- * @return The current game system.
+ * @returns The current game system.
  */
 export function getSystem(): Promise<System | undefined> {
   return new Promise((resolve) => {
@@ -81,12 +87,11 @@ export function setSystem(system: System) {
 }
 
 /**
- * Gets the current calculator step.
- * @returns The current step.
+ * @returns The current calculator step.
  */
-export function getStep(): Promise<Step> {
+export function getStep(): Promise<Step | undefined> {
   return new Promise((resolve) => {
-    const step = getStorage("step", Step.NotStarted);
+    const step = getStorage("step", undefined);
     resolve(step);
   });
 }
@@ -99,12 +104,9 @@ export function setStep(step: Step) {
 }
 
 /**
- * Gets the player's unit list.
  * @returns The player's unit list.
  */
-export function getPlayerUnits(): Promise<
-  ASPlayerInterface[] | TWPlayerInterface[]
-> {
+export function getPlayerUnits(): Promise<UnitInterface[]> {
   return new Promise((resolve) => {
     const units = getStorage("player", []);
     resolve(units);
@@ -112,22 +114,60 @@ export function getPlayerUnits(): Promise<
 }
 
 /**
+ * Gets a player unit.
+ * @param id A player unit ID.
+ * @returns The player unit, if it exists.
+ */
+export async function getPlayerUnit(
+  id: string,
+): Promise<UnitInterface | undefined> {
+  const units = await getPlayerUnits();
+  return units.find((unit) => unit.id === id);
+}
+
+/**
  * Sets the player's unit list.
  * @param units The player's unit list.
  */
-export function setPlayerUnits(
-  units: ASPlayerInterface[] | TWPlayerInterface[],
-) {
+export function setPlayerUnits(units: UnitInterface[]) {
   setStorage("player", units);
 }
 
 /**
- * Gets the opponent's unit list.
+ * Adds a unit to the player's unit list.
+ * @param unit A player unit.
+ */
+export async function addPlayerUnit(unit: UnitInterface) {
+  const units = await getPlayerUnits();
+  setPlayerUnits([...units, unit]);
+}
+
+/**
+ * Updates a unit in the player's unit list.
+ * @param unit A player unit.
+ */
+export async function updatePlayerUnit(unit: UnitInterface) {
+  const units = await getPlayerUnits();
+  setPlayerUnits(
+    units.map((currentUnit) =>
+      currentUnit.id === unit.id ? unit : currentUnit,
+    ),
+  );
+}
+
+/**
+ * Deletes a unit from the player's unit list.
+ * @param id A player unit ID.
+ */
+export async function deletePlayerUnit(id: string) {
+  const units = await getPlayerUnits();
+  setPlayerUnits(units.filter((unit) => unit.id !== id));
+}
+
+/**
  * @returns The opponent's unit list.
  */
-export function getOpponentUnits(): Promise<
-  ASOpponentInterface[] | TWOpponentInterface[]
-> {
+export function getOpponentUnits(): Promise<UnitInterface[]> {
   return new Promise((resolve) => {
     const units = getStorage("opponent", []);
     resolve(units);
@@ -135,11 +175,52 @@ export function getOpponentUnits(): Promise<
 }
 
 /**
- * Sets the opponent's unit list.
- * @param opponents The opponent's unit list.
+ * Gets an opponent unit.
+ * @param id An opponent unit ID.
+ * @returns The opponent unit, if it exists.
  */
-export function setOpponentUnits(
-  opponents: ASOpponentInterface[] | TWOpponentInterface[],
-) {
-  setStorage("opponent", opponents);
+export async function getOpponentUnit(
+  id: string,
+): Promise<UnitInterface | undefined> {
+  const units = await getOpponentUnits();
+  return units.find((unit) => unit.id === id);
+}
+
+/**
+ * Sets the opponent's unit list.
+ * @param units The opponent's unit list.
+ */
+export function setOpponentUnits(units: UnitInterface[]) {
+  setStorage("opponent", units);
+}
+
+/**
+ * Adds a unit to the opponent's unit list.
+ * @param unit An opponent unit.
+ */
+export async function addOpponentUnit(unit: UnitInterface) {
+  const units = await getOpponentUnits();
+  setOpponentUnits([...units, unit]);
+}
+
+/**
+ * Updates a unit in the opponent's unit list.
+ * @param unit An opponent unit.
+ */
+export async function updateOpponentUnit(unit: UnitInterface) {
+  const units = await getOpponentUnits();
+  setOpponentUnits(
+    units.map((currentUnit) =>
+      currentUnit.id === unit.id ? unit : currentUnit,
+    ),
+  );
+}
+
+/**
+ * Deletes a unit from the opponent's unit list.
+ * @param id An opponent unit ID.
+ */
+export async function deleteOpponentUnit(id: string) {
+  const units = await getOpponentUnits();
+  setOpponentUnits(units.filter((unit) => unit.id !== id));
 }

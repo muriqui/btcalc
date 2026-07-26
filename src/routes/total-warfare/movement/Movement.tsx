@@ -1,12 +1,12 @@
-import Heading from "../../components/atoms/Heading";
-import ButtonLink from "../../components/atoms/ButtonLink";
+import type { Route } from "./+types/Movement";
+import Heading from "~/components/atoms/Heading";
+import ButtonLink from "~/components/atoms/ButtonLink";
 import {
   getOpponentUnits,
   getPlayerUnits,
   setStep,
-} from "../../services/utilityService";
-import { System, Step } from "../../types";
-import type { Route } from "./+types/Movement";
+} from "~/services/utilityService";
+import { System, Step } from "~/types";
 
 export async function clientLoader() {
   const units = await getPlayerUnits();

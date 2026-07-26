@@ -4,7 +4,7 @@ import {
 } from "react-router";
 
 export interface LinkProps extends RouterLinkProps {
-  /** How the link is displayed: "text" for use in body text, or "secondary" for use a secondary call-to-action. */
+  /** How the link is displayed: "text" for use in body text, or "secondary" for use as a secondary call-to-action. */
   variant?: "text" | "secondary";
 }
 
@@ -32,7 +32,7 @@ export default function Link({
 
   return (
     <RouterLink
-      className={`font-semibold hover:underline ${linkClasses} ${className}`.trim()}
+      className={`font-semibold hover:underline hover:underline-offset-2 ${linkClasses} ${className}`.trim()}
       {...props}
     >
       {children}

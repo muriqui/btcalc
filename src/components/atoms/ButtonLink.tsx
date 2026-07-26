@@ -44,7 +44,7 @@ export default function ButtonLink({
 
   return (
     <Link
-      className={`inline-block rounded-md border p-2.5 font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-800 ${buttonClasses} ${className}`.trim()}
+      className={`inline-block rounded-md border p-2.5 font-semibold focus-visible:underline focus-visible:underline-offset-2 focus-visible:outline-0 ${buttonClasses} ${className}`.trim()}
       {...props}
     >
       {children}

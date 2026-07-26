@@ -1,10 +1,11 @@
+import type { Route } from "./+types/Home";
 import { useState } from "react";
-import CallToAction from "../components/molecules/CallToAction";
-import Heading from "../components/atoms/Heading";
 import Button from "~/components/atoms/Button";
 import ButtonGroup from "~/components/molecules/ButtonGroup";
-import ButtonLink from "../components/atoms/ButtonLink";
-import Link from "../components/atoms/Link";
+import ButtonLink from "~/components/atoms/ButtonLink";
+import CallToAction from "~/components/molecules/CallToAction";
+import Heading from "~/components/atoms/Heading";
+import Link from "~/components/atoms/Link";
 import Modal from "~/components/molecules/Modal";
 import {
   clearStorage,
@@ -12,9 +13,8 @@ import {
   getStep,
   setSystem,
   setStep,
-} from "../services/utilityService";
+} from "~/services/utilityService";
 import { System, Step } from "~/types";
-import type { Route } from "./+types/Home";
 
 export async function clientLoader() {
   const system = await getSystem();
@@ -42,7 +42,7 @@ export default function Home({
             </Button>
           }
           secondary={
-            system ? (
+            system && step ? (
               <Link to={`/${system}/${step}`}>Continue your last game</Link>
             ) : undefined
           }
@@ -58,24 +58,24 @@ export default function Home({
         <Heading level={2}>Choose which game system to use:</Heading>
         <ButtonGroup className="mt-4">
           <ButtonLink
-            to={`/${System.AlphaStrike}`}
+            to={`/${System.AlphaStrike}/${Step.Setup}`}
             variant="filled"
             onClick={() => {
               clearStorage();
               setSystem(System.AlphaStrike);
-              setStep(Step.NotStarted);
+              setStep(Step.Setup);
             }}
             tabIndex={0}
           >
             Alpha Strike
           </ButtonLink>
           <ButtonLink
-            to={`/${System.TotalWarfare}`}
+            to={`/${System.TotalWarfare}/${Step.Setup}`}
             variant="filled"
             onClick={() => {
               clearStorage();
               setSystem(System.TotalWarfare);
-              setStep(Step.NotStarted);
+              setStep(Step.Setup);
             }}
             tabIndex={0}
           >

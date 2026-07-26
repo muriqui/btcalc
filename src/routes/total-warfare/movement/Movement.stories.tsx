@@ -3,11 +3,15 @@ import { reactRouterParameters } from "storybook-addon-remix-react-router";
 import { within, expect } from "@storybook/test";
 
 import Movement from "./Movement";
-import { System, Step } from "../../types";
-import TotalWarfare from "./TotalWarfare";
+import GameplayLayout from "~/layouts/GameplayLayout";
+import { System, Step } from "~/types";
+
+const loaderData = {
+  system: System.TotalWarfare,
+};
 
 const route = {
-  element: <TotalWarfare />,
+  element: <GameplayLayout loaderData={loaderData} />,
   children: [{ path: Step.Movement, useStoryElement: true }],
 };
 

@@ -2,7 +2,8 @@ import { Link } from "react-router";
 import { System } from "~/types";
 
 export interface TopBarProps {
-  system: System;
+  /** The current game system. */
+  system?: System;
 }
 
 /**
@@ -19,10 +20,12 @@ export default function TopBar({ system }: TopBarProps) {
         >
           BTcalc
         </Link>
-        <p className="italic">
-          <span className="sr-only sm:not-sr-only">BattleTech: </span>
-          {system === System.AlphaStrike ? "Alpha Strike" : "Total Warfare"}
-        </p>
+        {system && (
+          <p className="italic">
+            <span className="sr-only sm:not-sr-only">BattleTech: </span>
+            {system === System.AlphaStrike ? "Alpha Strike" : "Total Warfare"}
+          </p>
+        )}
       </div>
     </header>
   );

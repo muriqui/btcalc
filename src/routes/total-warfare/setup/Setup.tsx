@@ -1,16 +1,17 @@
+// TODO: Overhaul this to work like the Alpha Strike Setup page.
+
 import { Form, redirect } from "react-router";
 import qs from "qs";
-import {
-  type TWPlayerInterface,
-  type TWOpponentInterface,
-  System,
-  Step,
-} from "../../types";
+import { System, Step } from "../../types";
 import {
   setPlayerUnits,
   setOpponentUnits,
   setStep,
 } from "../../services/utilityService";
+import {
+  type TWPlayerInterface,
+  type TWOpponentInterface,
+} from "../../services/totalWarfareService";
 import UnitSetup from "../../components/organisms/UnitSetup";
 import OpponentSetup from "../../components/organisms/OpponentSetup";
 import Button from "../../components/atoms/Button";
