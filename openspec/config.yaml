@@ -3,18 +3,18 @@ schema: spec-driven
 # Project context (optional)
 # This is shown to AI when creating artifacts.
 # Add your tech stack, conventions, style guides, domain knowledge, etc.
-# Example:
-#   context: |
-#     Tech stack: TypeScript, React, Node.js
-#     We use conventional commits
-#     Domain: e-commerce platform
+context: |
+  Tech stack: TypeScript, React + Vite, Tailwind CSS, Storybook (Vite builder), Zustand, React Router `HashRouter`
+  Testing: Vitest for unit testing, React Testing Library and Storybook for component testing, Playwright for E2E testing
+  Deployment target: Static hosting on GitHub Pages, build via Vite and deploy `dist/` folder through GitHub Actions, no server-side routing available
+  We use test-driven development (TDD) and behavior-driven development (BDD) practices, with a focus on writing tests before implementation. We follow a component-driven development approach, building reusable UI components in isolation using Storybook.
+  The rules engine is pure, framework-free TypeScript with no dependency on React or any store. It takes structured "conditions" data and returns a target number breakdown. This is the part that must be provably correct against the BattleTech rulebook, and is built test-first.
 
 # Per-artifact rules (optional)
 # Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always include a "Non-goals" section
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
+rules:
+  proposal:
+    - Keep proposals under 500 words
+    - Always include a "Non-goals" section that explicitly states what is not included, particularly around optional/advanced BattleTech rules, to prevent scope creep during implementation
+  tasks:
+    - Break tasks into chunks of max 2 hours
