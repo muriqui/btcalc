@@ -9,6 +9,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -17,7 +19,8 @@
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router": "^8.3.0",
-    "tailwindcss": "^4.3.3"
+    "tailwindcss": "^4.3.3",
+    "zustand": "^5.0.14"
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^5.2.1",
