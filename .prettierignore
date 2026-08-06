@@ -1,0 +1,2 @@
+# Ignore OpenSpec's structured documents.
+openspec/**

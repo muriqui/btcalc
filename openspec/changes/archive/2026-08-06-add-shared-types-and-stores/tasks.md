@@ -23,15 +23,22 @@ Each section is scoped to fit comfortably within a single ~2 hour session.
 
 - [x] Add `src/stores/gameStore.ts`: `game`, `startGame(ruleset)`,
       `clearGame()`, wrapped in `persist` with `version: 1` per design.md.
-- [x] Write failing tests first in `src/stores/gameStore.test.ts`: - starting a Total Warfare game produces `game.ruleset === "totalWarfare"`
-      with an empty `units` array - starting an Alpha Strike game produces the Alpha Strike shape - after `startGame`, a fresh store instance (simulating a page reload)
-      rehydrates the same `game` value from `localStorage` - `clearGame()` removes the persisted entry and resets `game` to `null`
+- [x] Write failing tests first in `src/stores/gameStore.test.ts`:
+      - starting a Total Warfare game produces `game.ruleset === "totalWarfare"`
+        with an empty `units` array
+      - starting an Alpha Strike game produces the Alpha Strike shape
+      - after `startGame`, a fresh store instance (simulating a page reload)
+        rehydrates the same `game` value from `localStorage`
+      - `clearGame()` removes the persisted entry and resets `game` to `null`
 - [x] Implement `gameStore.ts` until tests pass.
 
 ## 4. turnStore
 
-- [x] Write failing tests first in `src/stores/turnStore.test.ts`: - initial state matches the documented defaults - after mutating store state, `resetTurn()` returns it to defaults - no turnStore action ever calls `localStorage.setItem`
-      (spy-based assertion)
+- [x] Write failing tests first in `src/stores/turnStore.test.ts`:
+      - initial state matches the documented defaults
+      - after mutating store state, `resetTurn()` returns it to defaults
+      - no turnStore action ever calls `localStorage.setItem`
+        (spy-based assertion)
 - [x] Add `src/stores/turnStore.ts` with `resetTurn()` until tests pass.
 
 ## 5. Wrap-up
